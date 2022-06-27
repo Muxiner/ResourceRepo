@@ -1,0 +1,708 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/hello.svg">
+  <link rel="icon" href="/img/hello.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#1a1a1a">
+  <meta name="author" content="Muxiner">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="使用自动部署之前，我都是用的hexo deploy把每次生成的public文件夹上传到github上去，使用自动部署之后，就省略掉了这一步骤，但是多了这三步  git add -Agit commit -m “imformaion”git push  看似并没有简化自己的操作，实际上好处很多    博客源码托管在Github的仓库，避免源码丢失的风险 Github会记录每一次commit，方便回溯">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Github Actions实现Hexo博客在Github上的自动部署">
+<meta property="og:url" content="https://muxiner.github.io/2020/11/30/using-gitActions/index.html">
+<meta property="og:site_name" content="Muxiner&#39;s Blog">
+<meta property="og:description" content="使用自动部署之前，我都是用的hexo deploy把每次生成的public文件夹上传到github上去，使用自动部署之后，就省略掉了这一步骤，但是多了这三步  git add -Agit commit -m “imformaion”git push  看似并没有简化自己的操作，实际上好处很多    博客源码托管在Github的仓库，避免源码丢失的风险 Github会记录每一次commit，方便回溯">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s1.ax1x.com/2022/04/06/qjx8it.png">
+<meta property="og:image" content="https://s1.ax1x.com/2022/04/06/qjxJRf.png">
+<meta property="article:published_time" content="2020-11-30T08:55:45.000Z">
+<meta property="article:modified_time" content="2022-06-27T13:55:42.060Z">
+<meta property="article:author" content="Muxiner">
+<meta property="article:tag" content="Blog">
+<meta property="article:tag" content="Github">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s1.ax1x.com/2022/04/06/qjx8it.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>使用Github Actions实现Hexo博客在Github上的自动部署 - Muxiner&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"muxiner.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"🚩"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Muxiner&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                主页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="使用Github Actions实现Hexo博客在Github上的自动部署"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Muxiner
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-11-30 16:55" pubdate>
+          2020年11月30日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          3.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          33 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">使用Github Actions实现Hexo博客在Github上的自动部署</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    <!-- compatible with older versions-->
+                    本文最后更新于：几秒前
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>使用自动部署之前，我都是用的<code>hexo deploy</code>把每次生成的<code>public</code>文件夹上传到github上去，使用自动部署之后，就省略掉了这一步骤，但是多了这三步</p>
+<blockquote>
+<p>git add -A<br>git commit -m “imformaion”<br>git push</p>
+</blockquote>
+<p>看似并没有简化自己的操作，实际上好处很多  </p>
+<ul>
+<li>博客源码托管在Github的仓库，避免源码丢失的风险</li>
+<li>Github会记录每一次<code>commit</code>，方便回溯</li>
+<li>高逼格</li>
+<li>……</li>
+</ul>
+<h3 id="关于自动化部署"><a href="#关于自动化部署" class="headerlink" title="关于自动化部署"></a>关于自动化部署</h3><p>百度词条中的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/18750522"><u>自动化部署</u></a></p>
+<p>以及<code>CI\CD</code>——CI&#x2F;CD 是一种通过在应用开发阶段引入自动化来频繁向客户交付应用的方法。CI&#x2F;CD 的核心概念是持续集成、持续交付和持续部署。  </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/features/actions"><code>github Actions</code></a> 是 <a target="_blank" rel="noopener" href="https://github.com/"><code>GitHub</code></a> 的持续集成服务，于2018年10月推出。</p>
+<p>还有一个类似的是<a target="_blank" rel="noopener" href="https://travis-ci.org/"><code>TravisCI</code></a>。  </p>
+<p>我之前使用的就是<code>TravisCI</code>，然后出了点小小的问题，其无法使用，然后一直配置不好，我就开始使用<code>GitHub Actions</code>，而且有大佬说<code>觉得它非常强大，有创意，比 Travis CI 玩法更多。</code></p>
+<p>不多介绍，就推荐几个大佬的文章</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html">GitHub Actions 入门教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.kaygb.com/210.html">基于Github actions自动部署Hexo博客</a></li>
+<li><a target="_blank" rel="noopener" href="https://xirikm.net/2020/313-1">使用 GitHub Actions 自动构建 Hexo 博客</a></li>
+</ul>
+<p>不多介绍了，直接说我怎么使用<code>github actions</code>的，主要chao了大佬的东西。</p>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>需要一个<code>GitHub</code>帐号、一个 <code>GitHub Pages</code>仓库、一个<code>Hexo</code>博客备份仓库&#x2F;分支。另外我们还需要获取一个<code>GitHub Personal Access Token</code>用来推送构建好的文件到我们的<code>GitHub Pages</code>仓库。具体的操作这里不再重复叙述，有需要了解的可以去看之前的文章。</p>
+<p>点开博客备份仓库上方的<code>Settings</code>，点到左侧的<code>Secrets</code>项，添加两个秘密环境变量<code>GH_REF </code>、<code>GH_TOKEN</code>，值分别填写自己的<code>GitHub Pages</code> 仓库地址（不包含 https:&#x2F;&#x2F; ）和刚刚申请到的<code>GitHub Personal Access Token</code>。</p>
+<p><img src="https://s1.ax1x.com/2022/04/06/qjx8it.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="配置过程"><a href="#配置过程" class="headerlink" title="配置过程"></a>配置过程</h3><p>准备工作做好后就可以开始编写<code>GitHub Actions</code>配置文件了，这里对 Hexo 博客编译部署的步骤进行拆分讲解。</p>
+<p>配置文件的目录——在站点目录下新建<code>.github</code>文件夹，再在其中新建文件夹<code>workflows</code>，在创建<code>×××××××.yml</code>文件，命名随意。</p>
+<p><img src="https://s1.ax1x.com/2022/04/06/qjxJRf.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="触发条件和运行环境"><a href="#触发条件和运行环境" class="headerlink" title="触发条件和运行环境"></a>触发条件和运行环境</h3><p>我们设置在<code>master</code>分支上发生<code>push</code>操作时触发构建，使用最新的<code>Ubuntu</code>系统作为编译部署的环境，同时设置一个全局环境变量将时区修改为<code>Asia/Shanghai</code>(修改原因见 <a target="_blank" rel="noopener" href="https://xirikm.net/2020/215-1.html)%EF%BC%8C%E5%85%B7%E4%BD%93%E7%9A%84%E9%85%8D%E7%BD%AE%E5%86%85%E5%AE%B9%E5%A6%82%E4%B8%8B%EF%BC%9A">https://xirikm.net/2020/215-1.html)，具体的配置内容如下：</a></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">name:</span> <span class="hljs-string">Blog</span> <span class="hljs-string">CI/CD</span><br><br><span class="hljs-attr">on:</span><br>  <span class="hljs-attr">push:</span><br>    <span class="hljs-attr">branches:</span> <br>      <span class="hljs-bullet">-</span> <span class="hljs-string">master</span><br><br><span class="hljs-attr">env:</span><br>  <span class="hljs-attr">TZ:</span> <span class="hljs-string">Asia/Shanghai</span><br><br><span class="hljs-attr">jobs:</span><br>  <span class="hljs-attr">blog-cicd:</span><br>    <span class="hljs-attr">name:</span> <span class="hljs-string">Hexo</span> <span class="hljs-string">blog</span> <span class="hljs-string">build</span> <span class="hljs-string">&amp;</span> <span class="hljs-string">deploy</span><br>    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span><br><br>    <span class="hljs-attr">steps:</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="建立工作环境"><a href="#建立工作环境" class="headerlink" title="建立工作环境"></a>建立工作环境</h3><p>上面的大前提确定后就可以来开始建立我们的工作环境了（注： 后续所有步骤的配置都是接在上面<code>steps</code>块下的，不要弄混了层级关系）。</p>
+<p>首先检出代码，设置一下<code>node</code>环境，我们这里使用<code>12.x</code>版本的<code>node.js</code>：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">steps:</span><br><span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Checkout</span> <span class="hljs-string">codes</span><br>  <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v2</span><br><br><span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Setup</span> <span class="hljs-string">node</span><br>  <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/setup-node@v1</span><br>  <span class="hljs-attr">with:</span><br>    <span class="hljs-attr">node-version:</span> <span class="hljs-string">&#x27;12.x&#x27;</span><br></code></pre></td></tr></table></figure>
+<p>然后设置一下缓存目录以避免每次都要重新下载，从而加快构建速度（官方不建议直接缓存<code>node_modules</code>目录，所以这里设置的是<code>npm</code>的下载缓存目录<code>~/.npm</code>，这样后面仍需要使用<code>npm install</code>来安装依赖）。这里使用的是<code>package-lock.json</code>文件的<code>hash</code>值来标识缓存是否可以命中：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Cache</span> <span class="hljs-string">node</span> <span class="hljs-string">modules</span><br>  <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/cache@v1</span><br>  <span class="hljs-attr">with:</span><br>    <span class="hljs-attr">path:</span> <span class="hljs-string">~/.npm</span><br>    <span class="hljs-attr">key:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">runner.os</span> <span class="hljs-string">&#125;&#125;-node-$&#123;&#123;</span> <span class="hljs-string">hashFiles(&#x27;**/package-lock.json&#x27;)</span> <span class="hljs-string">&#125;&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>最后就是安装依赖了，这个根据自己的需要操作就行，由于我使用了<code>gulp</code>任务来压缩<code>Hexo</code>生成的文件，所以我这里除了<code>hexo-cli</code>还全局安装了<code>gulp</code>：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Install</span> <span class="hljs-string">dependencies</span><br>  <span class="hljs-attr">run:</span> <span class="hljs-string">|</span><br><span class="hljs-string">    npm install hexo-cli gulp -g</span><br><span class="hljs-string">    npm install</span><br></code></pre></td></tr></table></figure>
+<h3 id="生成部署文件"><a href="#生成部署文件" class="headerlink" title="生成部署文件"></a>生成部署文件</h3><p>这一步简单点<code>hexo g</code>就行了，我这里多加了一步执行 gulp 任务的操作（将其放在两个<code>step</code>中而不是一次性执行是为了方便在日志中看到每个操作消耗的时间）：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Generate</span> <span class="hljs-string">files</span><br>  <span class="hljs-attr">run:</span> <span class="hljs-string">hexo</span> <span class="hljs-string">generate</span><br><br><span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Execute</span> <span class="hljs-string">gulp</span> <span class="hljs-string">task</span><br>  <span class="hljs-attr">run:</span> <span class="hljs-string">gulp</span><br></code></pre></td></tr></table></figure>
+<h3 id="部署博客"><a href="#部署博客" class="headerlink" title="部署博客"></a>部署博客</h3><p>我们先将<code>GitHub Pages</code>仓库克隆过来，将其中的<code>.git</code>目录移到存放部署文件的<code>public</code>目录中（为了保留<code>GitHub Pages</code>仓库的提交历史），然后进入<code>public</code>目录设置一下提交用户名和邮箱，<code>add</code>所有文件并提交，最后利用保存在秘密环境变量中的<code>GitHub Personal Access Token</code>推送到<code>GitHub Pages</code>仓库中就可以了：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Deploy</span> <span class="hljs-string">blog</span><br>  <span class="hljs-attr">run:</span> <span class="hljs-string">|</span><br><span class="hljs-string">    git clone &quot;https://$&#123;&#123; secrets.GH_REF &#125;&#125;&quot; deploy_git</span><br><span class="hljs-string">    mv ./deploy_git/.git ./public/</span><br><span class="hljs-string">    cd ./public</span><br><span class="hljs-string">    git config user.name &quot;yourname&quot;</span><br><span class="hljs-string">    git config user.email &quot;youremail&quot;</span><br><span class="hljs-string">    git add .</span><br><span class="hljs-string">    git commit -m &quot;GitHub Actions Auto Builder at $(date +&#x27;%Y-%m-%d %H:%M:%S&#x27;)&quot;</span><br><span class="hljs-string">    git push --force --quiet &quot;https://$&#123;&#123; secrets.GH_TOKEN &#125;&#125;@$&#123;&#123; secrets.GH_REF &#125;&#125;&quot; master:master</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="完整配置文件"><a href="#完整配置文件" class="headerlink" title="完整配置文件"></a>完整配置文件</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">name:</span> <span class="hljs-string">Blog</span> <span class="hljs-string">CI/CD</span><br><br><span class="hljs-attr">on:</span><br>  <span class="hljs-attr">push:</span><br>    <span class="hljs-attr">branches:</span> <br>      <span class="hljs-bullet">-</span> <span class="hljs-string">master</span><br><br><span class="hljs-attr">env:</span><br>  <span class="hljs-attr">TZ:</span> <span class="hljs-string">Asia/Shanghai</span><br><br><span class="hljs-attr">jobs:</span><br>  <span class="hljs-attr">blog-cicd:</span><br>    <span class="hljs-attr">name:</span> <span class="hljs-string">Hexo</span> <span class="hljs-string">blog</span> <span class="hljs-string">build</span> <span class="hljs-string">&amp;</span> <span class="hljs-string">deploy</span><br>    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span><br><br>    <span class="hljs-attr">steps:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Checkout</span> <span class="hljs-string">codes</span><br>      <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v2</span><br><br>    <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Setup</span> <span class="hljs-string">node</span><br>      <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/setup-node@v1</span><br>      <span class="hljs-attr">with:</span><br>        <span class="hljs-attr">node-version:</span> <span class="hljs-string">&#x27;12.x&#x27;</span><br><br>    <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Cache</span> <span class="hljs-string">node</span> <span class="hljs-string">modules</span><br>      <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/cache@v1</span><br>      <span class="hljs-attr">with:</span><br>        <span class="hljs-attr">path:</span> <span class="hljs-string">~/.npm</span><br>        <span class="hljs-attr">key:</span> <span class="hljs-string">$&#123;&#123;</span> <span class="hljs-string">runner.os</span> <span class="hljs-string">&#125;&#125;-node-$&#123;&#123;</span> <span class="hljs-string">hashFiles(&#x27;**/package-lock.json&#x27;)</span> <span class="hljs-string">&#125;&#125;</span><br><br>    <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Install</span> <span class="hljs-string">dependencies</span><br>      <span class="hljs-attr">run:</span> <span class="hljs-string">|</span><br><span class="hljs-string">        npm install hexo-cli gulp -g</span><br><span class="hljs-string">        npm install</span><br><span class="hljs-string"></span><br>    <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Generate</span> <span class="hljs-string">files</span><br>      <span class="hljs-attr">run:</span> <span class="hljs-string">hexo</span> <span class="hljs-string">generate</span><br><br>    <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Execute</span> <span class="hljs-string">gulp</span> <span class="hljs-string">task</span><br>      <span class="hljs-attr">run:</span> <span class="hljs-string">gulp</span><br><br>    <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Deploy</span> <span class="hljs-string">blog</span><br>      <span class="hljs-attr">run:</span> <span class="hljs-string">|</span><br><span class="hljs-string">        git clone &quot;https://$&#123;&#123; secrets.GH_REF &#125;&#125;&quot; deploy_git</span><br><span class="hljs-string">        mv ./deploy_git/.git ./public/</span><br><span class="hljs-string">        cd ./public</span><br><span class="hljs-string">        git config user.name &quot;yourname&quot;</span><br><span class="hljs-string">        git config user.email &quot;youremail&quot;</span><br><span class="hljs-string">        git add .</span><br><span class="hljs-string">        git commit -m &quot;GitHub Actions Auto Builder at $(date +&#x27;%Y-%m-%d %H:%M:%S&#x27;)&quot;</span><br><span class="hljs-string">        git push --force --quiet &quot;https://$&#123;&#123; secrets.GH_TOKEN &#125;&#125;@$&#123;&#123; secrets.GH_REF &#125;&#125;&quot; master:master</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://xirikm.net/2020/313-1"><u>使用 GitHub Actions 自动构建 Hexo 博客</u></a><br><a target="_blank" rel="noopener" href="https://easyhexo.com/1-Hexo-install-and-config/1-5-continuous-integration.html#%E4%BB%80%E4%B9%88%E6%98%AF%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90"><u>持续集成 Continuous Integration</u></a></p>
+<p><strong>文档存在信息滞后，部分信息可能与实际不符</strong></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Blog/" class="category-chain-item">Blog</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Blog/">#Blog</a>
+      
+        <a href="/tags/Github/">#Github</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>使用Github Actions实现Hexo博客在Github上的自动部署</div>
+      <div>https://muxiner.github.io/2020/11/30/using-gitActions/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Muxiner</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2020年11月30日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/12/09/csapp-bomb/" title="CSAPP：BOMB实验">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CSAPP：BOMB实验</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/11/24/git-password/" title="git push 不用每次输入用户名和密码">
+                        <span class="hidden-mobile">git push 不用每次输入用户名和密码</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
