@@ -16,24 +16,24 @@
   <meta name="author" content="Muxiner">
   <meta name="keywords" content="">
   
-    <meta name="description" content="问题描述终端出现：   上图使用的是他人的问题图片，自己这边忘记截图了。  问题原因WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! 就是： 警告：远程主机标识已更改！ 此报错是由于远程的主机的公钥发生了变化导致的。  ssh 服务是通过公钥和私钥来进行连接的，它会把每个曾经访问过计算机或服务器的公钥（public key），记录在 ~&#x2F;.ssh&#x2F;k">
+    <meta name="description" content="如题所示，就是解决 PS 中 SSH 远程连接失败问题。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【水博客】解决 Windows Powershell 中 SSH 远程连接失败问题">
 <meta property="og:url" content="https://muxiner.github.io/2022/04/12/cannot-ssh-connect-with-ps/index.html">
 <meta property="og:site_name" content="Muxiner&#39;s Blog">
-<meta property="og:description" content="问题描述终端出现：   上图使用的是他人的问题图片，自己这边忘记截图了。  问题原因WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! 就是： 警告：远程主机标识已更改！ 此报错是由于远程的主机的公钥发生了变化导致的。  ssh 服务是通过公钥和私钥来进行连接的，它会把每个曾经访问过计算机或服务器的公钥（public key），记录在 ~&#x2F;.ssh&#x2F;k">
+<meta property="og:description" content="如题所示，就是解决 PS 中 SSH 远程连接失败问题。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s1.ax1x.com/2022/04/12/LnTJd1.md.png">
-<meta property="og:image" content="https://s1.ax1x.com/2022/04/12/LnXWAH.md.png">
-<meta property="og:image" content="https://s1.ax1x.com/2022/04/12/LupgDP.md.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628225106.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628225125.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628225148.png">
 <meta property="article:published_time" content="2022-04-12T15:15:10.000Z">
-<meta property="article:modified_time" content="2022-06-28T09:47:47.684Z">
+<meta property="article:modified_time" content="2022-06-28T14:39:30.000Z">
 <meta property="article:author" content="Muxiner">
 <meta property="article:tag" content="Blog">
 <meta property="article:tag" content="SSH">
 <meta property="article:tag" content="PowerShell">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s1.ax1x.com/2022/04/12/LnTJd1.md.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628225106.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -245,7 +245,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          614 字
+          608 字
         
       </span>
     
@@ -309,7 +309,7 @@
                 
                   
                     <!-- compatible with older versions-->
-                    本文最后更新于：几秒前
+                    本文最后更新于：1 小时前
                   
                 
               </p>
@@ -318,7 +318,7 @@
               <div class="markdown-body">
                 
                 <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>终端出现：</p>
-<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/LnTJd1"><img src="https://s1.ax1x.com/2022/04/12/LnTJd1.md.png" srcset="/img/loading.gif" lazyload alt="LnTJd1.md.png"></a></p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628225106.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>上图使用的是他人的问题图片，自己这边忘记截图了。</p>
 </blockquote>
@@ -328,15 +328,19 @@
 <p>此报错是由于远程的主机的公钥发生了变化导致的。 </p>
 <p>ssh 服务是通过公钥和私钥来进行连接的，它会把每个曾经访问过计算机或服务器的公钥（public key），记录在 <code>~/.ssh/known_hosts</code> 中，当下次访问曾经访问过的计算机或服务器时，ssh 就会核对公钥，如果和上次记录的不同，<code>OpenSSH</code> 会发出警告。</p>
 <h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><p>使用命令清楚所连接的 IP：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">ssh-keygen -R xx.xx.xx.xx<br><span class="hljs-meta prompt_"># </span><span class="language-bash">xx.xx.xx.xx 是需要使用 ssh 连接的 ip</span><br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs shell">ssh-keygen -R xx.xx.xx.xx
+<span class="hljs-meta prompt_"># </span><span class="language-bash">xx.xx.xx.xx 是需要使用 ssh 连接的 ip</span></code></pre></div>
 
-<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/LnXWAH"><img src="https://s1.ax1x.com/2022/04/12/LnXWAH.md.png" srcset="/img/loading.gif" lazyload alt="LnXWAH.md.png"></a></p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628225125.png" srcset="/img/loading.gif" lazyload></p>
 <p>然后重新连接：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">ssh name@xx.xx.xx.xx -p 22<br><span class="hljs-meta prompt_"># </span><span class="language-bash">name：用户名</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">xx.xx.xx.xx: ip</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">-p 22：使用端口 22</span><br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs shell">ssh name@xx.xx.xx.xx -p 22
+<span class="hljs-meta prompt_"># </span><span class="language-bash">name：用户名</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">xx.xx.xx.xx: ip</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">-p 22：使用端口 22</span></code></pre></div>
 <p>这是会出现有一局：</p>
 <p>Are you sure you want to continue connecting (yes&#x2F;no)?</p>
 <p>输入：yes，并按回车。</p>
-<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/LupgDP"><img src="https://s1.ax1x.com/2022/04/12/LupgDP.md.png" srcset="/img/loading.gif" lazyload alt="LupgDP.md.png"></a></p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628225148.png" srcset="/img/loading.gif" lazyload></p>
 <p>然后就能够成功建立远程连接，后续输入 <code>用户名</code> + <code>密码</code> 登录系统就行。</p>
 <p>最后，在终端断开 ssh 连接而不关闭终端的方法：</p>
 <ul>

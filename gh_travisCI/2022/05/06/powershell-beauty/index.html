@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s1.ax1x.com/2022/05/06/OK5y8J.png">
 <meta property="article:published_time" content="2022-05-06T07:01:55.000Z">
-<meta property="article:modified_time" content="2022-06-28T09:47:47.688Z">
+<meta property="article:modified_time" content="2022-06-28T15:14:12.000Z">
 <meta property="article:author" content="Muxiner">
 <meta property="article:tag" content="Beauty">
 <meta property="article:tag" content="Terminal">
@@ -306,7 +306,7 @@
                 
                   
                     <!-- compatible with older versions-->
-                    本文最后更新于：几秒前
+                    本文最后更新于：20 分钟前
                   
                 
               </p>
@@ -330,79 +330,104 @@
 <p><a target="_blank" rel="noopener" href="https://scoop.sh/#/">Scoop</a> 是 Windows 下的一款十分强大的包管理器，可以用来下载和管理各种软件包<br>首次需要打开并运行 <code>PowerShell terminal</code> (version 5.1 or later)。</p>
 </blockquote>
 <p>然后使用下列命令进行安装：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">Set-ExecutionPolicy RemoteSigned -Scope CurrentUser <br><span class="hljs-meta prompt_"># </span><span class="language-bash">Optional: Needed to run a remote script the first time</span><br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs shell">Set-ExecutionPolicy RemoteSigned -Scope CurrentUser 
+<span class="hljs-meta prompt_"># </span><span class="language-bash">Optional: Needed to run a remote script the first time</span></code></pre></div>
 
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">Invoke-WebRequest get.scoop.sh | Invoke-Expression<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs shell">Invoke-WebRequest get.scoop.sh | Invoke-Expression</code></pre></div>
 
 <h4 id="Oh-My-Posh"><a href="#Oh-My-Posh" class="headerlink" title="Oh My Posh"></a>Oh My Posh</h4><p>通过 <code>scoop</code> 进行安装：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">scoop install https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/oh-my-posh.json<br></code></pre></td></tr></table></figure>
-<p><img src="https://s1.ax1x.com/2022/05/06/OKHemR.png" srcset="/img/loading.gif" lazyload><br>当出现图示内容（绿色）时，说明安装成功。</p>
+<div class="code-wrapper"><pre><code class="hljs shell">scoop install https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/oh-my-posh.json</code></pre></div>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628231646.png" srcset="/img/loading.gif" lazyload></p>
+<p>当出现图示内容（绿色）时，说明安装成功。</p>
 <blockquote>
-<p>除了使用官方文档提到的方式进行安装。还可以使用 <code>scoop install oh-my-posh</code> 进行安装。<br>这是 <a target="_blank" rel="noopener" href="https://scoop.sh/#/apps?q=oh-my-posh">scoop apps</a>中所提到的。<br><img src="https://s1.ax1x.com/2022/05/06/OKHWNV.png" srcset="/img/loading.gif" lazyload><br>使用此种方法时，要跟着文档的方法走哦。<br>安装成功截图：<br><img src="https://s1.ax1x.com/2022/05/06/OKbA4f.png" srcset="/img/loading.gif" lazyload></p>
+<p>除了使用官方文档提到的方式进行安装。还可以使用 <code>scoop install oh-my-posh</code> 进行安装。<br>这是 <a target="_blank" rel="noopener" href="https://scoop.sh/#/apps?q=oh-my-posh">scoop apps</a>中所提到的。<br><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628231715.png" srcset="/img/loading.gif" lazyload><br>使用此种方法时，要跟着文档的方法走哦。<br>安装成功截图：<br><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628231734.png" srcset="/img/loading.gif" lazyload></p>
 </blockquote>
 <blockquote>
-<p>如果想要卸载 Oh My Posh 的话，可以使用命令 <code>scoop uninstall oh-my-posh</code>，进行卸载。<br>卸载成功截图：<br><img src="https://s1.ax1x.com/2022/05/06/OKbPHI.png" srcset="/img/loading.gif" lazyload></p>
+<p>如果想要卸载 Oh My Posh 的话，可以使用命令 <code>scoop uninstall oh-my-posh</code>，进行卸载。<br>卸载成功截图：<br><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628231750.png" srcset="/img/loading.gif" lazyload></p>
 </blockquote>
-<h4 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h4><p><img src="https://s1.ax1x.com/2022/05/07/OKO35t.png" srcset="/img/loading.gif" lazyload><br><a target="_blank" rel="noopener" href="https://ohmyposh.dev/docs/installation/windows">Oh My Posh</a> 提示到** 要显示所有图标，我们建议使用 <code>Nerd Font</code>。**</p>
+<h4 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628231811.png" srcset="/img/loading.gif" lazyload></p>
+<p><a target="_blank" rel="noopener" href="https://ohmyposh.dev/docs/installation/windows">Oh My Posh</a> 提示到** 要显示所有图标，我们建议使用 <code>Nerd Font</code>。**</p>
 <p>所以咱就下载 <a target="_blank" rel="noopener" href="https://www.nerdfonts.com/font-downloads">Nerd Font</a> 字体吧。</p>
-<p>如果不适用 <code>Nerd Font</code> 的话，就会出现这种情况：<br><img src="https://s1.ax1x.com/2022/05/07/OKOhZ9.png" srcset="/img/loading.gif" lazyload><br>可见 icon 们均没有正常显示，而是显示的方框，这也是为什么要使用 <code>Nerd Font</code> 的原因了。</p>
+<p>如果不适用 <code>Nerd Font</code> 的话，就会出现这种情况：</p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628231833.png" srcset="/img/loading.gif" lazyload></p>
+<p>可见 icon 们均没有正常显示，而是显示的方框，这也是为什么要使用 <code>Nerd Font</code> 的原因了。</p>
 <blockquote>
 <p>人家自己也说了—— “To display all icons, we recommend the use of a Nerd Font.”</p>
 </blockquote>
-<p><img src="https://s1.ax1x.com/2022/05/07/OKOxII.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628231854.png" srcset="/img/loading.gif" lazyload></p>
 <p>进入官网后选择一个中意的字体下载就行。我自己使用的 <a target="_blank" rel="noopener" href="https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip">Hack Nerd Font</a>（点击可直接下载该字体）</p>
-<p>然后进行安装啦，打开压缩包，选择喜欢的（细、粗）字体，然后点击安装。<br><img src="https://s1.ax1x.com/2022/05/07/OKXuWV.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后进行安装啦，打开压缩包，选择喜欢的（细、粗）字体，然后点击安装。</p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628231910.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>也可以使用 <code>scoop</code> 安装 <code>Nerd Font</code> 字体：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">scoop bucket add nerd-fonts<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs shell">scoop bucket add nerd-fonts</code></pre></div>
 <p>再在 <a target="_blank" rel="noopener" href="https://github.com/matthewjberger/scoop-nerd-fonts/tree/master/bucket">nerd fonts 字体库</a> 找到需要安装的字体。<br>然后就执行命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">scoop install Hack-NF<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs shell">scoop install Hack-NF</code></pre></div>
 <p>安装完成后需要重启 Windows Terminal 才可以设置字体哦，否则会设置失败。</p>
 </blockquote>
-<p>最后，在 <code>windows terminal</code> 中将字体选择为 <code>Hack Nerd Font</code>，即可。<br><img src="https://s1.ax1x.com/2022/05/07/OKXswd.png" srcset="/img/loading.gif" lazyload></p>
+<p>最后，在 <code>windows terminal</code> 中将字体选择为 <code>Hack Nerd Font</code>，即可。</p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628231927.png" srcset="/img/loading.gif" lazyload></p>
 <h4 id="posh-git"><a href="#posh-git" class="headerlink" title="posh-git"></a>posh-git</h4><p><a target="_blank" rel="noopener" href="https://github.com/dahlbyk/posh-git">posh-git</a> 可以在 <code>PowerShell</code> 中显示 <code>Git</code> 状态的摘要信息并自动补全 <code>Git</code> 命令。</p>
 <p>通过 <code>scoop</code> 来安装，依次执行命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">scoop bucket add extras<br></code></pre></td></tr></table></figure>
-<p><img src="https://s1.ax1x.com/2022/05/07/OKjf41.png" srcset="/img/loading.gif" lazyload></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">scoop install posh-git<br></code></pre></td></tr></table></figure>
-<p><img src="https://s1.ax1x.com/2022/05/07/OKjcB4.png" srcset="/img/loading.gif" lazyload></p>
-<h4 id="Terminal-Icons"><a href="#Terminal-Icons" class="headerlink" title="Terminal-Icons"></a>Terminal-Icons</h4><p><img src="https://s1.ax1x.com/2022/05/07/OKjHDe.png" srcset="/img/loading.gif" lazyload><br><a target="_blank" rel="noopener" href="https://github.com/devblackops/Terminal-Icons">Terminal-Icons</a> 可以在 <code>PowerShell</code> 中显示项目图标并以颜色区分。让你的 <code>Powershell</code> 变得更加的花哨。</p>
+<div class="code-wrapper"><pre><code class="hljs shell">scoop bucket add extras</code></pre></div>
+
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628231945.png" srcset="/img/loading.gif" lazyload></p>
+<div class="code-wrapper"><pre><code class="hljs shell">scoop install posh-git</code></pre></div>
+
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232008.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="Terminal-Icons"><a href="#Terminal-Icons" class="headerlink" title="Terminal-Icons"></a>Terminal-Icons</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232029.png" srcset="/img/loading.gif" lazyload></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/devblackops/Terminal-Icons">Terminal-Icons</a> 可以在 <code>PowerShell</code> 中显示项目图标并以颜色区分。让你的 <code>Powershell</code> 变得更加的花哨。</p>
 <p>通过 <code>scoop</code> 来安装，依次执行命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">scoop bucket add extras<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs shell">scoop bucket add extras</code></pre></div>
 <blockquote>
 <p>前文中已执行过该命令，此次可不在执行。</p>
 </blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">scoop install terminal-icons<br></code></pre></td></tr></table></figure>
-<p><img src="https://s1.ax1x.com/2022/05/07/OKvMb4.png" srcset="/img/loading.gif" lazyload></p>
+<div class="code-wrapper"><pre><code class="hljs shell">scoop install terminal-icons</code></pre></div>
+
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232046.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>安装完成后，还贴心的提示了如何使用呢。</p>
 </blockquote>
 <h3 id="配置-Oh-My-Posh"><a href="#配置-Oh-My-Posh" class="headerlink" title="配置 Oh My Posh"></a>配置 Oh My Posh</h3><p>完成上述的安装后，启动 <code>PowerShell</code> 时并不会默认加载个性化后的配置，因此需要修改 <code>PowerShell</code> 配置文件来让每次启动都加载。</p>
 <p>执行命令打开配置文件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">notepad $PROFILE<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs shell">notepad $PROFILE</code></pre></div>
 <p>若提示不存在文件，且提示是否创建文件，则直接创建，否则需要手动在 <code>PowerShell</code> 目录下创建一个配置文件再进行编辑。</p>
 <p>若需手动创建配置文件，则依次执行命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir ~\Documents\WindowsPowerShell<br><span class="hljs-meta prompt_"># </span><span class="language-bash">创建文件夹</span><br>echo &quot;&quot; &gt; ~\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1<br><span class="hljs-meta prompt_"># </span><span class="language-bash">创建配置文件</span><br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs shell">mkdir ~\Documents\WindowsPowerShell
+<span class="hljs-meta prompt_"># </span><span class="language-bash">创建文件夹</span>
+echo &quot;&quot; &gt; ~\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
+<span class="hljs-meta prompt_"># </span><span class="language-bash">创建配置文件</span></code></pre></div>
 <p>最后向配置文件中添加：</p>
-<figure class="highlight ps1"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs ps1"><span class="hljs-comment"># 使用 oh my posh</span><br><span class="hljs-built_in">oh</span><span class="hljs-literal">-my-posh</span> init pwsh | <span class="hljs-built_in">Invoke-Expression</span><br><span class="hljs-comment"># 使用 Terminal-Icons</span><br><span class="hljs-built_in">Import-Module</span> Terminal<span class="hljs-literal">-Icons</span><br><span class="hljs-comment"># 使用 posh-git</span><br><span class="hljs-built_in">Import-Module</span> posh<span class="hljs-literal">-git</span><br></code></pre></td></tr></table></figure>
-<p>最后重新启动 <code>PowerShell</code>，或者是输入命令 <code>powershell</code> 即可查看美化后的界面。<br><img src="https://s1.ax1x.com/2022/05/07/OKxkLD.png" srcset="/img/loading.gif" lazyload></p>
+<div class="code-wrapper"><pre><code class="hljs ps1"><span class="hljs-comment"># 使用 oh my posh</span>
+<span class="hljs-built_in">oh</span><span class="hljs-literal">-my-posh</span> init pwsh | <span class="hljs-built_in">Invoke-Expression</span>
+<span class="hljs-comment"># 使用 Terminal-Icons</span>
+<span class="hljs-built_in">Import-Module</span> Terminal<span class="hljs-literal">-Icons</span>
+<span class="hljs-comment"># 使用 posh-git</span>
+<span class="hljs-built_in">Import-Module</span> posh<span class="hljs-literal">-git</span></code></pre></div>
+<p>最后重新启动 <code>PowerShell</code>，或者是输入命令 <code>powershell</code> 即可查看美化后的界面。</p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232107.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="配置主题"><a href="#配置主题" class="headerlink" title="配置主题"></a>配置主题</h3><p>完成全部安装和配置后，使用的是默认主题，如果想要切换成其它主题，可以去 <a target="_blank" rel="noopener" href="https://ohmyposh.dev/docs/themes">官方主题目录</a> 查看各种主题的效果，同时这些主题也被安装在 <code>Oh My Pos</code>h 的主题目录下。</p>
 <p>通过 <code>scoop</code> 安装后的主题目录为：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">~\scoop\apps\oh-my-posh\current\themes<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs shell">~\scoop\apps\oh-my-posh\current\themes</code></pre></div>
 <p>所有主题配置文件都放在这里，并以 <code>.omp.json</code> 结尾，从其它地方下载的主题配置文件也需要放在这里。</p>
 <p>在终端中执行以下命令，就可以查看所有主题在终端中的效果：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">Get-PoshThemes ~\scoop\apps\oh-my-posh\current\themes <br></code></pre></td></tr></table></figure>
-<p><img src="https://s1.ax1x.com/2022/05/07/OKxrmF.png" srcset="/img/loading.gif" lazyload></p>
+<div class="code-wrapper"><pre><code class="hljs shell">Get-PoshThemes ~\scoop\apps\oh-my-posh\current\themes</code></pre></div>
+
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232123.png" srcset="/img/loading.gif" lazyload></p>
 <p>选择一个主题的名字，如 <code>paradox</code>，然后编辑 <code>PowerShell</code> 的配置文件，执行命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">notepad $PROFILE<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs shell">notepad $PROFILE</code></pre></div>
 <p>将其中的 <code>oh-my-posh init pwsh | Invoke-Expression</code> 加上 <code>--config [主题路径]</code> 参数：</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">oh-<span class="hljs-keyword">my</span>-posh init pwsh <span class="hljs-comment">--config ~\scoop\apps\oh-my-posh\current\themes\paradox.json | Invoke-Expression</span><br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs applescript">oh-<span class="hljs-keyword">my</span>-posh init pwsh <span class="hljs-comment">--config ~\scoop\apps\oh-my-posh\current\themes\paradox.json | Invoke-Expression</span></code></pre></div>
 <p>最后重新启动 <code>PowerShell</code>，或者是输入命令 <code>powershell</code> 即可查看美化后的界面。</p>
 <h3 id="配置-VS-code"><a href="#配置-VS-code" class="headerlink" title="配置 VS code"></a>配置 VS code</h3><p>在 <code>VS code</code> 中也能打开 <code>PowerShell</code> 终端，但是由于没有配置终端字体，因为 icon 们还是没有正常显示，而是显示的方框。</p>
 <p>因此需要设置 <code>VSCode</code> 的终端字体为 <code>Hack Nerd Font</code> 才能正常显示。</p>
-<p>首先打开<strong>设置</strong>，搜索 <code>Terminal &gt; Integrated &gt; Font Family</code>。<br><img src="https://s1.ax1x.com/2022/05/07/OKxh6K.png" srcset="/img/loading.gif" lazyload><br>然后添加 <code>Hack Nerd Font</code>。</p>
-<p>最后重新打开终端，或是执行 <code>powershell</code>，即可查看美化界面。<br><img src="https://s1.ax1x.com/2022/05/07/OKzaAH.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="成品"><a href="#成品" class="headerlink" title="成品"></a>成品</h3><p>完成上述配置，以及对 <code>Windows Terminal</code> 的配置文件进行修改后，咱就获得了一个花哨的 <code>PowerShell</code>:<br><img src="https://s1.ax1x.com/2022/05/07/OMSsi9.png" srcset="/img/loading.gif" lazyload></p>
+<p>首先打开<strong>设置</strong>，搜索 <code>Terminal &gt; Integrated &gt; Font Family</code>。</p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232142.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后添加 <code>Hack Nerd Font</code>。</p>
+<p>最后重新打开终端，或是执行 <code>powershell</code>，即可查看美化界面。</p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232205.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="成品"><a href="#成品" class="headerlink" title="成品"></a>成品</h3><p>完成上述配置，以及对 <code>Windows Terminal</code> 的配置文件进行修改后，咱就获得了一个花哨的 <code>PowerShell</code>:</p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628232221.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
 <li><a target="_blank" rel="noopener" href="https://ohmyposh.dev/">Oh My Posh | A prompt theme engine for any shell</a></li>
 <li><a target="_blank" rel="noopener" href="https://scoop.sh/#/">Scoop | A command-line installer for Windows</a></li>

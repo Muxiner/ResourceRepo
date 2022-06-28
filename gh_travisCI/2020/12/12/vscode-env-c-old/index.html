@@ -249,7 +249,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          3.1k 字
+          3k 字
         
       </span>
     
@@ -261,7 +261,7 @@
         
         
           <!-- compatible with older versions-->
-          26 分钟
+          25 分钟
         
       </span>
     
@@ -313,7 +313,7 @@
                 
                   
                     <!-- compatible with older versions-->
-                    本文最后更新于：18 小时前
+                    本文最后更新于：1 天前
                   
                 
               </p>
@@ -348,9 +348,67 @@
 <p>在 <code>.vscode</code> 中创建 <code>launch.json</code> , <code>tasks.json</code>。</p>
 <p><img src="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628005400.png" srcset="/img/loading.gif" lazyload></p>
 <p>复制下面代码到 <code>launch.json</code></p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment">// 使用 IntelliSense 了解相关属性。 </span><br>    <span class="hljs-comment">// 悬停以查看现有属性的描述。</span><br>    <span class="hljs-comment">// 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387</span><br>    <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;0.2.0&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;configurations&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>        <span class="hljs-punctuation">&#123;</span><br>            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;g++.exe - 生成和调试活动文件&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;cppdbg&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;request&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;launch&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;program&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;$&#123;workspaceFolder&#125;/Weexe\\$&#123;fileBasenameNoExtension&#125;.exe&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-comment">// workspacefolder为.vscode所在的文件夹,将要进行调试的程序的路径</span><br>            <span class="hljs-comment">//这个参数要和tasks.json一样,因为调试时的exe文件我们时保存在另一个路径中</span><br>            <span class="hljs-attr">&quot;args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;stopAtEntry&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">false</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;cwd&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;$&#123;workspaceFolder&#125;&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;environment&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;externalConsole&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;MIMode&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;gdb&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;miDebuggerPath&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;C:\\MinGW\\bin\\gdb.exe&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">//gdb.exe所在路径</span><br>            <span class="hljs-attr">&quot;setupCommands&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>                <span class="hljs-punctuation">&#123;</span><br>                    <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;为 gdb 启用整齐打印&quot;</span><span class="hljs-punctuation">,</span><br>                    <span class="hljs-attr">&quot;text&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;-enable-pretty-printing&quot;</span><span class="hljs-punctuation">,</span><br>                    <span class="hljs-attr">&quot;ignoreFailures&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span><br>                <span class="hljs-punctuation">&#125;</span><br>            <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;preLaunchTask&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;g++.exe build active file&quot;</span><br>        <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-punctuation">]</span><br><span class="hljs-punctuation">&#125;</span><br><br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+    <span class="hljs-comment">// 使用 IntelliSense 了解相关属性。 </span>
+    <span class="hljs-comment">// 悬停以查看现有属性的描述。</span>
+    <span class="hljs-comment">// 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387</span>
+    <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;0.2.0&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;configurations&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-punctuation">&#123;</span>
+            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;g++.exe - 生成和调试活动文件&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;cppdbg&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;request&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;launch&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;program&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;$&#123;workspaceFolder&#125;/Weexe\\$&#123;fileBasenameNoExtension&#125;.exe&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-comment">// workspacefolder为.vscode所在的文件夹,将要进行调试的程序的路径</span>
+            <span class="hljs-comment">//这个参数要和tasks.json一样,因为调试时的exe文件我们时保存在另一个路径中</span>
+            <span class="hljs-attr">&quot;args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;stopAtEntry&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">false</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;cwd&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;$&#123;workspaceFolder&#125;&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;environment&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;externalConsole&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;MIMode&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;gdb&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;miDebuggerPath&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;C:\\MinGW\\bin\\gdb.exe&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">//gdb.exe所在路径</span>
+            <span class="hljs-attr">&quot;setupCommands&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+                <span class="hljs-punctuation">&#123;</span>
+                    <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;为 gdb 启用整齐打印&quot;</span><span class="hljs-punctuation">,</span>
+                    <span class="hljs-attr">&quot;text&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;-enable-pretty-printing&quot;</span><span class="hljs-punctuation">,</span>
+                    <span class="hljs-attr">&quot;ignoreFailures&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span>
+                <span class="hljs-punctuation">&#125;</span>
+            <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;preLaunchTask&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;g++.exe build active file&quot;</span>
+        <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">&#125;</span>
+</code></pre></div>
 <p>复制下面代码到 <code>tasks.json</code></p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br><span class="hljs-comment">// 有关 tasks.json 格式的文档，请参见</span><br>    <span class="hljs-comment">// https://go.microsoft.com/fwlink/?LinkId=733558</span><br>    <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2.0.0&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;tasks&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>        <span class="hljs-punctuation">&#123;</span><br>            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;shell&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;g++.exe build active file&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;C:\\MinGW\\bin\\g++.exe&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">//g++.exe所在路径</span><br>            <span class="hljs-attr">&quot;args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>                <span class="hljs-string">&quot;-g&quot;</span><span class="hljs-punctuation">,</span><br>                <span class="hljs-string">&quot;$&#123;file&#125;&quot;</span><span class="hljs-punctuation">,</span><br>                <span class="hljs-string">&quot;-o&quot;</span><span class="hljs-punctuation">,</span><br>                <span class="hljs-string">&quot;$&#123;workspaceFolder&#125;/Weexe\\$&#123;fileBasenameNoExtension&#125;.exe&quot;</span><br>            <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;options&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>                <span class="hljs-attr">&quot;cwd&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;C:\\MinGW\\bin&quot;</span><br>            <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;problemMatcher&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>                <span class="hljs-string">&quot;$gcc&quot;</span><br>            <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;group&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>                <span class="hljs-attr">&quot;kind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;build&quot;</span><span class="hljs-punctuation">,</span><br>                <span class="hljs-attr">&quot;isDefault&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span><br>            <span class="hljs-punctuation">&#125;</span><br>        <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-punctuation">]</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span>
+<span class="hljs-comment">// 有关 tasks.json 格式的文档，请参见</span>
+    <span class="hljs-comment">// https://go.microsoft.com/fwlink/?LinkId=733558</span>
+    <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2.0.0&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;tasks&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-punctuation">&#123;</span>
+            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;shell&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;g++.exe build active file&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;C:\\MinGW\\bin\\g++.exe&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">//g++.exe所在路径</span>
+            <span class="hljs-attr">&quot;args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+                <span class="hljs-string">&quot;-g&quot;</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-string">&quot;$&#123;file&#125;&quot;</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-string">&quot;-o&quot;</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-string">&quot;$&#123;workspaceFolder&#125;/Weexe\\$&#123;fileBasenameNoExtension&#125;.exe&quot;</span>
+            <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;options&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span>
+                <span class="hljs-attr">&quot;cwd&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;C:\\MinGW\\bin&quot;</span>
+            <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;problemMatcher&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+                <span class="hljs-string">&quot;$gcc&quot;</span>
+            <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;group&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span>
+                <span class="hljs-attr">&quot;kind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;build&quot;</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-attr">&quot;isDefault&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span>
+            <span class="hljs-punctuation">&#125;</span>
+        <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">&#125;</span></code></pre></div>
 <p>文件夹暂时和上图相同。然后方可正常的运行C程序。</p>
 <h4 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h4><p>编写本文时，对于 C\C++ 环境配置还不是很熟，因此上述内容或多或少存在问题，后续会更新详细教程。</p>
 

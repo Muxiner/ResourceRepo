@@ -16,17 +16,19 @@
   <meta name="author" content="Muxiner">
   <meta name="keywords" content="">
   
-    <meta name="description" content="本文所写为 Windows 11 下包管理器 Scoop 的安装与使用">
+    <meta name="description" content="本文所写为 Windows 11 下包管理器 Scoop 的安装与使用，主要用于记录使用方法。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Windows 下包管理器 Scoop 的安装与使用">
 <meta property="og:url" content="https://muxiner.github.io/2022/05/30/using-scoop/index.html">
 <meta property="og:site_name" content="Muxiner&#39;s Blog">
-<meta property="og:description" content="本文所写为 Windows 11 下包管理器 Scoop 的安装与使用">
+<meta property="og:description" content="本文所写为 Windows 11 下包管理器 Scoop 的安装与使用，主要用于记录使用方法。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/md_img/20220529150626.png">
 <meta property="article:published_time" content="2022-05-30T15:59:37.000Z">
-<meta property="article:modified_time" content="2022-06-28T09:47:47.688Z">
+<meta property="article:modified_time" content="2022-06-28T13:52:30.000Z">
 <meta property="article:author" content="Muxiner">
+<meta property="article:tag" content="software">
+<meta property="article:tag" content="记录">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/md_img/20220529150626.png">
   
@@ -240,7 +242,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          3.3k 字
+          3.2k 字
         
       </span>
     
@@ -252,7 +254,7 @@
         
         
           <!-- compatible with older versions-->
-          28 分钟
+          27 分钟
         
       </span>
     
@@ -304,7 +306,7 @@
                 
                   
                     <!-- compatible with older versions-->
-                    本文最后更新于：几秒前
+                    本文最后更新于：2 小时前
                   
                 
               </p>
@@ -335,7 +337,7 @@
 </blockquote>
 </li>
 <li><p>确保以允许 <code>Powershell</code> 执行本地脚本。</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">set-executionpolicy</span> remotesigned <span class="hljs-literal">-scope</span> currentuser<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs powershell"><span class="hljs-built_in">set-executionpolicy</span> remotesigned <span class="hljs-literal">-scope</span> currentuser</code></pre></div>
 
 <blockquote>
 <p><code>Unrestricted</code> 也可以，但是安全性较低。</p>
@@ -345,27 +347,27 @@
 </ul>
 <h3 id="🍉-安装-Scoop-1"><a href="#🍉-安装-Scoop-1" class="headerlink" title="🍉 安装 Scoop"></a>🍉 安装 Scoop</h3><h4 id="🍑-安装在默认位置"><a href="#🍑-安装在默认位置" class="headerlink" title="🍑 安装在默认位置"></a>🍑 安装在默认位置</h4><p>默认安装在 <code>C:\Users\username\scoop</code> 路径下。</p>
 <p>执行命令：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">Invoke-Expression</span> (<span class="hljs-built_in">New-Object</span> System.Net.WebClient).DownloadString(<span class="hljs-string">&#x27;https://get.scoop.sh&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs powershell"><span class="hljs-built_in">Invoke-Expression</span> (<span class="hljs-built_in">New-Object</span> System.Net.WebClient).DownloadString(<span class="hljs-string">&#x27;https://get.scoop.sh&#x27;</span>)</code></pre></div>
 
 <p>或是执行（更短的）：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">iwr</span> <span class="hljs-literal">-useb</span> get.scoop.sh | <span class="hljs-built_in">iex</span><br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs powershell"><span class="hljs-built_in">iwr</span> <span class="hljs-literal">-useb</span> get.scoop.sh | <span class="hljs-built_in">iex</span></code></pre></div>
 
 <h4 id="🍑-自定义安装目录"><a href="#🍑-自定义安装目录" class="headerlink" title="🍑 自定义安装目录"></a>🍑 自定义安装目录</h4><p>例如将 <code>Scoop</code> 安装在 <code>C:\Scoop</code> 路径下。</p>
 <p>需要添加该路径到<strong>用户变量</strong>中：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$env:SCOOP</span>=<span class="hljs-string">&#x27;C:\scoop&#x27;</span><br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs powershell"><span class="hljs-variable">$env:SCOOP</span>=<span class="hljs-string">&#x27;C:\scoop&#x27;</span></code></pre></div>
 
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">[<span class="hljs-type">environment</span>]::setEnvironmentVariable(<span class="hljs-string">&#x27;SCOOP&#x27;</span>,<span class="hljs-variable">$env:SCOOP</span>,<span class="hljs-string">&#x27;User&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs powershell">[<span class="hljs-type">environment</span>]::setEnvironmentVariable(<span class="hljs-string">&#x27;SCOOP&#x27;</span>,<span class="hljs-variable">$env:SCOOP</span>,<span class="hljs-string">&#x27;User&#x27;</span>)</code></pre></div>
 
 <blockquote>
 <p>当然也可以添加到<strong>系统变量</strong>中：</p>
 <p>不过此时需要以<strong>管理员身份</strong>运行 <code>PowerShell</code> ，或是以<strong>管理员身份</strong>运行 <code>Windows Terminal</code>，再打开 <code>PowerShell</code> ，否则会报错：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">[<span class="hljs-type">environment</span>]::setEnvironmentVariable(<span class="hljs-string">&#x27;SCOOP&#x27;</span>,<span class="hljs-variable">$env:SCOOP</span>,<span class="hljs-string">&#x27;Machine&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs powershell">[<span class="hljs-type">environment</span>]::setEnvironmentVariable(<span class="hljs-string">&#x27;SCOOP&#x27;</span>,<span class="hljs-variable">$env:SCOOP</span>,<span class="hljs-string">&#x27;Machine&#x27;</span>)</code></pre></div>
 </blockquote>
 <blockquote>
 <p><span style="color:red;">添加完环境变量后需要重启 PowerShell 或 Terminal 等待变量生效。</span></p>
 </blockquote>
 <p>然后再执行安装指令：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">iwr</span> <span class="hljs-literal">-useb</span> get.scoop.sh | <span class="hljs-built_in">iex</span><br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs powershell"><span class="hljs-built_in">iwr</span> <span class="hljs-literal">-useb</span> get.scoop.sh | <span class="hljs-built_in">iex</span></code></pre></div>
 <p><img src="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/md_img/20220529150626.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>出现上图所示，且无错误提示，则安装成功。</p>
@@ -379,16 +381,37 @@
 <li>😶‍🌫️ 安装指令：<code>scoop install -g &lt;app&gt;</code></li>
 </ol>
 <p>合起来就是：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$env:SCOOP_GLOBAL</span>=<span class="hljs-string">&#x27;C:\apps&#x27;</span><br>[<span class="hljs-type">environment</span>]::setEnvironmentVariable(<span class="hljs-string">&#x27;SCOOP_GLOBAL&#x27;</span>,<span class="hljs-variable">$env:SCOOP_GLOBAL</span>,<span class="hljs-string">&#x27;Machine&#x27;</span>)<br>scoop install <span class="hljs-literal">-g</span> &lt;app&gt;<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs powershell"><span class="hljs-variable">$env:SCOOP_GLOBAL</span>=<span class="hljs-string">&#x27;C:\apps&#x27;</span>
+[<span class="hljs-type">environment</span>]::setEnvironmentVariable(<span class="hljs-string">&#x27;SCOOP_GLOBAL&#x27;</span>,<span class="hljs-variable">$env:SCOOP_GLOBAL</span>,<span class="hljs-string">&#x27;Machine&#x27;</span>)
+scoop install <span class="hljs-literal">-g</span> &lt;app&gt;</code></pre></div>
 
 <h3 id="🍉-使用-Scoop"><a href="#🍉-使用-Scoop" class="headerlink" title="🍉 使用 Scoop"></a>🍉 使用 Scoop</h3><p>查看 scoop 的命令：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">scoop help<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs powershell">scoop help</code></pre></div>
 
 <p>查看命令的详细信息：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs powershell">scoop help &lt;command&gt;<br><span class="hljs-comment"># for example: scoop help install </span><br><span class="hljs-comment"># For more detailed information on INSTALL</span><br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs powershell">scoop help &lt;command&gt;
+<span class="hljs-comment"># for example: scoop help install </span>
+<span class="hljs-comment"># For more detailed information on INSTALL</span></code></pre></div>
 
 <p>执行 <code>scoop help install </code>：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs powershell">Usage: scoop install &lt;app&gt; [<span class="hljs-type">options</span>]<br><br>e.g. The usual way to install an app (uses your local <span class="hljs-string">&#x27;buckets&#x27;</span>):<br>     scoop install git<br><br>To install an app from a manifest at a URL:<br>     scoop install https://raw.githubusercontent.com/ScoopInstaller/Main/master/bucket/runat.json<br><br>To install an app from a manifest on your computer<br>     scoop install \path\to\app.json<br><br>Options:<br>  <span class="hljs-literal">-g</span>, <span class="hljs-literal">--global</span>              Install the app globally<br>  <span class="hljs-literal">-i</span>, <span class="hljs-literal">--independent</span>         Don<span class="hljs-string">&#x27;t install dependencies automatically</span><br><span class="hljs-string">  -k, --no-cache            Don&#x27;</span>t use the download cache<br>  <span class="hljs-literal">-u</span>, <span class="hljs-literal">--no-update-scoop</span>     Don<span class="hljs-string">&#x27;t update Scoop before installing if it&#x27;</span>s outdated<br>  <span class="hljs-literal">-s</span>, <span class="hljs-literal">--skip</span>                Skip hash validation (use with caution!)<br>  <span class="hljs-literal">-a</span>, <span class="hljs-literal">--arch</span> &lt;<span class="hljs-number">32</span>bit|<span class="hljs-number">64</span>bit&gt;  Use the specified architecture, <span class="hljs-keyword">if</span> the app supports it<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs powershell">Usage: scoop install &lt;app&gt; [<span class="hljs-type">options</span>]
+
+e.g. The usual way to install an app (uses your local <span class="hljs-string">&#x27;buckets&#x27;</span>):
+     scoop install git
+
+To install an app from a manifest at a URL:
+     scoop install https://raw.githubusercontent.com/ScoopInstaller/Main/master/bucket/runat.json
+
+To install an app from a manifest on your computer
+     scoop install \path\to\app.json
+
+Options:
+  <span class="hljs-literal">-g</span>, <span class="hljs-literal">--global</span>              Install the app globally
+  <span class="hljs-literal">-i</span>, <span class="hljs-literal">--independent</span>         Don<span class="hljs-string">&#x27;t install dependencies automatically</span>
+<span class="hljs-string">  -k, --no-cache            Don&#x27;</span>t use the download cache
+  <span class="hljs-literal">-u</span>, <span class="hljs-literal">--no-update-scoop</span>     Don<span class="hljs-string">&#x27;t update Scoop before installing if it&#x27;</span>s outdated
+  <span class="hljs-literal">-s</span>, <span class="hljs-literal">--skip</span>                Skip hash validation (use with caution!)
+  <span class="hljs-literal">-a</span>, <span class="hljs-literal">--arch</span> &lt;<span class="hljs-number">32</span>bit|<span class="hljs-number">64</span>bit&gt;  Use the specified architecture, <span class="hljs-keyword">if</span> the app supports it</code></pre></div>
 
 
 
@@ -399,7 +422,9 @@
 <p>若是自定义安装路径，例如上文的位置，则在 <code>C:\Scoop</code> </p>
 </blockquote>
 <p>安装命令：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs powershell">scoop install &lt;app&gt;<br><span class="hljs-comment"># for example:</span><br><span class="hljs-comment"># scoop install nano</span><br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs powershell">scoop install &lt;app&gt;
+<span class="hljs-comment"># for example:</span>
+<span class="hljs-comment"># scoop install nano</span></code></pre></div>
 
 <h5 id="🫐-为所有用户安装"><a href="#🫐-为所有用户安装" class="headerlink" title="🫐 为所有用户安装"></a>🫐 为所有用户安装</h5><p>默认的安装路径：<code>C:\ProgramData\scoop</code></p>
 <p>若是如上文所示，自定义了全局应用安装目录，则安装路径：<code>C:\apps</code></p>
@@ -407,51 +432,53 @@
 <p>需要以<strong>管理员身份</strong>运行。</p>
 </blockquote>
 <p>安装命令：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs powershell">scoop install &lt;app&gt; <span class="hljs-literal">-g</span><br><span class="hljs-comment"># for example:</span><br><span class="hljs-comment"># scoop install nano -g</span><br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs powershell">scoop install &lt;app&gt; <span class="hljs-literal">-g</span>
+<span class="hljs-comment"># for example:</span>
+<span class="hljs-comment"># scoop install nano -g</span></code></pre></div>
 
-<h4 id="🍒-卸载应用"><a href="#🍒-卸载应用" class="headerlink" title="🍒 卸载应用"></a>🍒 卸载应用</h4><h5 id="🫐-卸载某一程序"><a href="#🫐-卸载某一程序" class="headerlink" title="🫐 卸载某一程序"></a>🫐 卸载某一程序</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">scoop uninstall &lt;app&gt;<br></code></pre></td></tr></table></figure>
+<h4 id="🍒-卸载应用"><a href="#🍒-卸载应用" class="headerlink" title="🍒 卸载应用"></a>🍒 卸载应用</h4><h5 id="🫐-卸载某一程序"><a href="#🫐-卸载某一程序" class="headerlink" title="🫐 卸载某一程序"></a>🫐 卸载某一程序</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop uninstall &lt;app&gt;</code></pre></div>
 
-<h5 id="🫐-卸载程序并移除配置文件"><a href="#🫐-卸载程序并移除配置文件" class="headerlink" title="🫐 卸载程序并移除配置文件"></a>🫐 卸载程序并移除配置文件</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">scoop uninstall &lt;app&gt; <span class="hljs-literal">-p</span><br></code></pre></td></tr></table></figure>
+<h5 id="🫐-卸载程序并移除配置文件"><a href="#🫐-卸载程序并移除配置文件" class="headerlink" title="🫐 卸载程序并移除配置文件"></a>🫐 卸载程序并移除配置文件</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop uninstall &lt;app&gt; <span class="hljs-literal">-p</span></code></pre></div>
 
-<h5 id="🫐-卸载全局程序"><a href="#🫐-卸载全局程序" class="headerlink" title="🫐 卸载全局程序"></a>🫐 卸载全局程序</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">scoop uninstall &lt;app&gt; <span class="hljs-literal">-g</span><br></code></pre></td></tr></table></figure>
+<h5 id="🫐-卸载全局程序"><a href="#🫐-卸载全局程序" class="headerlink" title="🫐 卸载全局程序"></a>🫐 卸载全局程序</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop uninstall &lt;app&gt; <span class="hljs-literal">-g</span></code></pre></div>
 
-<h5 id="🫐-更多信息"><a href="#🫐-更多信息" class="headerlink" title="🫐 更多信息"></a>🫐 更多信息</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">scoop help uninstall<br></code></pre></td></tr></table></figure>
-
-
-
-<h4 id="🍒-更新"><a href="#🍒-更新" class="headerlink" title="🍒 更新"></a>🍒 更新</h4><h5 id="🫐-更新-scoop-及所有-bucket-但不更新-app"><a href="#🫐-更新-scoop-及所有-bucket-但不更新-app" class="headerlink" title="🫐 更新 scoop 及所有 bucket 但不更新 app"></a>🫐 更新 scoop 及所有 bucket 但不更新 app</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">scoop update<br></code></pre></td></tr></table></figure>
-
-<h5 id="🫐-更新某一-app"><a href="#🫐-更新某一-app" class="headerlink" title="🫐 更新某一 app"></a>🫐 更新某一 app</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">scoop update &lt;app&gt;<br></code></pre></td></tr></table></figure>
-
-<h5 id="🫐-更新-scoop、bucket、app"><a href="#🫐-更新-scoop、bucket、app" class="headerlink" title="🫐 更新 scoop、bucket、app"></a>🫐 更新 scoop、bucket、app</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">scoop update *<br></code></pre></td></tr></table></figure>
-
-<h5 id="🫐-更新全局-app"><a href="#🫐-更新全局-app" class="headerlink" title="🫐 更新全局 app"></a>🫐 更新全局 app</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">scoop update &lt;app&gt; <span class="hljs-literal">-g</span><br></code></pre></td></tr></table></figure>
-
-<h5 id="🫐-更多信息-1"><a href="#🫐-更多信息-1" class="headerlink" title="🫐 更多信息"></a>🫐 更多信息</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">scoop help update<br></code></pre></td></tr></table></figure>
+<h5 id="🫐-更多信息"><a href="#🫐-更多信息" class="headerlink" title="🫐 更多信息"></a>🫐 更多信息</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop help uninstall</code></pre></div>
 
 
 
-<h4 id="🍒-其他有用操作"><a href="#🍒-其他有用操作" class="headerlink" title="🍒 其他有用操作"></a>🍒 其他有用操作</h4><h5 id="🫐-查看已安装-app"><a href="#🫐-查看已安装-app" class="headerlink" title="🫐 查看已安装 app"></a>🫐 查看已安装 app</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">scoop list<br></code></pre></td></tr></table></figure>
+<h4 id="🍒-更新"><a href="#🍒-更新" class="headerlink" title="🍒 更新"></a>🍒 更新</h4><h5 id="🫐-更新-scoop-及所有-bucket-但不更新-app"><a href="#🫐-更新-scoop-及所有-bucket-但不更新-app" class="headerlink" title="🫐 更新 scoop 及所有 bucket 但不更新 app"></a>🫐 更新 scoop 及所有 bucket 但不更新 app</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop update</code></pre></div>
 
-<h5 id="🫐-查看可更新-app"><a href="#🫐-查看可更新-app" class="headerlink" title="🫐 查看可更新 app"></a>🫐 查看可更新 app</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">scoop status<br></code></pre></td></tr></table></figure>
+<h5 id="🫐-更新某一-app"><a href="#🫐-更新某一-app" class="headerlink" title="🫐 更新某一 app"></a>🫐 更新某一 app</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop update &lt;app&gt;</code></pre></div>
 
-<h5 id="🫐-查看某-app-主页"><a href="#🫐-查看某-app-主页" class="headerlink" title="🫐 查看某 app 主页"></a>🫐 查看某 app 主页</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">scoop home &lt;app&gt;<br></code></pre></td></tr></table></figure>
+<h5 id="🫐-更新-scoop、bucket、app"><a href="#🫐-更新-scoop、bucket、app" class="headerlink" title="🫐 更新 scoop、bucket、app"></a>🫐 更新 scoop、bucket、app</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop update *</code></pre></div>
 
-<h5 id="🫐-查看「已知库」"><a href="#🫐-查看「已知库」" class="headerlink" title="🫐 查看「已知库」"></a>🫐 查看「已知库」</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">scoop bucket known<br></code></pre></td></tr></table></figure>
+<h5 id="🫐-更新全局-app"><a href="#🫐-更新全局-app" class="headerlink" title="🫐 更新全局 app"></a>🫐 更新全局 app</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop update &lt;app&gt; <span class="hljs-literal">-g</span></code></pre></div>
 
-<h5 id="🫐-添加「已知库」"><a href="#🫐-添加「已知库」" class="headerlink" title="🫐 添加「已知库」"></a>🫐 添加「已知库」</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">scoop bucket add &lt;bucket&gt;<br></code></pre></td></tr></table></figure>
+<h5 id="🫐-更多信息-1"><a href="#🫐-更多信息-1" class="headerlink" title="🫐 更多信息"></a>🫐 更多信息</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop help update</code></pre></div>
 
-<h5 id="🫐-查看已添加的库"><a href="#🫐-查看已添加的库" class="headerlink" title="🫐 查看已添加的库"></a>🫐 查看已添加的库</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">scoop bucket list<br></code></pre></td></tr></table></figure>
 
-<h5 id="🫐-删除已添加的库"><a href="#🫐-删除已添加的库" class="headerlink" title="🫐 删除已添加的库"></a>🫐 删除已添加的库</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">scoop bucket <span class="hljs-built_in">rm</span> &lt;bucket&gt;<br></code></pre></td></tr></table></figure>
 
-<h5 id="🫐-添加第三方库"><a href="#🫐-添加第三方库" class="headerlink" title="🫐 添加第三方库"></a>🫐 添加第三方库</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">scoop bucket add &lt;bucket&gt; &lt;bucket_url&gt;<br></code></pre></td></tr></table></figure>
+<h4 id="🍒-其他有用操作"><a href="#🍒-其他有用操作" class="headerlink" title="🍒 其他有用操作"></a>🍒 其他有用操作</h4><h5 id="🫐-查看已安装-app"><a href="#🫐-查看已安装-app" class="headerlink" title="🫐 查看已安装 app"></a>🫐 查看已安装 app</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop list</code></pre></div>
 
-<h5 id="🫐-删除已安装软件的旧版本"><a href="#🫐-删除已安装软件的旧版本" class="headerlink" title="🫐 删除已安装软件的旧版本"></a>🫐 删除已安装软件的旧版本</h5><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">scoop cleanup *<br></code></pre></td></tr></table></figure>
+<h5 id="🫐-查看可更新-app"><a href="#🫐-查看可更新-app" class="headerlink" title="🫐 查看可更新 app"></a>🫐 查看可更新 app</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop status</code></pre></div>
+
+<h5 id="🫐-查看某-app-主页"><a href="#🫐-查看某-app-主页" class="headerlink" title="🫐 查看某 app 主页"></a>🫐 查看某 app 主页</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop home &lt;app&gt;</code></pre></div>
+
+<h5 id="🫐-查看「已知库」"><a href="#🫐-查看「已知库」" class="headerlink" title="🫐 查看「已知库」"></a>🫐 查看「已知库」</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop bucket known</code></pre></div>
+
+<h5 id="🫐-添加「已知库」"><a href="#🫐-添加「已知库」" class="headerlink" title="🫐 添加「已知库」"></a>🫐 添加「已知库」</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop bucket add &lt;bucket&gt;</code></pre></div>
+
+<h5 id="🫐-查看已添加的库"><a href="#🫐-查看已添加的库" class="headerlink" title="🫐 查看已添加的库"></a>🫐 查看已添加的库</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop bucket list</code></pre></div>
+
+<h5 id="🫐-删除已添加的库"><a href="#🫐-删除已添加的库" class="headerlink" title="🫐 删除已添加的库"></a>🫐 删除已添加的库</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop bucket <span class="hljs-built_in">rm</span> &lt;bucket&gt;</code></pre></div>
+
+<h5 id="🫐-添加第三方库"><a href="#🫐-添加第三方库" class="headerlink" title="🫐 添加第三方库"></a>🫐 添加第三方库</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop bucket add &lt;bucket&gt; &lt;bucket_url&gt;</code></pre></div>
+
+<h5 id="🫐-删除已安装软件的旧版本"><a href="#🫐-删除已安装软件的旧版本" class="headerlink" title="🫐 删除已安装软件的旧版本"></a>🫐 删除已安装软件的旧版本</h5><div class="code-wrapper"><pre><code class="hljs powershell">scoop cleanup *</code></pre></div>
 
 <h5 id="🫐-清理软件缓存"><a href="#🫐-清理软件缓存" class="headerlink" title="🫐 清理软件缓存"></a>🫐 清理软件缓存</h5><p>通常是下载的软件安装包。</p>
 <p>以下命令清除所有缓存，即清空 <code>Scoop</code> 目录下的 <code>cache</code> 文件夹。</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">scoop cache <span class="hljs-built_in">rm</span> *<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs powershell">scoop cache <span class="hljs-built_in">rm</span> *</code></pre></div>
 
 <h3 id="🍉-进阶"><a href="#🍉-进阶" class="headerlink" title="🍉 进阶"></a>🍉 进阶</h3><p>更多信息请查看 <a target="_blank" rel="noopener" href="https://github.com/ScoopInstaller/Scoop/wiki">官方文档</a>。</p>
 
@@ -462,6 +489,36 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/software/">#software</a>
+      
+        <a href="/tags/%E8%AE%B0%E5%BD%95/">#记录</a>
+      
+    </div>
   
 </div>
 
@@ -518,8 +575,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/05/27/set-knowledge/" title="支配集、覆盖集、独立集与匹配">
-                        <span class="hidden-mobile">支配集、覆盖集、独立集与匹配</span>
+                      <a href="/2022/05/27/discrete-mathematics-set-knowledge/" title="离散数学笔记 —— 支配集、覆盖集、独立集与匹配">
+                        <span class="hidden-mobile">离散数学笔记 —— 支配集、覆盖集、独立集与匹配</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

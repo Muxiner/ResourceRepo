@@ -16,23 +16,23 @@
   <meta name="author" content="Muxiner">
   <meta name="keywords" content="">
   
-    <meta name="description" content="实验原理多元线性回归——最小二乘法 数据集介绍波士顿房价数据集 数据集的获得:  下载   通过包导入  下载获得数据集有点小问题，因而我是用的 包导入。   12345678910111213from sklearn import datasetsboston &#x3D; datasets.load_boston()# 将房价信息转成dataFrame格式df_boston_house_data &#x3D; p">
+    <meta name="description" content="机器学习实验，使用多元线性回归实现波士顿房价的预测。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="多元线性回归 —— 波士顿房价预测">
 <meta property="og:url" content="https://muxiner.github.io/2022/04/30/ml-boston-housing/index.html">
 <meta property="og:site_name" content="Muxiner&#39;s Blog">
-<meta property="og:description" content="实验原理多元线性回归——最小二乘法 数据集介绍波士顿房价数据集 数据集的获得:  下载   通过包导入  下载获得数据集有点小问题，因而我是用的 包导入。   12345678910111213from sklearn import datasetsboston &#x3D; datasets.load_boston()# 将房价信息转成dataFrame格式df_boston_house_data &#x3D; p">
+<meta property="og:description" content="机器学习实验，使用多元线性回归实现波士顿房价的预测。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s1.ax1x.com/2022/04/28/LjShxH.png">
-<meta property="og:image" content="https://s1.ax1x.com/2022/04/28/LjSoqI.png">
-<meta property="og:image" content="https://s1.ax1x.com/2022/04/28/LjFWJP.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628230435.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628230614.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628230727.png">
 <meta property="article:published_time" content="2022-04-30T07:31:04.000Z">
-<meta property="article:modified_time" content="2022-06-28T09:47:47.684Z">
+<meta property="article:modified_time" content="2022-06-28T14:39:30.000Z">
 <meta property="article:author" content="Muxiner">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="机器学习">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s1.ax1x.com/2022/04/28/LjShxH.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628230435.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -244,7 +244,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          8.5k 字
+          8k 字
         
       </span>
     
@@ -256,7 +256,7 @@
         
         
           <!-- compatible with older versions-->
-          72 分钟
+          67 分钟
         
       </span>
     
@@ -308,7 +308,7 @@
                 
                   
                     <!-- compatible with older versions-->
-                    本文最后更新于：几秒前
+                    本文最后更新于：1 小时前
                   
                 
               </p>
@@ -325,7 +325,19 @@
 <li><p>通过包导入</p>
 <blockquote>
 <p>下载获得数据集有点小问题，因而我是用的 <code>包导入</code>。</p>
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> datasets<br>boston = datasets.load_boston()<br><span class="hljs-comment"># 将房价信息转成dataFrame格式</span><br>df_boston_house_data = pd.DataFrame(boston.data, columns=boston.feature_names)<br>df_boston_house_data[<span class="hljs-string">&#x27;PRICE&#x27;</span>] = boston.target<br><span class="hljs-comment"># 查看数据是否存在空值，从结果来看数据不存在空值。</span><br><span class="hljs-comment"># print(df_boston_house_data.isnull().sum())</span><br><span class="hljs-comment"># 查看数据大小</span><br><span class="hljs-comment"># print(df_boston_house_data.shape)</span><br><span class="hljs-comment"># 显示数据前5行</span><br><span class="hljs-comment"># print(df_boston_house_data.head())</span><br><span class="hljs-comment"># 将数据集写入csv文件</span><br>df_boston_house_data.to_csv(<span class="hljs-string">&quot;boston_housing_data.csv&quot;</span>, index=<span class="hljs-literal">False</span>, sep=<span class="hljs-string">&#x27;,&#x27;</span>)<br></code></pre></td></tr></table></figure>
+  <div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> datasets
+boston = datasets.load_boston()
+<span class="hljs-comment"># 将房价信息转成dataFrame格式</span>
+df_boston_house_data = pd.DataFrame(boston.data, columns=boston.feature_names)
+df_boston_house_data[<span class="hljs-string">&#x27;PRICE&#x27;</span>] = boston.target
+<span class="hljs-comment"># 查看数据是否存在空值，从结果来看数据不存在空值。</span>
+<span class="hljs-comment"># print(df_boston_house_data.isnull().sum())</span>
+<span class="hljs-comment"># 查看数据大小</span>
+<span class="hljs-comment"># print(df_boston_house_data.shape)</span>
+<span class="hljs-comment"># 显示数据前5行</span>
+<span class="hljs-comment"># print(df_boston_house_data.head())</span>
+<span class="hljs-comment"># 将数据集写入csv文件</span>
+df_boston_house_data.to_csv(<span class="hljs-string">&quot;boston_housing_data.csv&quot;</span>, index=<span class="hljs-literal">False</span>, sep=<span class="hljs-string">&#x27;,&#x27;</span>)</code></pre></div>
 </blockquote>
 </li>
 <li><p>该数据集是一个回归问题。每个类的观察值数量是均等的，共有 506 个观察，13 个输入变量（数据集中前13列）和1个输出变量（最后一列）。</p>
@@ -412,7 +424,7 @@
 <td align="center">连续值</td>
 </tr>
 </tbody></table>
-<h3 id="实验详解"><a href="#实验详解" class="headerlink" title="实验详解"></a>实验详解</h3><p><a target="_blank" rel="noopener" href="https://imgtu.com/i/LjShxH"><img src="https://s1.ax1x.com/2022/04/28/LjShxH.png" srcset="/img/loading.gif" lazyload alt="LjShxH.png"></a><br><a target="_blank" rel="noopener" href="https://imgtu.com/i/LjSoqI"><img src="https://s1.ax1x.com/2022/04/28/LjSoqI.png" srcset="/img/loading.gif" lazyload alt="LjSoqI.png"></a></p>
+<h3 id="实验详解"><a href="#实验详解" class="headerlink" title="实验详解"></a>实验详解</h3><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628230435.png" srcset="/img/loading.gif" lazyload><br><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628230614.png" srcset="/img/loading.gif" lazyload></p>
 <p>简单的说就是，本次实验需要求得是：<br>$$<br>f(x)&#x3D;w_1x_1 + w_2x_2+…+w_dx_d+b<br>$$<br>中的 $w_1,w_2,…,w_d,b(d&#x3D;13)$，然后通过这 14 个参数与测试集的前 13 个变量进行计算，求得预测的房价。</p>
 <p>参数使用下列算式计算：<br>$$<br>w^* &#x3D; (X^TX)^{-1}X^Ty<br>$$<br>其中：</p>
 <ul>
@@ -435,20 +447,105 @@
 <li><p>对拟合得到的模型在测试集上进行测试，使用均方误差作为实验的准确结果并输出。</p>
 <h3 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h3></li>
 <li><p>数据集获得<br>使用 <code>sklearn</code> 包导入数据集，但是仅仅是导入，写入 csv 文件，后续使用的数据集均是从 csv 文件读取的。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> datasets<br>boston = datasets.load_boston()<br><span class="hljs-comment"># 将房价信息转成dataFrame格式</span><br>df_boston_house_data = pd.DataFrame(boston.data, columns=boston.feature_names)<br>df_boston_house_data[<span class="hljs-string">&#x27;PRICE&#x27;</span>] = boston.target<br><span class="hljs-comment"># 查看数据是否存在空值，从结果来看数据不存在空值。</span><br><span class="hljs-comment"># print(df_boston_house_data.isnull().sum())</span><br><span class="hljs-comment"># 查看数据大小</span><br><span class="hljs-comment"># print(df_boston_house_data.shape)</span><br><span class="hljs-comment"># 显示数据前5行</span><br><span class="hljs-comment"># print(df_boston_house_data.head())</span><br><span class="hljs-comment"># 将数据集写入csv文件</span><br>df_boston_house_data.to_csv(<span class="hljs-string">&quot;boston_housing_data.csv&quot;</span>, index=<span class="hljs-literal">False</span>, sep=<span class="hljs-string">&#x27;,&#x27;</span>)<br></code></pre></td></tr></table></figure></li>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> datasets
+boston = datasets.load_boston()
+<span class="hljs-comment"># 将房价信息转成dataFrame格式</span>
+df_boston_house_data = pd.DataFrame(boston.data, columns=boston.feature_names)
+df_boston_house_data[<span class="hljs-string">&#x27;PRICE&#x27;</span>] = boston.target
+<span class="hljs-comment"># 查看数据是否存在空值，从结果来看数据不存在空值。</span>
+<span class="hljs-comment"># print(df_boston_house_data.isnull().sum())</span>
+<span class="hljs-comment"># 查看数据大小</span>
+<span class="hljs-comment"># print(df_boston_house_data.shape)</span>
+<span class="hljs-comment"># 显示数据前5行</span>
+<span class="hljs-comment"># print(df_boston_house_data.head())</span>
+<span class="hljs-comment"># 将数据集写入csv文件</span>
+df_boston_house_data.to_csv(<span class="hljs-string">&quot;boston_housing_data.csv&quot;</span>, index=<span class="hljs-literal">False</span>, sep=<span class="hljs-string">&#x27;,&#x27;</span>)</code></pre></div></li>
 <li><p>读取数据集</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">read_data</span>(<span class="hljs-params">file_path</span>):<br> <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string"> 从文件路径中读取数据集</span><br><span class="hljs-string"> :param file_path: 文件路径</span><br><span class="hljs-string"> :return: 返回一个 dataFrame</span><br><span class="hljs-string"> &quot;&quot;&quot;</span><br> <span class="hljs-keyword">return</span> pd.read_csv(file_path, sep=<span class="hljs-string">&#x27;,&#x27;</span>)<br></code></pre></td></tr></table></figure></li>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">read_data</span>(<span class="hljs-params">file_path</span>):
+ <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string"> 从文件路径中读取数据集</span>
+<span class="hljs-string"> :param file_path: 文件路径</span>
+<span class="hljs-string"> :return: 返回一个 dataFrame</span>
+<span class="hljs-string"> &quot;&quot;&quot;</span>
+ <span class="hljs-keyword">return</span> pd.read_csv(file_path, sep=<span class="hljs-string">&#x27;,&#x27;</span>)</code></pre></div></li>
 <li><p>数据集拆分为训练集和测试集</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_training_data</span>(<span class="hljs-params">df, num</span>):<br> <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string"> 从 df 中获得训练集</span><br><span class="hljs-string"> :param num:</span><br><span class="hljs-string"> :param df:</span><br><span class="hljs-string"> :return:</span><br><span class="hljs-string"> &quot;&quot;&quot;</span><br> <span class="hljs-comment"># 取测试集的前450项</span><br> df_training = df.head(num)<br> <span class="hljs-keyword">return</span> df_training<br><br> <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_test_data</span>(<span class="hljs-params">df, num</span>):<br> <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string"> 从 df 中获取测试集</span><br><span class="hljs-string"> :param df:</span><br><span class="hljs-string"> :param num:</span><br><span class="hljs-string"> :return:</span><br><span class="hljs-string"> &quot;&quot;&quot;</span><br> <span class="hljs-comment"># 取数据集的后50项</span><br> df_test = df.tail(num)<br> <span class="hljs-keyword">return</span> df_test<br></code></pre></td></tr></table></figure></li>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_training_data</span>(<span class="hljs-params">df, num</span>):
+ <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string"> 从 df 中获得训练集</span>
+<span class="hljs-string"> :param num:</span>
+<span class="hljs-string"> :param df:</span>
+<span class="hljs-string"> :return:</span>
+<span class="hljs-string"> &quot;&quot;&quot;</span>
+ <span class="hljs-comment"># 取测试集的前450项</span>
+ df_training = df.head(num)
+ <span class="hljs-keyword">return</span> df_training
+
+ <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_test_data</span>(<span class="hljs-params">df, num</span>):
+ <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string"> 从 df 中获取测试集</span>
+<span class="hljs-string"> :param df:</span>
+<span class="hljs-string"> :param num:</span>
+<span class="hljs-string"> :return:</span>
+<span class="hljs-string"> &quot;&quot;&quot;</span>
+ <span class="hljs-comment"># 取数据集的后50项</span>
+ df_test = df.tail(num)
+ <span class="hljs-keyword">return</span> df_test</code></pre></div></li>
 <li><p>计算学习的模型<br>通过公式进行计算。<br>$$w^* &#x3D; (X^TX)^{-1}X^Ty$$</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">model_calculation</span>(<span class="hljs-params">df_x, df_y</span>):<br> <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string"> 计算模型</span><br><span class="hljs-string"> :param df_x:</span><br><span class="hljs-string"> :param df_y:</span><br><span class="hljs-string"> :return:</span><br><span class="hljs-string"> &quot;&quot;&quot;</span><br> <span class="hljs-comment"># 定义大小为 450 的全1数组，用于在 X 矩阵前插入一列全 1 的数</span><br> one_matrix = np.full(<span class="hljs-built_in">len</span>(df_x), <span class="hljs-number">1</span>, dtype=<span class="hljs-built_in">int</span>)<br> <span class="hljs-comment"># X 第一列插入 一列 1，获得 X 矩阵</span><br> x_matrix = np.insert(dataframe_to_matrix(df_x), <span class="hljs-number">0</span>, values=one_matrix, axis=<span class="hljs-number">1</span>)<br> <span class="hljs-comment"># y 矩阵</span><br> y_matrix = dataframe_to_matrix(df_y)<br> <span class="hljs-comment"># X，y 通过计算获得 β 参数</span><br> beta = np.dot(np.linalg.inv(np.dot(x_matrix.T, x_matrix)), np.dot(x_matrix.T, y_matrix))<br> <br> <span class="hljs-keyword">return</span> beta<br></code></pre></td></tr></table></figure></li>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">model_calculation</span>(<span class="hljs-params">df_x, df_y</span>):
+ <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string"> 计算模型</span>
+<span class="hljs-string"> :param df_x:</span>
+<span class="hljs-string"> :param df_y:</span>
+<span class="hljs-string"> :return:</span>
+<span class="hljs-string"> &quot;&quot;&quot;</span>
+ <span class="hljs-comment"># 定义大小为 450 的全1数组，用于在 X 矩阵前插入一列全 1 的数</span>
+ one_matrix = np.full(<span class="hljs-built_in">len</span>(df_x), <span class="hljs-number">1</span>, dtype=<span class="hljs-built_in">int</span>)
+ <span class="hljs-comment"># X 第一列插入 一列 1，获得 X 矩阵</span>
+ x_matrix = np.insert(dataframe_to_matrix(df_x), <span class="hljs-number">0</span>, values=one_matrix, axis=<span class="hljs-number">1</span>)
+ <span class="hljs-comment"># y 矩阵</span>
+ y_matrix = dataframe_to_matrix(df_y)
+ <span class="hljs-comment"># X，y 通过计算获得 β 参数</span>
+ beta = np.dot(np.linalg.inv(np.dot(x_matrix.T, x_matrix)), np.dot(x_matrix.T, y_matrix))
+ 
+ <span class="hljs-keyword">return</span> beta</code></pre></div></li>
 <li><p>通过模型获得房价预测值</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_estimate</span>(<span class="hljs-params">beta, df_test</span>):<br> <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string"></span><br><span class="hljs-string"> :param beta: β的矩阵</span><br><span class="hljs-string"> :param df_test: 测试集</span><br><span class="hljs-string"> :return: 返回预测价格的矩阵（数组）</span><br><span class="hljs-string"> &quot;&quot;&quot;</span><br> <span class="hljs-comment"># 先定义预测值的数组，大小等于测试样例大小，用0填充</span><br> estimate = np.full(<span class="hljs-built_in">len</span>(df_test), <span class="hljs-number">0</span>, dtype=<span class="hljs-built_in">int</span>)<br> <span class="hljs-comment"># 定义大小为56的全1数组，用于在 X 矩阵前插入一列全 1 的数</span><br> one_matrix = np.full(<span class="hljs-built_in">len</span>(df_test), <span class="hljs-number">1</span>, dtype=<span class="hljs-built_in">int</span>)<br> <span class="hljs-comment"># 将测试集中的前13项作为 矩阵 X 的数</span><br> test_matrix = dataframe_to_matrix(get_not_last_column(df_test))<br> <span class="hljs-comment"># X 第一列插入 一列 1</span><br> test_matrix = np.insert(test_matrix, <span class="hljs-number">0</span>, values=one_matrix, axis=<span class="hljs-number">1</span>)<br> <span class="hljs-comment"># print(np.size(test_matrix, 0))</span><br> <span class="hljs-comment"># X 中每一行同 β进行计算，获得预测的价格</span><br> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(np.size(test_matrix, <span class="hljs-number">0</span>)):<br>     estimate[i] = np.dot(beta, test_matrix[i])<br><br> <span class="hljs-comment"># print(estimate)</span><br> <span class="hljs-keyword">return</span> estimate<br></code></pre></td></tr></table></figure></li>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_estimate</span>(<span class="hljs-params">beta, df_test</span>):
+ <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string"></span>
+<span class="hljs-string"> :param beta: β的矩阵</span>
+<span class="hljs-string"> :param df_test: 测试集</span>
+<span class="hljs-string"> :return: 返回预测价格的矩阵（数组）</span>
+<span class="hljs-string"> &quot;&quot;&quot;</span>
+ <span class="hljs-comment"># 先定义预测值的数组，大小等于测试样例大小，用0填充</span>
+ estimate = np.full(<span class="hljs-built_in">len</span>(df_test), <span class="hljs-number">0</span>, dtype=<span class="hljs-built_in">int</span>)
+ <span class="hljs-comment"># 定义大小为56的全1数组，用于在 X 矩阵前插入一列全 1 的数</span>
+ one_matrix = np.full(<span class="hljs-built_in">len</span>(df_test), <span class="hljs-number">1</span>, dtype=<span class="hljs-built_in">int</span>)
+ <span class="hljs-comment"># 将测试集中的前13项作为 矩阵 X 的数</span>
+ test_matrix = dataframe_to_matrix(get_not_last_column(df_test))
+ <span class="hljs-comment"># X 第一列插入 一列 1</span>
+ test_matrix = np.insert(test_matrix, <span class="hljs-number">0</span>, values=one_matrix, axis=<span class="hljs-number">1</span>)
+ <span class="hljs-comment"># print(np.size(test_matrix, 0))</span>
+ <span class="hljs-comment"># X 中每一行同 β进行计算，获得预测的价格</span>
+ <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(np.size(test_matrix, <span class="hljs-number">0</span>)):
+     estimate[i] = np.dot(beta, test_matrix[i])
+
+ <span class="hljs-comment"># print(estimate)</span>
+ <span class="hljs-keyword">return</span> estimate</code></pre></div></li>
 <li><p>绘制房价实际值和预测值的比较图</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 绘制预测值与真实值图</span><br> <span class="hljs-comment"># 规定字体，避免乱码</span><br> plt.rcParams[<span class="hljs-string">&#x27;font.sans-serif&#x27;</span>] = [<span class="hljs-string">u&#x27;SimHei&#x27;</span>]<br> plt.rcParams[<span class="hljs-string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="hljs-literal">False</span><br> plt.plot(true_value_price, color=<span class="hljs-string">&quot;r&quot;</span>, label=<span class="hljs-string">&quot;实际价格&quot;</span>)  <span class="hljs-comment"># 颜色表示</span><br> plt.plot(estimate_value_price, color=(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>), label=<span class="hljs-string">&quot;预测价格&quot;</span>)<br> plt.xlabel(<span class="hljs-string">&quot;测试序号&quot;</span>)  <span class="hljs-comment"># x轴命名表示</span><br> plt.ylabel(<span class="hljs-string">&quot;价格&quot;</span>)  <span class="hljs-comment"># y轴命名表示</span><br> plt.title(<span class="hljs-string">&quot;实际值与预测值折线图&quot;</span>)<br> plt.legend()  <span class="hljs-comment"># 增加图例</span><br> plt.show()  <span class="hljs-comment"># 显示图片</span><br></code></pre></td></tr></table></figure>
-<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p><a target="_blank" rel="noopener" href="https://imgtu.com/i/LjFWJP"><img src="https://s1.ax1x.com/2022/04/28/LjFWJP.png" srcset="/img/loading.gif" lazyload alt="LjFWJP.png"></a></p>
-</li>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 绘制预测值与真实值图</span>
+ <span class="hljs-comment"># 规定字体，避免乱码</span>
+ plt.rcParams[<span class="hljs-string">&#x27;font.sans-serif&#x27;</span>] = [<span class="hljs-string">u&#x27;SimHei&#x27;</span>]
+ plt.rcParams[<span class="hljs-string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="hljs-literal">False</span>
+ plt.plot(true_value_price, color=<span class="hljs-string">&quot;r&quot;</span>, label=<span class="hljs-string">&quot;实际价格&quot;</span>)  <span class="hljs-comment"># 颜色表示</span>
+ plt.plot(estimate_value_price, color=(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>), label=<span class="hljs-string">&quot;预测价格&quot;</span>)
+ plt.xlabel(<span class="hljs-string">&quot;测试序号&quot;</span>)  <span class="hljs-comment"># x轴命名表示</span>
+ plt.ylabel(<span class="hljs-string">&quot;价格&quot;</span>)  <span class="hljs-comment"># y轴命名表示</span>
+ plt.title(<span class="hljs-string">&quot;实际值与预测值折线图&quot;</span>)
+ plt.legend()  <span class="hljs-comment"># 增加图例</span>
+ plt.show()  <span class="hljs-comment"># 显示图片</span></code></pre></div>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3></li>
 </ol>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628230727.png" srcset="/img/loading.gif" lazyload></p>
 <p>分析：</p>
 <p>上述结果仅是一次学习的结果，可见 50 组实际值与预测值之间出入较大，大部分的实际值与预测值之间存在较大的差别。</p>
 <p>不过好在获得了想要的结果。</p>
@@ -475,7 +572,182 @@
 </blockquote>
 </li>
 </ul>
-<h3 id="实验完整代码"><a href="#实验完整代码" class="headerlink" title="实验完整代码"></a>实验完整代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> datasets<br><br><br><span class="hljs-comment"># 数据集下载地址：https://www.kaggle.com/datasets/altavish/boston-housing-dataset?resource=download</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_boston_house_data</span>():<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    从包中加载波士顿房价数据集</span><br><span class="hljs-string">    （本不知道有这种包，但是发现下载的数据集在操作上都存在一些问题，因而找到这种方法）</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-comment"># 加载波士顿房价数据集信息</span><br>    boston = datasets.load_boston()<br>    <span class="hljs-comment"># 将房价信息转成dataFrame格式</span><br>    df_boston_house_data = pd.DataFrame(boston.data, columns=boston.feature_names)<br>    df_boston_house_data[<span class="hljs-string">&#x27;PRICE&#x27;</span>] = boston.target<br>    <span class="hljs-comment"># 查看数据是否存在空值，从结果来看数据不存在空值。</span><br>    <span class="hljs-comment"># print(df_boston_house_data.isnull().sum())</span><br>    <span class="hljs-comment"># 查看数据大小</span><br>    <span class="hljs-comment"># print(df_boston_house_data.shape)</span><br>    <span class="hljs-comment"># 显示数据前5行</span><br>    <span class="hljs-comment"># print(df_boston_house_data.head())</span><br>    <span class="hljs-comment"># 将数据集写入csv文件</span><br>    df_boston_house_data.to_csv(<span class="hljs-string">&quot;boston_housing_data.csv&quot;</span>, index=<span class="hljs-literal">False</span>, sep=<span class="hljs-string">&#x27;,&#x27;</span>)<br>    <span class="hljs-comment"># return df_boston_house_data</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_data_describe</span>(<span class="hljs-params">df</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string"></span><br><span class="hljs-string">    :param df:</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-comment"># 查看数据的描述信息，在描述信息里可以看到每个特征的均值，最大值，最小值等信息</span><br>    df.describe()<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">read_data</span>(<span class="hljs-params">file_path</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    从文件路径中读取数据集</span><br><span class="hljs-string">    :param file_path: 文件路径</span><br><span class="hljs-string">    :return: 返回一个 dataFrame</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">return</span> pd.read_csv(file_path, sep=<span class="hljs-string">&#x27;,&#x27;</span>)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_training_data</span>(<span class="hljs-params">df, num</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    从 df 中获得训练集</span><br><span class="hljs-string">    :param num:</span><br><span class="hljs-string">    :param df:</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-comment"># 取测试集的前450项</span><br>    df_training = df.head(num)<br>    <span class="hljs-comment"># print(df_training)</span><br>    <span class="hljs-keyword">return</span> df_training<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_test_data</span>(<span class="hljs-params">df, num</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    从 df 中获取测试集</span><br><span class="hljs-string">    :param df:</span><br><span class="hljs-string">    :param num:</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-comment"># 取数据集的后50项</span><br>    df_test = df.tail(num)<br>    <span class="hljs-comment"># print(df_test)</span><br>    <span class="hljs-keyword">return</span> df_test<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_last_column</span>(<span class="hljs-params">df</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    获取df最后一列的数据</span><br><span class="hljs-string">    :param df:</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-comment"># print(df.iloc[:, -1])</span><br>    <span class="hljs-keyword">return</span> df.iloc[:, -<span class="hljs-number">1</span>]<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_not_last_column</span>(<span class="hljs-params">df</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    获取df的除最后一列的所有数据</span><br><span class="hljs-string">    :param df:</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-comment"># print(len(df))</span><br>    <span class="hljs-comment"># print(df.iloc[:, :(df.shape[1] - 1)])</span><br>    <span class="hljs-keyword">return</span> df.iloc[:, :(df.shape[<span class="hljs-number">1</span>] - <span class="hljs-number">1</span>)]<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">dataframe_to_matrix</span>(<span class="hljs-params">df</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    将df转换为多维矩阵</span><br><span class="hljs-string">    其实就是转为 numpy 数组</span><br><span class="hljs-string">    :param df: 需要转换的 df</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">return</span> df.to_numpy()<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">model_calculation</span>(<span class="hljs-params">df_x, df_y</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    计算模型</span><br><span class="hljs-string">    :param df_x: 训练集的前13列</span><br><span class="hljs-string">    :param df_y: 训练集的第14列</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-comment"># 定义大小为 450 的全1数组，用于在 X 矩阵前插入一列全 1 的数</span><br>    one_matrix = np.full(<span class="hljs-built_in">len</span>(df_x), <span class="hljs-number">1</span>, dtype=<span class="hljs-built_in">int</span>)<br>    <span class="hljs-comment"># X 第一列插入 一列 1，获得 X 矩阵</span><br>    x_matrix = np.insert(dataframe_to_matrix(df_x), <span class="hljs-number">0</span>, values=one_matrix, axis=<span class="hljs-number">1</span>)<br>    <span class="hljs-comment"># y 矩阵</span><br>    y_matrix = dataframe_to_matrix(df_y)<br>    <span class="hljs-comment"># X，y 通过计算获得 β 参数</span><br>    beta = np.dot(np.linalg.inv(np.dot(x_matrix.T, x_matrix)), np.dot(x_matrix.T, y_matrix))<br>    <span class="hljs-comment"># print(beta)</span><br>    <span class="hljs-keyword">return</span> beta<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_estimate</span>(<span class="hljs-params">beta, df_test</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string"></span><br><span class="hljs-string">    :param beta: β的矩阵</span><br><span class="hljs-string">    :param df_test: 测试集</span><br><span class="hljs-string">    :return: 返回预测价格的矩阵（数组）</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-comment"># 先定义预测值的数组，大小等于测试样例大小，用0填充</span><br>    estimate = np.full(<span class="hljs-built_in">len</span>(df_test), <span class="hljs-number">0</span>, dtype=<span class="hljs-built_in">int</span>)<br>    <span class="hljs-comment"># 定义大小为56的全1数组，用于在 X 矩阵前插入一列全 1 的数</span><br>    one_matrix = np.full(<span class="hljs-built_in">len</span>(df_test), <span class="hljs-number">1</span>, dtype=<span class="hljs-built_in">int</span>)<br>    <span class="hljs-comment"># 将测试集中的前13项作为 矩阵 X 的数</span><br>    test_matrix = dataframe_to_matrix(get_not_last_column(df_test))<br>    <span class="hljs-comment"># X 第一列插入 一列 1</span><br>    test_matrix = np.insert(test_matrix, <span class="hljs-number">0</span>, values=one_matrix, axis=<span class="hljs-number">1</span>)<br>    <span class="hljs-comment"># print(np.size(test_matrix, 0))</span><br>    <span class="hljs-comment"># X 中每一行同 β进行计算，获得预测的价格</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(np.size(test_matrix, <span class="hljs-number">0</span>)):<br>        estimate[i] = np.dot(beta, test_matrix[i])<br><br>    <span class="hljs-comment"># print(estimate)</span><br>    <span class="hljs-keyword">return</span> estimate<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    path = <span class="hljs-string">&#x27;boston_housing_data.csv&#x27;</span><br>    <span class="hljs-comment"># 读取csv文件，存入 df</span><br>    df_housing_data = read_data(path)<br>    <span class="hljs-comment"># 获取训练集</span><br>    df_training_data = get_training_data(df_housing_data, <span class="hljs-number">450</span>)<br>    <span class="hljs-comment"># 获取测试集</span><br>    df_test_data = get_test_data(df_housing_data, <span class="hljs-number">56</span>)<br>    <span class="hljs-comment"># 获取训练来的 参数</span><br>    beta_matrix = model_calculation(get_not_last_column(df_training_data), get_last_column(df_training_data))<br>    <span class="hljs-comment"># 测试集与训练结果参数计算获得 预测价格</span><br>    estimate_value_price = get_estimate(beta_matrix, df_test_data)<br>    <span class="hljs-comment"># 实际价格</span><br>    true_value_price = dataframe_to_matrix(get_last_column(df_test_data))<br>    <span class="hljs-comment"># 绘制预测值与真实值图</span><br>    <span class="hljs-comment"># 规定字体，避免乱码</span><br>    plt.rcParams[<span class="hljs-string">&#x27;font.sans-serif&#x27;</span>] = [<span class="hljs-string">u&#x27;SimHei&#x27;</span>]<br>    plt.rcParams[<span class="hljs-string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="hljs-literal">False</span><br>    plt.plot(true_value_price, color=<span class="hljs-string">&quot;r&quot;</span>, label=<span class="hljs-string">&quot;实际价格&quot;</span>)  <span class="hljs-comment"># 颜色表示</span><br>    plt.plot(estimate_value_price, color=(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>), label=<span class="hljs-string">&quot;预测价格&quot;</span>)<br>    plt.xlabel(<span class="hljs-string">&quot;测试序号&quot;</span>)  <span class="hljs-comment"># x轴命名表示</span><br>    plt.ylabel(<span class="hljs-string">&quot;价格&quot;</span>)  <span class="hljs-comment"># y轴命名表示</span><br>    plt.title(<span class="hljs-string">&quot;实际值与预测值折线图&quot;</span>)<br>    plt.legend()  <span class="hljs-comment"># 增加图例</span><br>    plt.show()  <span class="hljs-comment"># 显示图片</span><br><br></code></pre></td></tr></table></figure>
+<h3 id="实验完整代码"><a href="#实验完整代码" class="headerlink" title="实验完整代码"></a>实验完整代码</h3><div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> datasets
+
+
+<span class="hljs-comment"># 数据集下载地址：https://www.kaggle.com/datasets/altavish/boston-housing-dataset?resource=download</span>
+
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">get_boston_house_data</span>():
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    从包中加载波士顿房价数据集</span>
+<span class="hljs-string">    （本不知道有这种包，但是发现下载的数据集在操作上都存在一些问题，因而找到这种方法）</span>
+<span class="hljs-string">    :return:</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    <span class="hljs-comment"># 加载波士顿房价数据集信息</span>
+    boston = datasets.load_boston()
+    <span class="hljs-comment"># 将房价信息转成dataFrame格式</span>
+    df_boston_house_data = pd.DataFrame(boston.data, columns=boston.feature_names)
+    df_boston_house_data[<span class="hljs-string">&#x27;PRICE&#x27;</span>] = boston.target
+    <span class="hljs-comment"># 查看数据是否存在空值，从结果来看数据不存在空值。</span>
+    <span class="hljs-comment"># print(df_boston_house_data.isnull().sum())</span>
+    <span class="hljs-comment"># 查看数据大小</span>
+    <span class="hljs-comment"># print(df_boston_house_data.shape)</span>
+    <span class="hljs-comment"># 显示数据前5行</span>
+    <span class="hljs-comment"># print(df_boston_house_data.head())</span>
+    <span class="hljs-comment"># 将数据集写入csv文件</span>
+    df_boston_house_data.to_csv(<span class="hljs-string">&quot;boston_housing_data.csv&quot;</span>, index=<span class="hljs-literal">False</span>, sep=<span class="hljs-string">&#x27;,&#x27;</span>)
+    <span class="hljs-comment"># return df_boston_house_data</span>
+
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">get_data_describe</span>(<span class="hljs-params">df</span>):
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">    :param df:</span>
+<span class="hljs-string">    :return:</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    <span class="hljs-comment"># 查看数据的描述信息，在描述信息里可以看到每个特征的均值，最大值，最小值等信息</span>
+    df.describe()
+
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">read_data</span>(<span class="hljs-params">file_path</span>):
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    从文件路径中读取数据集</span>
+<span class="hljs-string">    :param file_path: 文件路径</span>
+<span class="hljs-string">    :return: 返回一个 dataFrame</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    <span class="hljs-keyword">return</span> pd.read_csv(file_path, sep=<span class="hljs-string">&#x27;,&#x27;</span>)
+
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">get_training_data</span>(<span class="hljs-params">df, num</span>):
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    从 df 中获得训练集</span>
+<span class="hljs-string">    :param num:</span>
+<span class="hljs-string">    :param df:</span>
+<span class="hljs-string">    :return:</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    <span class="hljs-comment"># 取测试集的前450项</span>
+    df_training = df.head(num)
+    <span class="hljs-comment"># print(df_training)</span>
+    <span class="hljs-keyword">return</span> df_training
+
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">get_test_data</span>(<span class="hljs-params">df, num</span>):
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    从 df 中获取测试集</span>
+<span class="hljs-string">    :param df:</span>
+<span class="hljs-string">    :param num:</span>
+<span class="hljs-string">    :return:</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    <span class="hljs-comment"># 取数据集的后50项</span>
+    df_test = df.tail(num)
+    <span class="hljs-comment"># print(df_test)</span>
+    <span class="hljs-keyword">return</span> df_test
+
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">get_last_column</span>(<span class="hljs-params">df</span>):
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    获取df最后一列的数据</span>
+<span class="hljs-string">    :param df:</span>
+<span class="hljs-string">    :return:</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    <span class="hljs-comment"># print(df.iloc[:, -1])</span>
+    <span class="hljs-keyword">return</span> df.iloc[:, -<span class="hljs-number">1</span>]
+
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">get_not_last_column</span>(<span class="hljs-params">df</span>):
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    获取df的除最后一列的所有数据</span>
+<span class="hljs-string">    :param df:</span>
+<span class="hljs-string">    :return:</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    <span class="hljs-comment"># print(len(df))</span>
+    <span class="hljs-comment"># print(df.iloc[:, :(df.shape[1] - 1)])</span>
+    <span class="hljs-keyword">return</span> df.iloc[:, :(df.shape[<span class="hljs-number">1</span>] - <span class="hljs-number">1</span>)]
+
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">dataframe_to_matrix</span>(<span class="hljs-params">df</span>):
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    将df转换为多维矩阵</span>
+<span class="hljs-string">    其实就是转为 numpy 数组</span>
+<span class="hljs-string">    :param df: 需要转换的 df</span>
+<span class="hljs-string">    :return:</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    <span class="hljs-keyword">return</span> df.to_numpy()
+
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">model_calculation</span>(<span class="hljs-params">df_x, df_y</span>):
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    计算模型</span>
+<span class="hljs-string">    :param df_x: 训练集的前13列</span>
+<span class="hljs-string">    :param df_y: 训练集的第14列</span>
+<span class="hljs-string">    :return:</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    <span class="hljs-comment"># 定义大小为 450 的全1数组，用于在 X 矩阵前插入一列全 1 的数</span>
+    one_matrix = np.full(<span class="hljs-built_in">len</span>(df_x), <span class="hljs-number">1</span>, dtype=<span class="hljs-built_in">int</span>)
+    <span class="hljs-comment"># X 第一列插入 一列 1，获得 X 矩阵</span>
+    x_matrix = np.insert(dataframe_to_matrix(df_x), <span class="hljs-number">0</span>, values=one_matrix, axis=<span class="hljs-number">1</span>)
+    <span class="hljs-comment"># y 矩阵</span>
+    y_matrix = dataframe_to_matrix(df_y)
+    <span class="hljs-comment"># X，y 通过计算获得 β 参数</span>
+    beta = np.dot(np.linalg.inv(np.dot(x_matrix.T, x_matrix)), np.dot(x_matrix.T, y_matrix))
+    <span class="hljs-comment"># print(beta)</span>
+    <span class="hljs-keyword">return</span> beta
+
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">get_estimate</span>(<span class="hljs-params">beta, df_test</span>):
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">    :param beta: β的矩阵</span>
+<span class="hljs-string">    :param df_test: 测试集</span>
+<span class="hljs-string">    :return: 返回预测价格的矩阵（数组）</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    <span class="hljs-comment"># 先定义预测值的数组，大小等于测试样例大小，用0填充</span>
+    estimate = np.full(<span class="hljs-built_in">len</span>(df_test), <span class="hljs-number">0</span>, dtype=<span class="hljs-built_in">int</span>)
+    <span class="hljs-comment"># 定义大小为56的全1数组，用于在 X 矩阵前插入一列全 1 的数</span>
+    one_matrix = np.full(<span class="hljs-built_in">len</span>(df_test), <span class="hljs-number">1</span>, dtype=<span class="hljs-built_in">int</span>)
+    <span class="hljs-comment"># 将测试集中的前13项作为 矩阵 X 的数</span>
+    test_matrix = dataframe_to_matrix(get_not_last_column(df_test))
+    <span class="hljs-comment"># X 第一列插入 一列 1</span>
+    test_matrix = np.insert(test_matrix, <span class="hljs-number">0</span>, values=one_matrix, axis=<span class="hljs-number">1</span>)
+    <span class="hljs-comment"># print(np.size(test_matrix, 0))</span>
+    <span class="hljs-comment"># X 中每一行同 β进行计算，获得预测的价格</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(np.size(test_matrix, <span class="hljs-number">0</span>)):
+        estimate[i] = np.dot(beta, test_matrix[i])
+
+    <span class="hljs-comment"># print(estimate)</span>
+    <span class="hljs-keyword">return</span> estimate
+
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
+    path = <span class="hljs-string">&#x27;boston_housing_data.csv&#x27;</span>
+    <span class="hljs-comment"># 读取csv文件，存入 df</span>
+    df_housing_data = read_data(path)
+    <span class="hljs-comment"># 获取训练集</span>
+    df_training_data = get_training_data(df_housing_data, <span class="hljs-number">450</span>)
+    <span class="hljs-comment"># 获取测试集</span>
+    df_test_data = get_test_data(df_housing_data, <span class="hljs-number">56</span>)
+    <span class="hljs-comment"># 获取训练来的 参数</span>
+    beta_matrix = model_calculation(get_not_last_column(df_training_data), get_last_column(df_training_data))
+    <span class="hljs-comment"># 测试集与训练结果参数计算获得 预测价格</span>
+    estimate_value_price = get_estimate(beta_matrix, df_test_data)
+    <span class="hljs-comment"># 实际价格</span>
+    true_value_price = dataframe_to_matrix(get_last_column(df_test_data))
+    <span class="hljs-comment"># 绘制预测值与真实值图</span>
+    <span class="hljs-comment"># 规定字体，避免乱码</span>
+    plt.rcParams[<span class="hljs-string">&#x27;font.sans-serif&#x27;</span>] = [<span class="hljs-string">u&#x27;SimHei&#x27;</span>]
+    plt.rcParams[<span class="hljs-string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="hljs-literal">False</span>
+    plt.plot(true_value_price, color=<span class="hljs-string">&quot;r&quot;</span>, label=<span class="hljs-string">&quot;实际价格&quot;</span>)  <span class="hljs-comment"># 颜色表示</span>
+    plt.plot(estimate_value_price, color=(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>), label=<span class="hljs-string">&quot;预测价格&quot;</span>)
+    plt.xlabel(<span class="hljs-string">&quot;测试序号&quot;</span>)  <span class="hljs-comment"># x轴命名表示</span>
+    plt.ylabel(<span class="hljs-string">&quot;价格&quot;</span>)  <span class="hljs-comment"># y轴命名表示</span>
+    plt.title(<span class="hljs-string">&quot;实际值与预测值折线图&quot;</span>)
+    plt.legend()  <span class="hljs-comment"># 增加图例</span>
+    plt.show()  <span class="hljs-comment"># 显示图片</span>
+</code></pre></div>
                 
               </div>
             

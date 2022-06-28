@@ -16,23 +16,23 @@
   <meta name="author" content="Muxiner">
   <meta name="keywords" content="">
   
-    <meta name="description" content="实验原理感知机学习算法原始形式 感知机模型：$f(x)&#x3D;sign(\omega x + \theta)$ 输入：训练集 $T&#x3D;{(x_1, y_1),(x_2,y_2,…,(x_n, y_n))}$ $x_i\in X&#x3D;R^n$ $y_i\in{1,-1}$ $i&#x3D;1,2,…,n$   学习率 $\eta$：$0&lt; \eta \leq 1$   输出：">
+    <meta name="description" content="机器学习实验，感知机学习算法的实践。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="感知机学习算法">
 <meta property="og:url" content="https://muxiner.github.io/2022/05/26/ml-perceptron/index.html">
 <meta property="og:site_name" content="Muxiner&#39;s Blog">
-<meta property="og:description" content="实验原理感知机学习算法原始形式 感知机模型：$f(x)&#x3D;sign(\omega x + \theta)$ 输入：训练集 $T&#x3D;{(x_1, y_1),(x_2,y_2,…,(x_n, y_n))}$ $x_i\in X&#x3D;R^n$ $y_i\in{1,-1}$ $i&#x3D;1,2,…,n$   学习率 $\eta$：$0&lt; \eta \leq 1$   输出：">
+<meta property="og:description" content="机器学习实验，感知机学习算法的实践。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s1.ax1x.com/2022/05/25/XANmo8.png">
-<meta property="og:image" content="https://s1.ax1x.com/2022/05/25/XADaHs.jpg">
-<meta property="og:image" content="https://www.imagehub.cc/image/GPmK3D">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628225935.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628225958.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628230114.png">
 <meta property="article:published_time" content="2022-05-25T16:47:20.000Z">
-<meta property="article:modified_time" content="2022-06-28T09:47:47.684Z">
+<meta property="article:modified_time" content="2022-06-28T14:39:30.000Z">
 <meta property="article:author" content="Muxiner">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="机器学习">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s1.ax1x.com/2022/05/25/XANmo8.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628225935.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -244,7 +244,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          6.4k 字
+          6.1k 字
         
       </span>
     
@@ -256,7 +256,7 @@
         
         
           <!-- compatible with older versions-->
-          54 分钟
+          51 分钟
         
       </span>
     
@@ -308,7 +308,7 @@
                 
                   
                     <!-- compatible with older versions-->
-                    本文最后更新于：几秒前
+                    本文最后更新于：1 小时前
                   
                 
               </p>
@@ -350,7 +350,7 @@
 <li><p>共有 98 个样本 2 个输入变量</p>
 </li>
 <li><p>数据格式如下图：</p>
-<img src="https://s1.ax1x.com/2022/05/25/XANmo8.png" srcset="/img/loading.gif" lazyload width = "40%"></li>
+<img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628225935.png" srcset="/img/loading.gif" lazyload width = "40%"></li>
 </ul>
 <h2 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h2><ul>
 <li><code>Python</code> 版本：<code>Python 3.9</code></li>
@@ -370,22 +370,189 @@
 <li>数据集线性可分，最好求解出<strong>线性超平面</strong></li>
 </ol>
 <h2 id="实验代码详解"><a href="#实验代码详解" class="headerlink" title="实验代码详解"></a>实验代码详解</h2><h3 id="感知机"><a href="#感知机" class="headerlink" title="感知机"></a>感知机</h3><p>根据上述的感知机学习算法编写代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">perceptron</span>(<span class="hljs-params">data_x, data_y, eta</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    感知机学习算法</span><br><span class="hljs-string">    :param data_x: 样本</span><br><span class="hljs-string">    :param data_y: 标签</span><br><span class="hljs-string">    :param eta: 学习率</span><br><span class="hljs-string">    :return: w， θ</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    omega = np.zeros(data_x.shape[<span class="hljs-number">1</span>])<br>    theta = <span class="hljs-number">0</span><br>    classify_count = <span class="hljs-number">0</span> <span class="hljs-comment"># 记录分类次数</span><br>    classify_round = <span class="hljs-number">0</span> <span class="hljs-comment"># 记录分类轮次</span><br>    classify_right = <span class="hljs-literal">False</span> <span class="hljs-comment"># 记录误分类点的存在</span><br>    new_round = <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> classify_right:<br>        <span class="hljs-keyword">if</span> new_round:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;第 %d 轮：&quot;</span> % classify_round)<br>            classify_round += <span class="hljs-number">1</span><br>        classify_right = <span class="hljs-literal">True</span><br>        new_round = <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">for</span> index <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, data_x.shape[<span class="hljs-number">0</span>]):<br>            <span class="hljs-keyword">if</span> data_y[index] * (np.dot(omega, data_x[index]) + theta) &lt;= <span class="hljs-number">0</span>:<br>                theta += eta * data_y[index]<br>                omega += eta * data_x[index] * data_y[index]<br>                classify_count += <span class="hljs-number">1</span><br>                <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;分类次数：%d\t θ: %.2f\t w：&quot;</span> % (classify_count, theta), omega)<br>                <span class="hljs-comment"># 绘图</span><br>                table_line(data_x[:, <span class="hljs-number">0</span>], data_x[:, <span class="hljs-number">1</span>], data_y, omega, theta, classify_count)<br>                classify_right = <span class="hljs-literal">False</span><br>                new_round = <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">return</span> omega, theta<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">perceptron</span>(<span class="hljs-params">data_x, data_y, eta</span>):
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    感知机学习算法</span>
+<span class="hljs-string">    :param data_x: 样本</span>
+<span class="hljs-string">    :param data_y: 标签</span>
+<span class="hljs-string">    :param eta: 学习率</span>
+<span class="hljs-string">    :return: w， θ</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    omega = np.zeros(data_x.shape[<span class="hljs-number">1</span>])
+    theta = <span class="hljs-number">0</span>
+    classify_count = <span class="hljs-number">0</span> <span class="hljs-comment"># 记录分类次数</span>
+    classify_round = <span class="hljs-number">0</span> <span class="hljs-comment"># 记录分类轮次</span>
+    classify_right = <span class="hljs-literal">False</span> <span class="hljs-comment"># 记录误分类点的存在</span>
+    new_round = <span class="hljs-literal">True</span>
+    <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> classify_right:
+        <span class="hljs-keyword">if</span> new_round:
+            <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;第 %d 轮：&quot;</span> % classify_round)
+            classify_round += <span class="hljs-number">1</span>
+        classify_right = <span class="hljs-literal">True</span>
+        new_round = <span class="hljs-literal">False</span>
+        <span class="hljs-keyword">for</span> index <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, data_x.shape[<span class="hljs-number">0</span>]):
+            <span class="hljs-keyword">if</span> data_y[index] * (np.dot(omega, data_x[index]) + theta) &lt;= <span class="hljs-number">0</span>:
+                theta += eta * data_y[index]
+                omega += eta * data_x[index] * data_y[index]
+                classify_count += <span class="hljs-number">1</span>
+                <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;分类次数：%d\t θ: %.2f\t w：&quot;</span> % (classify_count, theta), omega)
+                <span class="hljs-comment"># 绘图</span>
+                table_line(data_x[:, <span class="hljs-number">0</span>], data_x[:, <span class="hljs-number">1</span>], data_y, omega, theta, classify_count)
+                classify_right = <span class="hljs-literal">False</span>
+                new_round = <span class="hljs-literal">True</span>
+    <span class="hljs-keyword">return</span> omega, theta</code></pre></div>
 
 <h3 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h3><p>绘图主要是两个部分：</p>
 <ol>
 <li>训练集根据 [0, 1] 划分后的散点图</li>
 <li>随着 $\omega, \theta$ 的变化而变化的含有超平面的图</li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_scatter_data</span>(<span class="hljs-params">x_axis, y_axis, label</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    对数据按照 label【0，1】进行分组，方便绘制不同颜色的散点图</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    x_red, x_blue, y_red, y_blue = [], [], [], []<br>    <span class="hljs-keyword">for</span> index <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(label)):<br>        <span class="hljs-keyword">if</span> label[index] == <span class="hljs-number">1</span>:<br>            x_red.append(x_axis[index])<br>            y_red.append(y_axis[index])<br>        <span class="hljs-keyword">elif</span> label[index] == -<span class="hljs-number">1</span>:<br>            x_blue.append(x_axis[index])<br>            y_blue.append(y_axis[index])<br>    <span class="hljs-keyword">return</span> [x_red, x_blue], [y_red, y_blue]<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">draw_table</span>(<span class="hljs-params">x_axis, y_axis, label</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    显示最开始的分组结果</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    axis_x, axis_y = get_scatter_data(x_axis, y_axis, label)<br>    color = [<span class="hljs-string">&#x27;red&#x27;</span>, <span class="hljs-string">&#x27;blue&#x27;</span>]<br>    mark = [<span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;0&#x27;</span>]<br>    <span class="hljs-keyword">for</span> index <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(axis_x)):<br>        plt.scatter(axis_x[index], axis_y[index], color=color[index], label=mark[index], alpha=<span class="hljs-number">.5</span>)<br>    plt.xlim((-<span class="hljs-number">4</span>, <span class="hljs-number">4</span>))<br>    plt.ylim((-<span class="hljs-number">3</span>, <span class="hljs-number">15</span>))<br>    plt.legend()  <span class="hljs-comment"># 显示图例</span><br>    plt.show()<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">table_line</span>(<span class="hljs-params">x_axis, y_axis, label, omega, theta, i</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    绘制每次迭代时的超平面，并保存图片</span><br><span class="hljs-string">    :param x_axis: 样本的第一列</span><br><span class="hljs-string">    :param y_axis: 样本第二列</span><br><span class="hljs-string">    :param label: 样本标签【0，1】</span><br><span class="hljs-string">    :param omega: w</span><br><span class="hljs-string">    :param theta: θ</span><br><span class="hljs-string">    :param i: 迭代次数</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    axis_x, axis_y = get_scatter_data(x_axis, y_axis, label)<br>    color = [<span class="hljs-string">&#x27;red&#x27;</span>, <span class="hljs-string">&#x27;blue&#x27;</span>]<br>    mark = [<span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;0&#x27;</span>]<br>    x1 = -theta / omega[<span class="hljs-number">0</span>]<br>    x2 = -theta / omega[<span class="hljs-number">1</span>]<br><br>    <span class="hljs-comment"># 仅当可以绘制一条直线时，绘图</span><br>    <span class="hljs-keyword">if</span> x1 != x2:<br>        <span class="hljs-keyword">for</span> index <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(axis_x)):<br>            plt.scatter(axis_x[index], axis_y[index], color=color[index], label=mark[index], alpha=<span class="hljs-number">.5</span>)<br>        plt.xlim((-<span class="hljs-number">4</span>, <span class="hljs-number">4</span>))<br>        plt.ylim((-<span class="hljs-number">3</span>, <span class="hljs-number">15</span>))<br>        plt.axline([x1, <span class="hljs-number">0</span>], [<span class="hljs-number">0</span>, x2], label=<span class="hljs-string">&#x27;超平面&#x27;</span>, color=<span class="hljs-string">&#x27;black&#x27;</span>)<br>        plt.legend()  <span class="hljs-comment"># 显示图例</span><br>        <span class="hljs-comment"># 将绘制的图保存到 result 目录下，用于制作 gif</span><br>        plt.savefig(<span class="hljs-string">&#x27;./result/images&#x27;</span> + <span class="hljs-built_in">str</span>(i) + <span class="hljs-string">&#x27;.jpg&#x27;</span>)<br>        <span class="hljs-comment"># 绘制完并保存后，关闭绘图，避免所有绘图绘制在一个图上</span><br>        plt.close()<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_scatter_data</span>(<span class="hljs-params">x_axis, y_axis, label</span>):
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    对数据按照 label【0，1】进行分组，方便绘制不同颜色的散点图</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    x_red, x_blue, y_red, y_blue = [], [], [], []
+    <span class="hljs-keyword">for</span> index <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(label)):
+        <span class="hljs-keyword">if</span> label[index] == <span class="hljs-number">1</span>:
+            x_red.append(x_axis[index])
+            y_red.append(y_axis[index])
+        <span class="hljs-keyword">elif</span> label[index] == -<span class="hljs-number">1</span>:
+            x_blue.append(x_axis[index])
+            y_blue.append(y_axis[index])
+    <span class="hljs-keyword">return</span> [x_red, x_blue], [y_red, y_blue]
+
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">draw_table</span>(<span class="hljs-params">x_axis, y_axis, label</span>):
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    显示最开始的分组结果</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    axis_x, axis_y = get_scatter_data(x_axis, y_axis, label)
+    color = [<span class="hljs-string">&#x27;red&#x27;</span>, <span class="hljs-string">&#x27;blue&#x27;</span>]
+    mark = [<span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;0&#x27;</span>]
+    <span class="hljs-keyword">for</span> index <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(axis_x)):
+        plt.scatter(axis_x[index], axis_y[index], color=color[index], label=mark[index], alpha=<span class="hljs-number">.5</span>)
+    plt.xlim((-<span class="hljs-number">4</span>, <span class="hljs-number">4</span>))
+    plt.ylim((-<span class="hljs-number">3</span>, <span class="hljs-number">15</span>))
+    plt.legend()  <span class="hljs-comment"># 显示图例</span>
+    plt.show()
+
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">table_line</span>(<span class="hljs-params">x_axis, y_axis, label, omega, theta, i</span>):
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    绘制每次迭代时的超平面，并保存图片</span>
+<span class="hljs-string">    :param x_axis: 样本的第一列</span>
+<span class="hljs-string">    :param y_axis: 样本第二列</span>
+<span class="hljs-string">    :param label: 样本标签【0，1】</span>
+<span class="hljs-string">    :param omega: w</span>
+<span class="hljs-string">    :param theta: θ</span>
+<span class="hljs-string">    :param i: 迭代次数</span>
+<span class="hljs-string">    :return:</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    axis_x, axis_y = get_scatter_data(x_axis, y_axis, label)
+    color = [<span class="hljs-string">&#x27;red&#x27;</span>, <span class="hljs-string">&#x27;blue&#x27;</span>]
+    mark = [<span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;0&#x27;</span>]
+    x1 = -theta / omega[<span class="hljs-number">0</span>]
+    x2 = -theta / omega[<span class="hljs-number">1</span>]
+
+    <span class="hljs-comment"># 仅当可以绘制一条直线时，绘图</span>
+    <span class="hljs-keyword">if</span> x1 != x2:
+        <span class="hljs-keyword">for</span> index <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(axis_x)):
+            plt.scatter(axis_x[index], axis_y[index], color=color[index], label=mark[index], alpha=<span class="hljs-number">.5</span>)
+        plt.xlim((-<span class="hljs-number">4</span>, <span class="hljs-number">4</span>))
+        plt.ylim((-<span class="hljs-number">3</span>, <span class="hljs-number">15</span>))
+        plt.axline([x1, <span class="hljs-number">0</span>], [<span class="hljs-number">0</span>, x2], label=<span class="hljs-string">&#x27;超平面&#x27;</span>, color=<span class="hljs-string">&#x27;black&#x27;</span>)
+        plt.legend()  <span class="hljs-comment"># 显示图例</span>
+        <span class="hljs-comment"># 将绘制的图保存到 result 目录下，用于制作 gif</span>
+        plt.savefig(<span class="hljs-string">&#x27;./result/images&#x27;</span> + <span class="hljs-built_in">str</span>(i) + <span class="hljs-string">&#x27;.jpg&#x27;</span>)
+        <span class="hljs-comment"># 绘制完并保存后，关闭绘图，避免所有绘图绘制在一个图上</span>
+        plt.close()</code></pre></div>
 
 <p>为方便查看迭代过程中，随 $\omega,\theta$ 的变化而变化的超平面情况，将每次迭代后绘制超平面，然后将图片保存至  <code>result</code> 文件夹，再读取该文件夹所有文件，制作成一个 GIF，用于观看迭代变化情况。</p>
-<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><code class="hljs txt">第 0 轮：<br>分类次数：1	 θ: -0.50	 w： [ 0.008806 -7.026532]<br>分类次数：2	 θ: 0.00	 w： [-0.689011  -4.6952615]<br>分类次数：3	 θ: 0.50	 w： [-0.485659 -1.161594]<br>分类次数：4	 θ: 1.00	 w： [-0.0604425  2.298573 ]<br>分类次数：5	 θ: 0.50	 w： [-0.734034 -4.289177]<br>分类次数：6	 θ: 1.00	 w： [-0.1456275 -2.705667 ]<br>分类次数：7	 θ: 1.50	 w： [-0.4289305  0.1688345]<br>分类次数：8	 θ: 1.00	 w： [-0.140668  -5.7206265]<br>分类次数：9	 θ: 1.50	 w： [-1.20291  -4.384391]<br>分类次数：10	 θ: 2.00	 w： [-1.0449175 -2.6224145]<br>分类次数：11	 θ: 2.50	 w： [-1.238079  -0.6277715]<br>分类次数：12	 θ: 3.00	 w： [-0.639777  1.848154]<br>分类次数：13	 θ: 2.50	 w： [-0.7773875 -2.9236695]<br>分类次数：14	 θ: 3.00	 w： [-1.0002265 -1.275018 ]<br>分类次数：15	 θ: 3.50	 w： [-0.4791155  1.7775595]<br>分类次数：16	 θ: 3.00	 w： [-0.169722  -3.3829335]<br>分类次数：17	 θ: 3.50	 w： [ 0.244545 -2.044911]<br>分类次数：18	 θ: 4.00	 w： [0.359273 0.916058]<br>分类次数：19	 θ: 3.50	 w： [ 0.8392155 -4.86161  ]<br>分类次数：20	 θ: 4.00	 w： [ 1.5928545 -2.347677 ]<br>分类次数：21	 θ: 4.50	 w： [1.64269   1.0702425]<br>分类次数：22	 θ: 4.00	 w： [ 1.814694 -4.2885  ]<br>分类次数：23	 θ: 4.50	 w： [ 2.707658  -0.4291775]<br>分类次数：24	 θ: 4.00	 w： [ 2.711255  -4.9670735]<br>分类次数：25	 θ: 4.50	 w： [ 3.7921    -0.2106735]<br>分类次数：26	 θ: 4.00	 w： [ 3.1437585 -6.014453 ]<br>分类次数：27	 θ: 4.50	 w： [ 2.4750225 -5.7802835]<br>分类次数：28	 θ: 5.00	 w： [ 2.4013605 -4.3428605]<br>分类次数：29	 θ: 5.50	 w： [ 3.0613325 -3.2572465]<br>分类次数：30	 θ: 6.00	 w： [ 4.0894405 -0.747256 ]<br>分类次数：31	 θ: 6.50	 w： [3.663624  1.4405895]<br>分类次数：32	 θ: 6.00	 w： [ 4.4186475 -1.5904065]<br>分类次数：33	 θ: 6.50	 w： [ 3.8689185 -0.7462695]<br>分类次数：34	 θ: 6.00	 w： [ 3.1688675 -7.06066  ]<br>分类次数：35	 θ: 6.50	 w： [ 4.0452885 -4.326577 ]<br>分类次数：36	 θ: 7.00	 w： [ 3.70539  -3.716312]<br>分类次数：37	 θ: 7.50	 w： [ 2.6209945 -3.644496 ]<br>第 1 轮：<br>分类次数：38	 θ: 8.00	 w： [ 1.9231775 -1.3132255]<br>分类次数：39	 θ: 8.50	 w： [2.1265295 2.220442 ]<br>分类次数：40	 θ: 8.00	 w： [ 1.7928325 -4.150284 ]<br>分类次数：41	 θ: 8.50	 w： [ 2.218049 -0.690117]<br>分类次数：42	 θ: 8.00	 w： [ 1.5444575 -7.277867 ]<br>分类次数：43	 θ: 8.50	 w： [ 2.132864 -5.694357]<br>分类次数：44	 θ: 9.00	 w： [ 1.849561  -2.8198555]<br>分类次数：45	 θ: 9.50	 w： [1.8374585 0.256056 ]<br>分类次数：46	 θ: 9.00	 w： [ 2.125721 -5.633405]<br>分类次数：47	 θ: 9.50	 w： [ 1.063479  -4.2971695]<br>分类次数：48	 θ: 10.00	 w： [ 1.2214715 -2.535193 ]<br>分类次数：49	 θ: 10.50	 w： [ 1.02831 -0.54055]<br>分类次数：50	 θ: 10.00	 w： [ 0.4158785 -6.33423  ]<br>分类次数：51	 θ: 10.50	 w： [ 1.0141805 -3.8583045]<br>分类次数：52	 θ: 11.00	 w： [ 0.7913415 -2.209653 ]<br>分类次数：53	 θ: 11.50	 w： [1.3124525 0.8429245]<br>分类次数：54	 θ: 11.00	 w： [ 1.621846  -4.3175685]<br>分类次数：55	 θ: 11.50	 w： [ 1.736574  -1.3565995]<br>分类次数：56	 θ: 11.00	 w： [ 2.4915975 -4.3875955]<br>分类次数：57	 θ: 11.50	 w： [ 3.9966725 -0.1867125]<br>分类次数：58	 θ: 11.00	 w： [ 3.2966215 -6.501103 ]<br>分类次数：59	 θ: 11.50	 w： [ 4.1730425 -3.76702  ]<br>第 2 轮：<br>分类次数：60	 θ: 12.00	 w： [ 3.4752255 -1.4357495]<br>分类次数：61	 θ: 11.50	 w： [ 3.19052  -6.210127]<br>分类次数：62	 θ: 12.00	 w： [ 3.6157365 -2.74996  ]<br>分类次数：63	 θ: 12.50	 w： [3.3324335 0.1245415]<br>分类次数：64	 θ: 12.00	 w： [ 3.620696  -5.7649195]<br>分类次数：65	 θ: 12.50	 w： [ 2.558454 -4.428684]<br>分类次数：66	 θ: 13.00	 w： [ 2.7164465 -2.6667075]<br>分类次数：67	 θ: 13.50	 w： [3.2375575 0.38587  ]<br>分类次数：68	 θ: 13.00	 w： [ 3.546951 -4.774623]<br>分类次数：69	 θ: 13.50	 w： [ 3.661679 -1.813654]<br>分类次数：70	 θ: 13.00	 w： [ 2.751131 -6.955649]<br>分类次数：71	 θ: 13.50	 w： [ 4.256206 -2.754766]<br>分类次数：72	 θ: 14.00	 w： [ 3.8328875 -0.8302285]<br>分类次数：73	 θ: 13.50	 w： [ 3.1328365 -7.144619 ]<br>分类次数：74	 θ: 14.00	 w： [ 4.0092575 -4.410536 ]<br>第 3 轮：<br>分类次数：75	 θ: 14.50	 w： [ 3.3114405 -2.0792655]<br>第 4 轮：<br></code></pre></td></tr></table></figure>
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><div class="code-wrapper"><pre><code class="hljs txt">第 0 轮：
+分类次数：1	 θ: -0.50	 w： [ 0.008806 -7.026532]
+分类次数：2	 θ: 0.00	 w： [-0.689011  -4.6952615]
+分类次数：3	 θ: 0.50	 w： [-0.485659 -1.161594]
+分类次数：4	 θ: 1.00	 w： [-0.0604425  2.298573 ]
+分类次数：5	 θ: 0.50	 w： [-0.734034 -4.289177]
+分类次数：6	 θ: 1.00	 w： [-0.1456275 -2.705667 ]
+分类次数：7	 θ: 1.50	 w： [-0.4289305  0.1688345]
+分类次数：8	 θ: 1.00	 w： [-0.140668  -5.7206265]
+分类次数：9	 θ: 1.50	 w： [-1.20291  -4.384391]
+分类次数：10	 θ: 2.00	 w： [-1.0449175 -2.6224145]
+分类次数：11	 θ: 2.50	 w： [-1.238079  -0.6277715]
+分类次数：12	 θ: 3.00	 w： [-0.639777  1.848154]
+分类次数：13	 θ: 2.50	 w： [-0.7773875 -2.9236695]
+分类次数：14	 θ: 3.00	 w： [-1.0002265 -1.275018 ]
+分类次数：15	 θ: 3.50	 w： [-0.4791155  1.7775595]
+分类次数：16	 θ: 3.00	 w： [-0.169722  -3.3829335]
+分类次数：17	 θ: 3.50	 w： [ 0.244545 -2.044911]
+分类次数：18	 θ: 4.00	 w： [0.359273 0.916058]
+分类次数：19	 θ: 3.50	 w： [ 0.8392155 -4.86161  ]
+分类次数：20	 θ: 4.00	 w： [ 1.5928545 -2.347677 ]
+分类次数：21	 θ: 4.50	 w： [1.64269   1.0702425]
+分类次数：22	 θ: 4.00	 w： [ 1.814694 -4.2885  ]
+分类次数：23	 θ: 4.50	 w： [ 2.707658  -0.4291775]
+分类次数：24	 θ: 4.00	 w： [ 2.711255  -4.9670735]
+分类次数：25	 θ: 4.50	 w： [ 3.7921    -0.2106735]
+分类次数：26	 θ: 4.00	 w： [ 3.1437585 -6.014453 ]
+分类次数：27	 θ: 4.50	 w： [ 2.4750225 -5.7802835]
+分类次数：28	 θ: 5.00	 w： [ 2.4013605 -4.3428605]
+分类次数：29	 θ: 5.50	 w： [ 3.0613325 -3.2572465]
+分类次数：30	 θ: 6.00	 w： [ 4.0894405 -0.747256 ]
+分类次数：31	 θ: 6.50	 w： [3.663624  1.4405895]
+分类次数：32	 θ: 6.00	 w： [ 4.4186475 -1.5904065]
+分类次数：33	 θ: 6.50	 w： [ 3.8689185 -0.7462695]
+分类次数：34	 θ: 6.00	 w： [ 3.1688675 -7.06066  ]
+分类次数：35	 θ: 6.50	 w： [ 4.0452885 -4.326577 ]
+分类次数：36	 θ: 7.00	 w： [ 3.70539  -3.716312]
+分类次数：37	 θ: 7.50	 w： [ 2.6209945 -3.644496 ]
+第 1 轮：
+分类次数：38	 θ: 8.00	 w： [ 1.9231775 -1.3132255]
+分类次数：39	 θ: 8.50	 w： [2.1265295 2.220442 ]
+分类次数：40	 θ: 8.00	 w： [ 1.7928325 -4.150284 ]
+分类次数：41	 θ: 8.50	 w： [ 2.218049 -0.690117]
+分类次数：42	 θ: 8.00	 w： [ 1.5444575 -7.277867 ]
+分类次数：43	 θ: 8.50	 w： [ 2.132864 -5.694357]
+分类次数：44	 θ: 9.00	 w： [ 1.849561  -2.8198555]
+分类次数：45	 θ: 9.50	 w： [1.8374585 0.256056 ]
+分类次数：46	 θ: 9.00	 w： [ 2.125721 -5.633405]
+分类次数：47	 θ: 9.50	 w： [ 1.063479  -4.2971695]
+分类次数：48	 θ: 10.00	 w： [ 1.2214715 -2.535193 ]
+分类次数：49	 θ: 10.50	 w： [ 1.02831 -0.54055]
+分类次数：50	 θ: 10.00	 w： [ 0.4158785 -6.33423  ]
+分类次数：51	 θ: 10.50	 w： [ 1.0141805 -3.8583045]
+分类次数：52	 θ: 11.00	 w： [ 0.7913415 -2.209653 ]
+分类次数：53	 θ: 11.50	 w： [1.3124525 0.8429245]
+分类次数：54	 θ: 11.00	 w： [ 1.621846  -4.3175685]
+分类次数：55	 θ: 11.50	 w： [ 1.736574  -1.3565995]
+分类次数：56	 θ: 11.00	 w： [ 2.4915975 -4.3875955]
+分类次数：57	 θ: 11.50	 w： [ 3.9966725 -0.1867125]
+分类次数：58	 θ: 11.00	 w： [ 3.2966215 -6.501103 ]
+分类次数：59	 θ: 11.50	 w： [ 4.1730425 -3.76702  ]
+第 2 轮：
+分类次数：60	 θ: 12.00	 w： [ 3.4752255 -1.4357495]
+分类次数：61	 θ: 11.50	 w： [ 3.19052  -6.210127]
+分类次数：62	 θ: 12.00	 w： [ 3.6157365 -2.74996  ]
+分类次数：63	 θ: 12.50	 w： [3.3324335 0.1245415]
+分类次数：64	 θ: 12.00	 w： [ 3.620696  -5.7649195]
+分类次数：65	 θ: 12.50	 w： [ 2.558454 -4.428684]
+分类次数：66	 θ: 13.00	 w： [ 2.7164465 -2.6667075]
+分类次数：67	 θ: 13.50	 w： [3.2375575 0.38587  ]
+分类次数：68	 θ: 13.00	 w： [ 3.546951 -4.774623]
+分类次数：69	 θ: 13.50	 w： [ 3.661679 -1.813654]
+分类次数：70	 θ: 13.00	 w： [ 2.751131 -6.955649]
+分类次数：71	 θ: 13.50	 w： [ 4.256206 -2.754766]
+分类次数：72	 θ: 14.00	 w： [ 3.8328875 -0.8302285]
+分类次数：73	 θ: 13.50	 w： [ 3.1328365 -7.144619 ]
+分类次数：74	 θ: 14.00	 w： [ 4.0092575 -4.410536 ]
+第 3 轮：
+分类次数：75	 θ: 14.50	 w： [ 3.3114405 -2.0792655]
+第 4 轮：</code></pre></div>
 <p>超平面：</p>
-<img src="https://s1.ax1x.com/2022/05/25/XADaHs.jpg" srcset="/img/loading.gif" lazyload>
+<img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628225958.png" srcset="/img/loading.gif" lazyload>
 
 <p>迭代过程：</p>
-<p><img src="https://www.imagehub.cc/image/GPmK3D" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628230114.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="实验心得体会"><a href="#实验心得体会" class="headerlink" title="实验心得体会"></a>实验心得体会</h2><p>将数学公式转化成代码模型还是具有一定的难度呀，光看数学公式理解起来还是比较清晰的，但是如果靠自己将公式转化为代码模型就无从下手，只得先借鉴他人的成果，比如前文中的算法步骤，才好轻松进行转换。</p>
 <p>其次是绘图的小问题，自己的想法是先绘制出散点图，再将直线加上去，然后获取第二张图，结果发现似乎没法实现。就只能每次都绘制散点，绘制直线，同时尽可能地减少代码的重复性。</p>
 <p>后面调用 <code>table_line()</code> 函数绘制多个图时，发现，下一张图比上一张图多了一条直线，竟是每次在上一张图的基础上进行绘制，以致于图片全部作废，经了解，需要加上 <code>ptl.close()</code> “关闭” 图表，才好绘制新的图表。</p>
@@ -484,9 +651,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/05/27/tree/" title="树">
+                      <a href="/2022/05/27/discrete-mathematics-tree/" title="离散数学笔记 —— 树">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">树</span>
+                        <span class="hidden-mobile">离散数学笔记 —— 树</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -494,8 +661,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/05/24/path-circuit/" title="通路与回路">
-                        <span class="hidden-mobile">通路与回路</span>
+                      <a href="/2022/05/24/discrete-mathematics-path-circuit/" title="离散数学笔记 —— 通路与回路">
+                        <span class="hidden-mobile">离散数学笔记 —— 通路与回路</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

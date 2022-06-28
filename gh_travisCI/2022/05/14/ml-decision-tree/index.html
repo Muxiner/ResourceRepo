@@ -16,22 +16,22 @@
   <meta name="author" content="Muxiner">
   <meta name="keywords" content="">
   
-    <meta name="description" content="实验原理 决策树思想决策树学习的本质：从训练数据集中归纳出一组分类规则。   可能这种决策规则一个也没有  也可能有多个决策规则    此时需要选择一个与数据集矛盾较小的决策树规则，同时有需要很好的泛化效果。 学习算法原理 构造根节点，将所有的训练数据集放入根节点 选择一个最优特征，将训练集分割成子集，使得训练及在当前条件下有最好的分类 如果这些子集已经可能很好的分类，那么构建叶子节点；如果还不能">
+    <meta name="description" content="机器学习实验，使用决策树算法实现隐形眼镜数据的预测。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="决策树 —— 隐形眼镜数据集预测">
 <meta property="og:url" content="https://muxiner.github.io/2022/05/14/ml-decision-tree/index.html">
 <meta property="og:site_name" content="Muxiner&#39;s Blog">
-<meta property="og:description" content="实验原理 决策树思想决策树学习的本质：从训练数据集中归纳出一组分类规则。   可能这种决策规则一个也没有  也可能有多个决策规则    此时需要选择一个与数据集矛盾较小的决策树规则，同时有需要很好的泛化效果。 学习算法原理 构造根节点，将所有的训练数据集放入根节点 选择一个最优特征，将训练集分割成子集，使得训练及在当前条件下有最好的分类 如果这些子集已经可能很好的分类，那么构建叶子节点；如果还不能">
+<meta property="og:description" content="机器学习实验，使用决策树算法实现隐形眼镜数据的预测。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s1.ax1x.com/2022/05/14/O6WkVA.png">
-<meta property="og:image" content="https://s1.ax1x.com/2022/05/14/O6WKKg.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628230841.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628231217.png">
 <meta property="article:published_time" content="2022-05-14T15:07:20.000Z">
-<meta property="article:modified_time" content="2022-06-28T09:47:47.684Z">
+<meta property="article:modified_time" content="2022-06-28T14:39:30.000Z">
 <meta property="article:author" content="Muxiner">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="机器学习">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s1.ax1x.com/2022/05/14/O6WkVA.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628230841.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -243,7 +243,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          7.2k 字
+          7k 字
         
       </span>
     
@@ -255,7 +255,7 @@
         
         
           <!-- compatible with older versions-->
-          60 分钟
+          59 分钟
         
       </span>
     
@@ -307,7 +307,7 @@
                 
                   
                     <!-- compatible with older versions-->
-                    本文最后更新于：几秒前
+                    本文最后更新于：1 小时前
                   
                 
               </p>
@@ -482,8 +482,8 @@
 <li>将每个特征的信息增益率打印输出</li>
 <li>输出最后建立的决策树模型结构图（可以用 <code>字典结构</code> 表示，也可以用 <code>matplotlib</code> 等图形库绘制出树形图）<blockquote>
 <ul>
-<li>字典表示：<img src="https://s1.ax1x.com/2022/05/14/O6WkVA.png" srcset="/img/loading.gif" lazyload></li>
-<li>树形图表示：   <img src="https://s1.ax1x.com/2022/05/14/O6WKKg.png" srcset="/img/loading.gif" lazyload width="60%"/></li>
+<li>字典表示：<img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628230841.png" srcset="/img/loading.gif" lazyload></li>
+<li>树形图表示：   <img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628231217.png" srcset="/img/loading.gif" lazyload width="60%"/></li>
 </ul>
 </blockquote>
 </li>
@@ -516,16 +516,67 @@
 <p>$m$ 是最佳特征标签的个数。</p>
 <p>每类子数据集都是最佳特征标签相同的其他特征数据的集合。</p>
 </blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">split_dataset</span>(<span class="hljs-params">data, index, value</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    对数据集进行分片</span><br><span class="hljs-string">    :param data: 需要分片的数据集</span><br><span class="hljs-string">    :param index: 新数据集不需要的某列的索引</span><br><span class="hljs-string">    :param value: 用于确定新数据集需要某行在 某列[index]对应的值</span><br><span class="hljs-string">    :return: 新的数据集</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    has_split_dataset = []<br>    <span class="hljs-keyword">for</span> col_data <span class="hljs-keyword">in</span> data:<br>        <span class="hljs-comment"># 选择特定行的数据进行切片</span><br>        <span class="hljs-keyword">if</span> col_data[index] == value:<br>            <span class="hljs-comment"># 取 第 index 个前的所有元素</span><br>            has_split_col = col_data[:index].tolist()<br>            <span class="hljs-comment"># 再加上第 index 个后面的所有元素</span><br>            has_split_col.extend(col_data[index + <span class="hljs-number">1</span>:].tolist())<br>            <span class="hljs-comment"># 再将其加入 新的 数据集</span><br>            has_split_dataset.append(has_split_col)<br>    <span class="hljs-keyword">return</span> np.array(has_split_dataset)<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">split_dataset</span>(<span class="hljs-params">data, index, value</span>):
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    对数据集进行分片</span>
+<span class="hljs-string">    :param data: 需要分片的数据集</span>
+<span class="hljs-string">    :param index: 新数据集不需要的某列的索引</span>
+<span class="hljs-string">    :param value: 用于确定新数据集需要某行在 某列[index]对应的值</span>
+<span class="hljs-string">    :return: 新的数据集</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    has_split_dataset = []
+    <span class="hljs-keyword">for</span> col_data <span class="hljs-keyword">in</span> data:
+        <span class="hljs-comment"># 选择特定行的数据进行切片</span>
+        <span class="hljs-keyword">if</span> col_data[index] == value:
+            <span class="hljs-comment"># 取 第 index 个前的所有元素</span>
+            has_split_col = col_data[:index].tolist()
+            <span class="hljs-comment"># 再加上第 index 个后面的所有元素</span>
+            has_split_col.extend(col_data[index + <span class="hljs-number">1</span>:].tolist())
+            <span class="hljs-comment"># 再将其加入 新的 数据集</span>
+            has_split_dataset.append(has_split_col)
+    <span class="hljs-keyword">return</span> np.array(has_split_dataset)</code></pre></div>
 
 <h3 id="决策树主函数"><a href="#决策树主函数" class="headerlink" title="决策树主函数"></a>决策树主函数</h3><p>获取数据集中的标签数据：<code>labels = [item[-1] for item in data]</code></p>
 <h4 id="递归终止条件"><a href="#递归终止条件" class="headerlink" title="递归终止条件"></a>递归终止条件</h4><ol>
 <li><p>子节点的样本属于同一类标签</p>
 <p>返回该类标签</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> <span class="hljs-number">1</span> == <span class="hljs-built_in">len</span>(<span class="hljs-built_in">set</span>(labels)):<br>    <span class="hljs-keyword">return</span> labels[<span class="hljs-number">0</span>]<br></code></pre></td></tr></table></figure></li>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">if</span> <span class="hljs-number">1</span> == <span class="hljs-built_in">len</span>(<span class="hljs-built_in">set</span>(labels)):
+    <span class="hljs-keyword">return</span> labels[<span class="hljs-number">0</span>]</code></pre></div></li>
 <li><p>子节点样本的特征标签相同，或是没有了样本</p>
 <p> 返回出现次数最多的标签</p>
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs python"><br>    <span class="hljs-comment"># 特征集为空 或是 特征集上的取值相同，停止分类</span><br>    <span class="hljs-comment"># 返回出现次数最多的 标签</span><br>    <span class="hljs-comment"># len(data[0]) == 1 就是数据集里只剩下标签，没有特征了</span><br>    <span class="hljs-comment"># len(set(data[:, 0])) == 1 特征集上的取值相同</span><br>    <span class="hljs-comment"># not feature_label 特征集空了</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(data[<span class="hljs-number">0</span>]) == <span class="hljs-number">1</span> <span class="hljs-keyword">or</span> <span class="hljs-built_in">len</span>(<span class="hljs-built_in">set</span>(data[:, <span class="hljs-number">0</span>])) == <span class="hljs-number">1</span>:<br>        <span class="hljs-keyword">return</span> most_label(labels)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">most_label</span>(<span class="hljs-params">data</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        返回，出现次数最大多的标签</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        label = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">set</span>(data))<br>        most = <span class="hljs-string">&#x27;&#x27;</span><br>        most_count = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> item_label <span class="hljs-keyword">in</span> label:<br>            count = <span class="hljs-number">0</span><br>            <span class="hljs-keyword">for</span> item_data <span class="hljs-keyword">in</span> data:<br>                <span class="hljs-keyword">if</span> item_label == item_data:<br>                    count += <span class="hljs-number">1</span><br>            most = item_label <span class="hljs-keyword">if</span> count &gt; most_count <span class="hljs-keyword">else</span> most<br>            most_count = count<br>        <span class="hljs-keyword">return</span> most<br>    ```Glasses<br><br><span class="hljs-number">3.</span> 特征集为空<br>   <br>   返回出现次数最多的标签<br><br>   ```python<br>       <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> feature_label:<br>           <span class="hljs-keyword">return</span> most_label(labels)<br></code></pre></td></tr></table></figure></li>
+ <div class="code-wrapper"><pre><code class="hljs python">
+    <span class="hljs-comment"># 特征集为空 或是 特征集上的取值相同，停止分类</span>
+    <span class="hljs-comment"># 返回出现次数最多的 标签</span>
+    <span class="hljs-comment"># len(data[0]) == 1 就是数据集里只剩下标签，没有特征了</span>
+    <span class="hljs-comment"># len(set(data[:, 0])) == 1 特征集上的取值相同</span>
+    <span class="hljs-comment"># not feature_label 特征集空了</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(data[<span class="hljs-number">0</span>]) == <span class="hljs-number">1</span> <span class="hljs-keyword">or</span> <span class="hljs-built_in">len</span>(<span class="hljs-built_in">set</span>(data[:, <span class="hljs-number">0</span>])) == <span class="hljs-number">1</span>:
+        <span class="hljs-keyword">return</span> most_label(labels)
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">most_label</span>(<span class="hljs-params">data</span>):
+        <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">        返回，出现次数最大多的标签</span>
+<span class="hljs-string">        &quot;&quot;&quot;</span>
+        label = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">set</span>(data))
+        most = <span class="hljs-string">&#x27;&#x27;</span>
+        most_count = <span class="hljs-number">0</span>
+        <span class="hljs-keyword">for</span> item_label <span class="hljs-keyword">in</span> label:
+            count = <span class="hljs-number">0</span>
+            <span class="hljs-keyword">for</span> item_data <span class="hljs-keyword">in</span> data:
+                <span class="hljs-keyword">if</span> item_label == item_data:
+                    count += <span class="hljs-number">1</span>
+            most = item_label <span class="hljs-keyword">if</span> count &gt; most_count <span class="hljs-keyword">else</span> most
+            most_count = count
+        <span class="hljs-keyword">return</span> most
+    ```Glasses
+
+<span class="hljs-number">3.</span> 特征集为空
+   
+   返回出现次数最多的标签
+
+   ```python
+       <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> feature_label:
+           <span class="hljs-keyword">return</span> most_label(labels)</code></pre></div></li>
 </ol>
 <h4 id="创建节点"><a href="#创建节点" class="headerlink" title="创建节点"></a>创建节点</h4><ul>
 <li>通过最优特征子函数获取最优特征的索引</li>
@@ -536,7 +587,15 @@
 </blockquote>
 </li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 从特征标签中选择最优划分标签</span><br><span class="hljs-comment"># 选择最优标签</span><br>best_index = get_best_feature(data[:, <span class="hljs-number">0</span>:-<span class="hljs-number">1</span>], np.array(labels), <span class="hljs-literal">False</span>)<br><span class="hljs-comment"># 获取最优的标签</span><br>best_feature_label = feature_label[best_index]<br><span class="hljs-comment"># 根据最优特征的标签生成树</span><br>decision_tree = &#123;best_feature_label: &#123;&#125;&#125;<br><span class="hljs-comment"># 删除已使用的标签</span><br><span class="hljs-comment"># del (feature_label[best_index])</span><br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 从特征标签中选择最优划分标签</span>
+<span class="hljs-comment"># 选择最优标签</span>
+best_index = get_best_feature(data[:, <span class="hljs-number">0</span>:-<span class="hljs-number">1</span>], np.array(labels), <span class="hljs-literal">False</span>)
+<span class="hljs-comment"># 获取最优的标签</span>
+best_feature_label = feature_label[best_index]
+<span class="hljs-comment"># 根据最优特征的标签生成树</span>
+decision_tree = &#123;best_feature_label: &#123;&#125;&#125;
+<span class="hljs-comment"># 删除已使用的标签</span>
+<span class="hljs-comment"># del (feature_label[best_index])</span></code></pre></div>
 
 <h4 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h4><ul>
 <li>获取数据集中最优特征的所有数据</li>
@@ -548,18 +607,96 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 得到训练集中所有最优特征的标签</span><br>feat_value = [item[best_index] <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> data]<br><span class="hljs-comment"># 去掉重复值</span><br><span class="hljs-keyword">for</span> value <span class="hljs-keyword">in</span> <span class="hljs-built_in">set</span>(feat_value):<br>    decision_tree[best_feature_label][value] = create_decision_tree(<br>        split_dataset(data, best_index, value), <br>        split_feature(feature_label, best_index))<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 得到训练集中所有最优特征的标签</span>
+feat_value = [item[best_index] <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> data]
+<span class="hljs-comment"># 去掉重复值</span>
+<span class="hljs-keyword">for</span> value <span class="hljs-keyword">in</span> <span class="hljs-built_in">set</span>(feat_value):
+    decision_tree[best_feature_label][value] = create_decision_tree(
+        split_dataset(data, best_index, value), 
+        split_feature(feature_label, best_index))</code></pre></div>
 <p>两个划分函数：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">split_dataset</span>(<span class="hljs-params">data, index, value</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    对数据集进行分片</span><br><span class="hljs-string">    :param data: 需要分片的数据集</span><br><span class="hljs-string">    :param index: 新数据集不需要的某列的索引</span><br><span class="hljs-string">    :param value: 用于确定新数据集需要某行在 某列[index]对应的值</span><br><span class="hljs-string">    :return: 新的数据集</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    has_split_dataset = []<br>    <span class="hljs-keyword">for</span> col_data <span class="hljs-keyword">in</span> data:<br>        <span class="hljs-comment"># 选择特定行的数据进行切片</span><br>        <span class="hljs-keyword">if</span> col_data[index] == value:<br>            <span class="hljs-comment"># 取 第 index 个前的所有元素</span><br>            has_split_col = col_data[:index].tolist()<br>            <span class="hljs-comment"># 再加上第 index 个后面的所有元素</span><br>            has_split_col.extend(col_data[index + <span class="hljs-number">1</span>:].tolist())<br>            <span class="hljs-comment"># 再将其加入 新的 数据集</span><br>            has_split_dataset.append(has_split_col)<br>    <span class="hljs-keyword">return</span> np.array(has_split_dataset)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">split_feature</span>(<span class="hljs-params">label, index</span>):<br>    error_deal = []<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(label)):<br>        <span class="hljs-keyword">if</span> i != index:<br>            error_deal.append(label[i])<br>    <span class="hljs-keyword">return</span> error_deal<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">split_dataset</span>(<span class="hljs-params">data, index, value</span>):
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    对数据集进行分片</span>
+<span class="hljs-string">    :param data: 需要分片的数据集</span>
+<span class="hljs-string">    :param index: 新数据集不需要的某列的索引</span>
+<span class="hljs-string">    :param value: 用于确定新数据集需要某行在 某列[index]对应的值</span>
+<span class="hljs-string">    :return: 新的数据集</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    has_split_dataset = []
+    <span class="hljs-keyword">for</span> col_data <span class="hljs-keyword">in</span> data:
+        <span class="hljs-comment"># 选择特定行的数据进行切片</span>
+        <span class="hljs-keyword">if</span> col_data[index] == value:
+            <span class="hljs-comment"># 取 第 index 个前的所有元素</span>
+            has_split_col = col_data[:index].tolist()
+            <span class="hljs-comment"># 再加上第 index 个后面的所有元素</span>
+            has_split_col.extend(col_data[index + <span class="hljs-number">1</span>:].tolist())
+            <span class="hljs-comment"># 再将其加入 新的 数据集</span>
+            has_split_dataset.append(has_split_col)
+    <span class="hljs-keyword">return</span> np.array(has_split_dataset)
+
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">split_feature</span>(<span class="hljs-params">label, index</span>):
+    error_deal = []
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(label)):
+        <span class="hljs-keyword">if</span> i != index:
+            error_deal.append(label[i])
+    <span class="hljs-keyword">return</span> error_deal</code></pre></div>
 
 <h4 id="返回决策树"><a href="#返回决策树" class="headerlink" title="返回决策树"></a>返回决策树</h4><p>当分支创建完毕后，就返回决策树。</p>
 <h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><hr>
 <p>实验结果输出<strong>各特征的信息增益率</strong>和<strong>决策树模型</strong>（<code>元组结构</code>）。</p>
 <p>信息增益率：</p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs txt">第 1 个特征的信息增益率为 0.02485642633702430<br>第 2 个特征的信息增益率为 0.03951083542356582<br>第 3 个特征的信息增益率为 0.37700523001147723<br>第 4 个特征的信息增益率为 0.54879494069539858<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs txt">第 1 个特征的信息增益率为 0.02485642633702430
+第 2 个特征的信息增益率为 0.03951083542356582
+第 3 个特征的信息增益率为 0.37700523001147723
+第 4 个特征的信息增益率为 0.54879494069539858</code></pre></div>
 
 <p>决策树模型（手动进行了格式化处理）：</p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs txt">&#123;<br>    &#x27;眼泪数量&#x27;: <br>    &#123;<br>        1: 3, <br>        2: <br>        &#123;<br>            &#x27;散光&#x27;: <br>            &#123;<br>                1: <br>                &#123;<br>                    &#x27;年龄&#x27;: <br>                    &#123;<br>                        1: 2, <br>                        2: 2, <br>                        3: <br>                        &#123;<br>                            &#x27;症状&#x27;: <br>                            &#123;<br>                                1: 3, <br>                                2: 2<br>                            &#125;<br>                        &#125;<br>                    &#125;<br>                &#125;, <br>                2: <br>                &#123;<br>                    &#x27;症状&#x27;: <br>                    &#123;<br>                        1: 1, <br>                        2: <br>                        &#123;<br>                            &#x27;年龄&#x27;: <br>                            &#123;<br>                                1: 1, <br>                                2: 3, <br>                                3: 3<br>                            &#125;<br>                        &#125;<br>                    &#125;<br>                &#125;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs txt">&#123;
+    &#x27;眼泪数量&#x27;: 
+    &#123;
+        1: 3, 
+        2: 
+        &#123;
+            &#x27;散光&#x27;: 
+            &#123;
+                1: 
+                &#123;
+                    &#x27;年龄&#x27;: 
+                    &#123;
+                        1: 2, 
+                        2: 2, 
+                        3: 
+                        &#123;
+                            &#x27;症状&#x27;: 
+                            &#123;
+                                1: 3, 
+                                2: 2
+                            &#125;
+                        &#125;
+                    &#125;
+                &#125;, 
+                2: 
+                &#123;
+                    &#x27;症状&#x27;: 
+                    &#123;
+                        1: 1, 
+                        2: 
+                        &#123;
+                            &#x27;年龄&#x27;: 
+                            &#123;
+                                1: 1, 
+                                2: 3, 
+                                3: 3
+                            &#125;
+                        &#125;
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre></div>
 <blockquote>
 <p>文件中显示的为：</p>
 <p>{‘眼泪数量’: {1: 3, 2: {‘散光’: {1: {‘年龄’: {1: 2, 2: 2, 3: {‘症状’: {1: 3, 2: 2}}}}, 2: {‘症状’: {1: 1, 2: {‘年龄’: {1: 1, 2: 3, 3: 3}}}}}}}}</p>
@@ -696,7 +833,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/05/14/LDA-2022-05-14/" title="线性判别分析 —— 献血预测">
+                      <a href="/2022/05/14/ml-lda/" title="线性判别分析 —— 献血预测">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">线性判别分析 —— 献血预测</span>
                         <span class="visible-mobile">上一篇</span>
