@@ -4,6 +4,139 @@
   
   
   <entry>
+    <title>使用 Git 时网络问题（代理）解决</title>
+    <link href="/2022/09/06/git-proxy-error/"/>
+    <url>/2022/09/06/git-proxy-error/</url>
+    
+    <content type="html"><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>使用 git 命令执行与 github 相关命令失败的错误提示，如下：</p><div class="code-wrapper"><pre><code class="hljs powershell"><span class="hljs-comment">## station one</span>OpenSSL SSL_read: Connection was reset, errno <span class="hljs-number">10054</span><span class="hljs-comment">## station two</span>Failed to connect to github.com port <span class="hljs-number">443</span> after <span class="hljs-number">21098</span> ms: Timed out</code></pre></div><h3 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h3><p>简而言之，github 被墙，走代理，然而设置不正确。</p><p>修改一下就好。</p><h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><p>执行下述命令（根据自身情况做适当修改）：</p><div class="code-wrapper"><pre><code class="hljs powershell">git config <span class="hljs-literal">--global</span> <span class="hljs-literal">--unset</span> socks5.proxygit config <span class="hljs-literal">--global</span> socks5.proxy <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:xxxx<span class="hljs-comment">### xxxx 为端口号</span></code></pre></div><div class="note note-primary">            <p>没法解决问题的话，就得对症下药，如 DNS 问题就干嘛干嘛之类的。</p>          </div>]]></content>
+    
+    
+    <categories>
+      
+      <category>水博客</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Git</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>更改终端显示语言</title>
+    <link href="/2022/07/26/console-lang=en/"/>
+    <url>/2022/07/26/console-lang=en/</url>
+    
+    <content type="html"><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>将 linux (arch) 的语言设置为中文后，不仅是显示语言成功设置为中文，就连终端的显示（提示）语言也是中文，使用起来，总有种奇怪的感觉，觉得奇怪是因为习惯了全英文的终端显示。</p><p>所以想要将终端显示设置回英文。</p><p>经过多番搜索后，终于找到一个不错的解决方案。</p><h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><ol><li><p><strong>打开终端</strong></p></li><li><p><strong>使用命令 <code>echo $0</code> 或是 <code>echo $SHELL</code> 查看当前使用的 <code>Shell</code>：</strong></p> <div class="code-wrapper"><pre><code class="hljs bash">xxxx@xxxxx: ~$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$0</span>/bin/bash</code></pre></div> <div class="code-wrapper"><pre><code class="hljs bash">xxxx@xxxxx: ~$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$SHELL</span>/bin/bash</code></pre></div><blockquote><p>一般 <code>shell</code> 类型：<code>bash</code>、<code>zsh</code>。</p></blockquote></li><li><p><strong>使用编辑器打开配置文件</strong><br> 编辑器可选取：<code>Vim</code>、<code>nano</code>。<br> <code>bash</code> 的（用户）配置文件：<code>.bashrc</code> 或是 <code>.bash_profile</code></p><blockquote><p>编辑任一即可<br><code>zsh</code> 的（用户）配置文件：<code>.zshrc</code></p></blockquote><p> 输入命令编辑器打开配置文件：</p> <div class="code-wrapper"><pre><code class="hljs bash">nano ~/.bashrc</code></pre></div></li><li><p><strong>编辑配置文件</strong><br> 在文件中加入下述内容：</p> <div class="code-wrapper"><pre><code class="hljs txt">if [ &quot;$TERM&quot;=&quot;linux&quot; ] ;then export LANG=en_US.UTF-8 export LANGUAGE=en_US fi</code></pre></div><p> 保存。</p></li><li><p><strong>使配置文件生效</strong></p><div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> ~/.bashrc</code></pre></div><blockquote><p><code>zsh</code> 的配置文件生效命令同理。</p></blockquote></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>console</tag>
+      
+      <tag>记录</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>使用 Gurb 进行多系统引导，并使用主题美化 Grub 界面</title>
+    <link href="/2022/07/24/linux-gurb-beauty/"/>
+    <url>/2022/07/24/linux-gurb-beauty/</url>
+    
+    <content type="html"><![CDATA[<p>咕咕咕，开始。</p><div class="note note-primary">            <p><strong>2022-07-24</strong> 更新：简单记录一下，未能添加前后对比图</p>          </div><h3 id="更改-Deepin-的系统引导为-grub"><a href="#更改-Deepin-的系统引导为-grub" class="headerlink" title="更改 Deepin 的系统引导为 grub"></a>更改 Deepin 的系统引导为 grub</h3><ol><li><p><code>ctrl + alt + T</code> 打开终端，查看 <code>efi</code> 的挂载点</p> <div class="code-wrapper"><pre><code class="hljs bash">lsblk<span class="hljs-comment"># 查看 /boot/efi 的挂载点 </span></code></pre></div><p> 查询到 <code>/boot/efi</code> 的挂载点是：<code>/dev/sda1</code></p></li><li><p>安装 <code>grub</code> 到 <code>efi</code> 挂载点</p><div class="code-wrapper"><pre><code class="hljs bash">sudo grub-install /dev/sda1</code></pre></div><blockquote><p>安装成功时会提示下述内容：<br>Installation finished. No error reported.<br>若是中文界面的终端：<br>安装完成。没有错错误报告。</p></blockquote></li></ol><h3 id="美化-grub-引导界面"><a href="#美化-grub-引导界面" class="headerlink" title="美化 grub 引导界面"></a>美化 grub 引导界面</h3><h4 id="下载个人所喜欢的主题"><a href="#下载个人所喜欢的主题" class="headerlink" title="下载个人所喜欢的主题"></a>下载个人所喜欢的主题</h4><p>主题网站：<a href="https://www.gnome-look.org/browse?cat=109&ord=rating">GMOME-LOOK.ORG | GRUB THEME</a></p><p>个人选择了 <code>Vimix</code> 主题。主题路径：<a href="https://www.gnome-look.org/p/1009236">Grub-theme-vimix</a></p><blockquote><p>部分主题拥有适用于不同分辨率显示屏的版本，鉴于个人机器的硬件水平酌情选择，如：<br><code>1080p</code>、<code>4k</code>、<code>2k</code>。</p></blockquote><p>下载方式：</p><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220724221058.png"></p><p>或是：</p><p>点击 <code>files</code>，再选择对应分辨率的文件。</p><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220724221532.png"></p><h4 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h4><ol><li><p>解压主题：</p><ul><li>使用命令行解压：   <div class="code-wrapper"><pre><code class="hljs bash">tar -Jxf Vimix-1080p.tar.xz<span class="hljs-comment"># tar -Jxf Vimix-2k.tar.xz</span><span class="hljs-comment"># tar -Jxf Vimix-4k.tar.xz</span></code></pre></div> 选择合适的命令解压。</li><li>使用文件系统解压。</li></ul></li><li><p>放置主题文件<br>将解压出来的主题文件放置到系统的 <code>grub</code> 主题文件中去。</p><p>例如：</p><div class="code-wrapper"><pre><code class="hljs bash">sudo <span class="hljs-built_in">cp</span> Vimix /usr/share/grub/themes/Vimix -rf</code></pre></div><blockquote><p>上述命令执行时，<strong>所在的路径为 Vimix 文件夹所在路径</strong>。</p></blockquote></li><li><p>修改系统配置</p><p> 编辑 grub 文件。</p> <div class="code-wrapper"><pre><code class="hljs bash">sudo nano /etc/default/grub</code></pre></div><blockquote><p>根据个人喜好选择编辑器如，nano、vim。</p></blockquote><p> 然后修改 GRUB_THEME，这是 grub 的主题设置，默认注释掉。<br> 直接插入一行代码：<br> <div class="code-wrapper"><pre><code class="hljs ini"><span class="hljs-attr">GRUB_THEME</span>=<span class="hljs-string">&quot;/usr/share/grub/themes/vimix/theme.txt&quot;</span></code></pre></div></p><blockquote><p>修改了引号中的路径，指向我们自定的主题文件的 <code>theme.txt</code>。</p></blockquote></li></ol><h4 id="更新-grub-cfg-文件"><a href="#更新-grub-cfg-文件" class="headerlink" title="更新 grub.cfg 文件"></a>更新 <code>grub.cfg</code> 文件</h4><p>执行命令更新 <code>grub.cfg</code> 文件，使我们上述所作的设置生效。</p><div class="code-wrapper"><pre><code class="hljs bash">sudo update-grub</code></pre></div><h3 id="重启查看效果"><a href="#重启查看效果" class="headerlink" title="重启查看效果"></a>重启查看效果</h3><p>执行命令命令重启电脑：</p><div class="code-wrapper"><pre><code class="hljs bash">sudo reboot</code></pre></div><p>或是可视化的点点点，重启电脑。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Archlinux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Deepin</tag>
+      
+      <tag>Grub</tag>
+      
+      <tag>Beauty</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>好东西就记录下来</title>
+    <link href="/2022/07/12/good-skills-record/"/>
+    <url>/2022/07/12/good-skills-record/</url>
+    
+    <content type="html"><![CDATA[<div class="note note-primary">            <p><strong>2022-07-12</strong> 更新</p>          </div><h3 id="PowerShell-获取系统时间"><a href="#PowerShell-获取系统时间" class="headerlink" title="PowerShell 获取系统时间"></a>PowerShell 获取系统时间</h3><blockquote><p>人懒不想每次写博文、更新博文时手敲日期和时间，就想偷懒，使用命令行格式化输出想要的时间。</p></blockquote><blockquote><p>较多使用 Windows 系统，因为使用 PowerShell 获取时间。</p></blockquote><p><strong>基础命令</strong>：</p><ul><li><code>Get-Date</code>: 获取当前<strong>时间</strong></li><li><code>Get-Date -Format &#39;yyyy&#39;</code>: 获取当前<strong>年份</strong></li><li><code>Get-Date -Format &#39;MM&#39;</code>: 获取当前<strong>月份</strong></li><li><code>Get-Date -Format &#39;dd&#39;</code>: 获取当前<strong>日</strong></li><li><code>Get-Date -Format &#39;HH&#39;</code>: 获取当前<strong>时</strong>（24 小时制）</li><li><code>Get-Date -Format &#39;hh&#39;</code>: 获取当前<strong>时</strong>（12 小时制）</li><li><code>Get-Date -Format &#39;mm&#39;</code>: 获取当前<strong>分</strong></li><li><code>Get-Date -Format &#39;ss&#39;</code>: 获取当前<strong>秒</strong></li></ul><p><span style="color: #02b2ff; ">自由组合一下获得格式化的日期或者时间：</span></p><div class="code-wrapper"><pre><code class="hljs powershell"><span class="hljs-built_in">Get-Date</span> <span class="hljs-literal">-Format</span> <span class="hljs-string">&#x27;yyyy-MM-dd&#x27;</span><span class="hljs-comment"># 2022-07-12</span><span class="hljs-built_in">Get-Date</span><span class="hljs-comment"># 2022年7月12日 17:47:14</span><span class="hljs-built_in">Get-Date</span> <span class="hljs-literal">-Format</span> <span class="hljs-string">&#x27;HH:mm:ss&#x27;</span><span class="hljs-comment"># 17:47:56</span><span class="hljs-built_in">Get-Date</span> <span class="hljs-literal">-Format</span> <span class="hljs-string">&#x27;yyyy-MM-dd HH:mm:ss&#x27;</span><span class="hljs-comment"># 2022-07-12 17:48:25</span><span class="hljs-built_in">Get-Date</span> <span class="hljs-literal">-Format</span> <span class="hljs-string">&#x27;yyyy年M月dd日 HH时mm分ss秒&#x27;</span><span class="hljs-comment"># 2022年7月12日 17时52分42秒</span></code></pre></div><p>但是每次获取格式化时间时都需要输入这么多字符也很麻烦，那就使用 alias：</p><div class="code-wrapper"><pre><code class="hljs powershell"><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;Function now &#123;get-date -format &quot;yyyy-MM-d HH:mm:ss&quot;&#125;&#x27;</span> &gt;&gt; <span class="hljs-variable">$profile</span></code></pre></div><blockquote><p>意思就是，将 <code>Function now &#123;get-date -format &quot;yyyy-MM-d HH:mm:ss&quot;&#125;</code> 追加到 <code>$PROFILE</code> 文件里。<br>上述命令含义是：<code>now</code> 代替 <code>get-date -format &quot;yyyy-MM-d HH:mm:ss&quot;</code>。<br>二者效果相同。</p></blockquote><p>然后： </p><div class="code-wrapper"><pre><code class="hljs powershell">now<span class="hljs-comment"># 2022-07-12 18:01:15</span></code></pre></div>]]></content>
+    
+    
+    <categories>
+      
+      <category>记录</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Skills</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Visual Studio Code 插件使用记录</title>
+    <link href="/2022/07/12/vscode-plugins/"/>
+    <url>/2022/07/12/vscode-plugins/</url>
+    
+    <content type="html"><![CDATA[<h3 id="更新情况"><a href="#更新情况" class="headerlink" title="更新情况"></a>更新情况</h3><div class="note note-primary">            <p><strong>2022-07-12</strong> 更新：</p><ul><li>添加 <span class="label label-info"><a href="#C-C-Plugins" title="vs code C\C++插件">C\C++ Plugins</a></span>：<span class="label label-default"><a href="#1-C-C">C\C++</a></span>、<span class="label label-default"><a href="#2-C-x2F-C-Extension-Pack">C&#x2F;C++ Extension Pack</a></span></li><li>添加 <span class="label label-info"><a href="#美化" title="vs code 美化插件">美化</a></span>：<span class="label label-default"><a href="#2-One-Dark-Pro">One Dark Pro</a></span>、<span class="label label-default"><a href="#1-Beauty">Beauty</a></span></li><li>添加 <span class="label label-info"><a href="#汉化" title="vs code 汉化插件">汉化</a></span>：<span class="label label-default"><a href="#Chinese-Simplified-简体中文-Language-Pack-for-Visual-Studio">Chinese (Simplified) (简体中文) Language Pack for Visual Studio</a></span></li><li>添加 <span class="label label-info"><a href="#Markdown" title="vs code 汉化插件">Markdown</a></span>：<span class="label label-default"><a href="#1-Markdown-All-in-One">Markdown All in One</a></span>、<span class="label label-default"><a href="#2-Markdown-PDF">Markdown PDF</a></span></li><li>添加 <span class="label label-info"><a href="#Python" title="vs code python 插件">Python</a></span>：<span class="label label-default"><a href="#1-Python">Python</a></span>、<span class="label label-default"><a href="#2-Pylance">Pylance</a></span></li></ul>          </div><div class="note note-primary">            <p><strong>2022-07-16</strong> 更新：</p><ul><li><span class="label label-info">美化</span> 添加：<span class="label label-default"><a href="#2-Material-Icon-Theme">Material Icon Theme</a></span>、<span class="label label-default"><a href="#3-vscode-icons">vscode-icons</a></span></li><li>添加 <span class="label label-info"><a href="#前端" title="vs code 前端插件">前端</a></span>：<span class="label label-default"><a href="#1-Live-Server">Live Server</a></span>、<span class="label label-default"><a href="#2-Auto-Complete-Tag">Auto Complete Tag</a></span>、<span class="label label-default"><a href="#3-Auto-Rename-Tag">Auto Rename Tag</a></span>、<span class="label label-default"><a href="#4-Auto-Close-Tag">Auto Close Tag</a></span>、<span class="label label-default"><a href="#5-CSS-Peek">CSS Peek</a></span>、<span class="label label-default"><a href="#6-HTML-CSS-Support">HTML CSS Support</a></span></li><li>添加 <span class="label label-info"><a href="#高效率工具" title="vs code 高效率工具插件">高效率工具</a></span>：<span class="label label-default"><a href="#1-Path-Intellisense">Path Intellisense</a></span>、<span class="label label-default"><a href="#2-Bracket-Pair-Colorization-Toggler">Bracket Pair Colorization Toggler</a></span></li></ul>          </div><h3 id="C-C-Plugins"><a href="#C-C-Plugins" class="headerlink" title="C\C++ Plugins"></a>C\C++ Plugins</h3><div class="note note-info">            <p>关于 windows 下 VS code C\C++ 环境的配置：<a class="btn" href="https://muxiner.github.io/2022/04/19/vscode-env-c-new/#"  target="_blank">Windows 下 VS code 配置 C&#x2F;C++ 环境</a></p>          </div><h4 id="1-C-C"><a href="#1-C-C" class="headerlink" title="1. C\C++"></a>1. C\C++</h4><p><a id='C\C++'></a></p><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712185147.png"></p><p>C&#x2F;C++ 扩展为 Visual Studio Code 添加了对 C&#x2F;C++ 的语言支持，包括 IntelliSense 和调试等功能。</p><blockquote><p>是在 vs code 上面使用 C\C++ 的必要插件。</p></blockquote><h4 id="2-C-x2F-C-Extension-Pack"><a href="#2-C-x2F-C-Extension-Pack" class="headerlink" title="2. C&#x2F;C++ Extension Pack"></a>2. C&#x2F;C++ Extension Pack</h4><p><a id='C/C++Extension-Pack'></a></p><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712185921.png"></p><p>此扩展包包括一组用于 Visual Studio Code 中 C++ 开发的流行扩展。</p><ul><li><a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools">C&#x2F;C++</a></li><li><a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-themes">C&#x2F;C++ Themes</a></li><li><a href="https://marketplace.visualstudio.com/items?itemName=twxs.cmake">CMake</a></li><li><a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools">CMake Tools</a></li><li><a href="https://marketplace.visualstudio.com/items?itemName=cschlosser.doxdocgen">Doxygen Documentation Generator</a></li><li><a href="https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax">Better C++ Syntax</a></li><li><a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack">Remote Development Extension Pack</a></li></ul><blockquote><p>推荐 C\C++ 插件的插件呀。</p></blockquote><h4 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h4><h3 id="美化"><a href="#美化" class="headerlink" title="美化"></a>美化</h3><h4 id="1-Beauty"><a href="#1-Beauty" class="headerlink" title="1. Beauty"></a>1. Beauty</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712191137.png"></p><p>Beauty 是 Web 开发中 VSCODE 的代码美化器扩展。<br>它支持多种语言，如 javascript, css, less, python, jsx, markups(html, swig, nunjucks)…等。</p><blockquote><p>不格式化其他的编程语言吗。</p></blockquote><h4 id="2-One-Dark-Pro"><a href="#2-One-Dark-Pro" class="headerlink" title="2. One Dark Pro"></a>2. One Dark Pro</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712191628.png"></p><p><code>Atom</code> 用于 <code>Visual Studio Code</code> 的标志性 <code>One Dark</code> 主题。</p><blockquote><p>很好看的主题呀。</p></blockquote><h4 id="2-Material-Icon-Theme"><a href="#2-Material-Icon-Theme" class="headerlink" title="2. Material Icon Theme"></a>2. Material Icon Theme</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716174638.png"></p><p>Get the Material Design icons into your VS Code.</p><blockquote><p>这个图标还挺好看的呢。<br>想看清楚的图标的话，需要去官方的 <a href="https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme">MarketPlace</a> 看一看吧。</p></blockquote><h4 id="3-vscode-icons"><a href="#3-vscode-icons" class="headerlink" title="3. vscode-icons"></a>3. vscode-icons</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716181801.png"></p><p>vscode 团队设计的图标库，还可以，但是在我看来，没上一个好看哦。</p><h3 id="汉化"><a href="#汉化" class="headerlink" title="汉化"></a>汉化</h3><h4 id="Chinese-Simplified-简体中文-Language-Pack-for-Visual-Studio"><a href="#Chinese-Simplified-简体中文-Language-Pack-for-Visual-Studio" class="headerlink" title="Chinese (Simplified) (简体中文) Language Pack for Visual Studio"></a>Chinese (Simplified) (简体中文) Language Pack for Visual Studio</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712192229.png"></p><p>此中文（简体）语言包为 VS Code 提供本地化界面。</p><blockquote><p>英文不友好者狂喜插件。</p></blockquote><h3 id="Markdown"><a href="#Markdown" class="headerlink" title="Markdown"></a>Markdown</h3><h4 id="1-Markdown-All-in-One"><a href="#1-Markdown-All-in-One" class="headerlink" title="1. Markdown All in One"></a>1. Markdown All in One</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712192533.png"></p><p><code>Visual Studio Code</code> 的 <code>Markdown</code> 支持。</p><blockquote><p>将 <code>vscode</code> 作为 <code>markdown</code> 编辑器的话就需要这个了。</p></blockquote><h4 id="2-Markdown-PDF"><a href="#2-Markdown-PDF" class="headerlink" title="2. Markdown PDF"></a>2. Markdown PDF</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712192745.png"></p><p>此扩展将 <code>Markdown</code> 文件转换为 <code>pdf</code>、<code>html</code>、<code>png</code> 或 <code>jpeg</code> 文件。</p><blockquote><p>导出 <code>markdown</code> 文件需要的插件。</p></blockquote><div class="note note-info">            <p>如果导出文件时数学公式不正确，可见：<a class="btn" href="https://muxiner.github.io/2022/04/18/vscode-markdown-pdf-math-latex-error/"  target="_blank">VS code Markdown 导出 PDF 时，数学公式未能正确导出</a></p>          </div><h3 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h3><h4 id="1-Python"><a href="#1-Python" class="headerlink" title="1. Python"></a>1. Python</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712193331.png"></p><p><code>IntelliSense</code> (Pylance)、<code>Linting</code>、调试（多线程、远程）、<code>Jupyter Notebooks</code>、代码格式化、重构、单元测试。</p><blockquote><p>编辑 python 的必备插件呀。</p></blockquote><h4 id="2-Pylance"><a href="#2-Pylance" class="headerlink" title="2. Pylance"></a>2. Pylance</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712193550.png"></p><p><code>VS Code</code> 中用于 <code>Python</code> 的高性能、功能丰富的语言服务器。</p><p><code>Pylance</code> 可与 <code>VScode</code> 中的 <code>Python</code> 插件一起使用的一个插件，以提供高性能的语言支持。<br>在后台，<code>Pylance</code> 由 <code>Microsoft</code> 的静态类型检查工具 <code>Pyright</code> 提供支持。 使用 <code>Pyright</code>，<code>Pylance</code> 可以为 <code>Python IntelliSense</code> 体验提供丰富的类型信息，从而帮助您更快地编写更好的代码。</p><p><code>Pylance</code> 名称是 <code>Monty Python</code> 的 <code>Lancelot</code> 的一个小颂歌，<code>Lancelot</code> 是第一个在圣杯中回答守门员问题的骑士。</p><p><strong>快速开始</strong></p><ol><li>安装 <code>Pylance</code> 扩展。<ol><li>打开一个 <code>Python（.py）</code>文件，<code>Pylance</code> 扩展名将被激活。</li></ol></li><li>当提示您将 <code>Pylance</code> 设置为默认语言服务器时，选择“是”。 这将更新您的首选项，也可以通过使用文本编辑器将“python.languageServer”：“ Pylance” 添加到 <code>settings.json</code> 文件中来手动进行。</li></ol><p><code>Pylance</code> 为 <code>Python 3</code> 提供了一些很棒的功能，包括：</p><ul><li>字串</li><li>签名帮助，带有类型信息</li><li>参数建议</li><li>代码补全</li><li>自动导入（以及添加和删除导入代码操作）</li><li>输入代码的时候报告代码错误和警告（诊断）</li><li>代码大纲</li><li>代码导航</li><li>类型检查模式</li><li>本地多个工作区支持</li><li><code>IntelliCode</code> 兼容性</li><li><code>Jupyter Notebooks</code> 兼容性</li><li>语法高亮</li></ul><h3 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h3><h4 id="1-Live-Server"><a href="#1-Live-Server" class="headerlink" title="1. Live Server"></a>1. Live Server</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716182133.png"></p><p>模拟本地服务器，编写完网页代码后保存，浏览器的页面情况将自动刷新，就无需在浏览器中刷新。</p><h4 id="2-Auto-Complete-Tag"><a href="#2-Auto-Complete-Tag" class="headerlink" title="2. Auto Complete Tag"></a>2. Auto Complete Tag</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716184131.png"></p><p>同时拥有<strong>自动关闭标签</strong>和<strong>自动重命名标签</strong>的功能。</p><blockquote><p>就是下面两个插件的功能，要么安装该插件，要么安装下面两个插件。</p></blockquote><h4 id="3-Auto-Rename-Tag"><a href="#3-Auto-Rename-Tag" class="headerlink" title="3. Auto Rename Tag"></a>3. Auto Rename Tag</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716183614.png"></p><p>自动重命名成对的 HTML&#x2F;XML 标记。</p><h4 id="4-Auto-Close-Tag"><a href="#4-Auto-Close-Tag" class="headerlink" title="4. Auto Close Tag"></a>4. Auto Close Tag</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716183810.png"></p><p>自动添加 HTML&#x2F;XMl 关闭标记。</p><p>特征：</p><ul><li>键入开始标签的右括号时自动添加结束标签</li><li>插入结束标签后，光标在开始和结束标签之间</li><li>设置不自动关闭的标签列表</li><li>自动关闭自关闭标签</li><li>支持 <code>Sublime Text 3</code> 的自动关闭标签</li><li>使用键盘快捷键或命令面板手动添加关闭标签</li></ul><h4 id="5-CSS-Peek"><a href="#5-CSS-Peek" class="headerlink" title="5. CSS Peek"></a>5. CSS Peek</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716184534.png"></p><p>快速跳到CSS的定义处预览。</p><p>特征：该扩展支持符号定义跟踪的所有正常功能，但它适用于 <code>css</code> 选择器（<code>类</code>、<code>ID</code> 和 <code>HTML</code> 标记）。这包括：</p><ul><li><code>Peek</code>：内联加载 <code>css</code> 文件并在此处进行快速编辑。( <code>Ctrl + Shift + F12</code> )</li><li><code>转到</code>：直接跳转到 <code>css</code> 文件或在新编辑器中打开它 (<code>F12</code>)</li><li><code>悬停</code>：悬停在符号 (<code>Ctrl + hover</code>)上显示定义</li></ul><h4 id="6-HTML-CSS-Support"><a href="#6-HTML-CSS-Support" class="headerlink" title="6. HTML CSS Support"></a>6. HTML CSS Support</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716184901.png"></p><p>适用于 <code>HTML</code> 的 <code>Visual Studio Code CSS Intellisense</code>.</p><p>特征: </p><ul><li>完善 HTML <code>id</code> 和 <code>类</code>属性。</li><li>支持链接和嵌入的样式表。</li><li>支持模板继承。</li><li>支持其他样式表。</li><li>支持其他类似 <code>HTML</code> 的语言。</li><li>按需验证 <code>CSS</code> 选择器。</li></ul><p>用法: 可以通过 <code>ctrl + 空格</code> 查看 <code>id</code> 和 <code>类</code> 属性建议列表。</p><h3 id="高效率工具"><a href="#高效率工具" class="headerlink" title="高效率工具"></a>高效率工具</h3><h4 id="1-Path-Intellisense"><a href="#1-Path-Intellisense" class="headerlink" title="1. Path Intellisense"></a>1. Path Intellisense</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716173750.png"></p><p>该插件支持自动提示文件路径，支持各种文件无脑快速引入。</p><h4 id="2-Bracket-Pair-Colorization-Toggler"><a href="#2-Bracket-Pair-Colorization-Toggler" class="headerlink" title="2. Bracket Pair Colorization Toggler"></a>2. Bracket Pair Colorization Toggler</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716182853.png"></p><p>给不同区域的括号加上不同的颜色，加以区分。</p><p>仓库：<a href="https://github.com/dzhavat/bracket-pair-toggler">Bracket Pair Colorization Toggler</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>VS code</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>记录</tag>
+      
+      <tag>Plugins</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Windows 下包管理器 Scoop 的安装与使用</title>
     <link href="/2022/05/30/using-scoop/"/>
     <url>/2022/05/30/using-scoop/</url>
@@ -20,9 +153,9 @@
     
     <tags>
       
-      <tag>software</tag>
-      
       <tag>记录</tag>
+      
+      <tag>software</tag>
       
     </tags>
     

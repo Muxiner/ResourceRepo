@@ -1,0 +1,866 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/hello.svg">
+  <link rel="icon" href="/img/hello.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#1a1a1a">
+  <meta name="author" content="Muxiner">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="记录一下 vs code 好用的插件，以及开发环境需要的插件。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Visual Studio Code 插件使用记录">
+<meta property="og:url" content="https://muxiner.github.io/2022/07/12/vscode-plugins/index.html">
+<meta property="og:site_name" content="Muxiner&#39;s Blog">
+<meta property="og:description" content="记录一下 vs code 好用的插件，以及开发环境需要的插件。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712185147.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712185921.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712191137.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712191628.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716174638.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716181801.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712192229.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712192533.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712192745.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712193331.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712193550.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716182133.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716184131.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716183614.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716183810.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716184534.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716184901.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716173750.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716182853.png">
+<meta property="article:published_time" content="2022-07-12T08:35:59.000Z">
+<meta property="article:modified_time" content="2022-07-16T09:30:32.000Z">
+<meta property="article:author" content="Muxiner">
+<meta property="article:tag" content="记录">
+<meta property="article:tag" content="Plugins">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712185147.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Visual Studio Code 插件使用记录 - Muxiner&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"muxiner.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"🚩"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Muxiner&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                主页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Visual Studio Code 插件使用记录"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Muxiner
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-07-12 16:35" pubdate>
+          2022年7月12日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          2.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          24 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Visual Studio Code 插件使用记录</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    <!-- compatible with older versions-->
+                    本文最后更新于：2 个月前
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="更新情况"><a href="#更新情况" class="headerlink" title="更新情况"></a>更新情况</h3><div class="note note-primary">
+            <p><strong>2022-07-12</strong> 更新：</p><ul><li>添加 <span class="label label-info"><a href="#C-C-Plugins" title="vs code C\C++插件">C\C++ Plugins</a></span>：<span class="label label-default"><a href="#1-C-C">C\C++</a></span>、<span class="label label-default"><a href="#2-C-x2F-C-Extension-Pack">C&#x2F;C++ Extension Pack</a></span></li><li>添加 <span class="label label-info"><a href="#美化" title="vs code 美化插件">美化</a></span>：<span class="label label-default"><a href="#2-One-Dark-Pro">One Dark Pro</a></span>、<span class="label label-default"><a href="#1-Beauty">Beauty</a></span></li><li>添加 <span class="label label-info"><a href="#汉化" title="vs code 汉化插件">汉化</a></span>：<span class="label label-default"><a href="#Chinese-Simplified-简体中文-Language-Pack-for-Visual-Studio">Chinese (Simplified) (简体中文) Language Pack for Visual Studio</a></span></li><li>添加 <span class="label label-info"><a href="#Markdown" title="vs code 汉化插件">Markdown</a></span>：<span class="label label-default"><a href="#1-Markdown-All-in-One">Markdown All in One</a></span>、<span class="label label-default"><a href="#2-Markdown-PDF">Markdown PDF</a></span></li><li>添加 <span class="label label-info"><a href="#Python" title="vs code python 插件">Python</a></span>：<span class="label label-default"><a href="#1-Python">Python</a></span>、<span class="label label-default"><a href="#2-Pylance">Pylance</a></span></li></ul>
+          </div>
+
+
+<div class="note note-primary">
+            <p><strong>2022-07-16</strong> 更新：</p><ul><li><span class="label label-info">美化</span> 添加：<span class="label label-default"><a href="#2-Material-Icon-Theme">Material Icon Theme</a></span>、<span class="label label-default"><a href="#3-vscode-icons">vscode-icons</a></span></li><li>添加 <span class="label label-info"><a href="#前端" title="vs code 前端插件">前端</a></span>：<span class="label label-default"><a href="#1-Live-Server">Live Server</a></span>、<span class="label label-default"><a href="#2-Auto-Complete-Tag">Auto Complete Tag</a></span>、<span class="label label-default"><a href="#3-Auto-Rename-Tag">Auto Rename Tag</a></span>、<span class="label label-default"><a href="#4-Auto-Close-Tag">Auto Close Tag</a></span>、<span class="label label-default"><a href="#5-CSS-Peek">CSS Peek</a></span>、<span class="label label-default"><a href="#6-HTML-CSS-Support">HTML CSS Support</a></span></li><li>添加 <span class="label label-info"><a href="#高效率工具" title="vs code 高效率工具插件">高效率工具</a></span>：<span class="label label-default"><a href="#1-Path-Intellisense">Path Intellisense</a></span>、<span class="label label-default"><a href="#2-Bracket-Pair-Colorization-Toggler">Bracket Pair Colorization Toggler</a></span></li></ul>
+          </div>
+
+
+<h3 id="C-C-Plugins"><a href="#C-C-Plugins" class="headerlink" title="C\C++ Plugins"></a>C\C++ Plugins</h3><div class="note note-info">
+            <p>关于 windows 下 VS code C\C++ 环境的配置：<a class="btn" href="https://muxiner.github.io/2022/04/19/vscode-env-c-new/#"  target="_blank">Windows 下 VS code 配置 C&#x2F;C++ 环境</a></p>
+          </div>
+
+
+<h4 id="1-C-C"><a href="#1-C-C" class="headerlink" title="1. C\C++"></a>1. C\C++</h4><p><a id='C\C++'></a></p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712185147.png" srcset="/img/loading.gif" lazyload></p>
+<p>C&#x2F;C++ 扩展为 Visual Studio Code 添加了对 C&#x2F;C++ 的语言支持，包括 IntelliSense 和调试等功能。</p>
+<blockquote>
+<p>是在 vs code 上面使用 C\C++ 的必要插件。</p>
+</blockquote>
+<h4 id="2-C-x2F-C-Extension-Pack"><a href="#2-C-x2F-C-Extension-Pack" class="headerlink" title="2. C&#x2F;C++ Extension Pack"></a>2. C&#x2F;C++ Extension Pack</h4><p><a id='C/C++Extension-Pack'></a></p>
+<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712185921.png" srcset="/img/loading.gif" lazyload></p>
+<p>此扩展包包括一组用于 Visual Studio Code 中 C++ 开发的流行扩展。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools">C&#x2F;C++</a></li>
+<li><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-themes">C&#x2F;C++ Themes</a></li>
+<li><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=twxs.cmake">CMake</a></li>
+<li><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools">CMake Tools</a></li>
+<li><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=cschlosser.doxdocgen">Doxygen Documentation Generator</a></li>
+<li><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax">Better C++ Syntax</a></li>
+<li><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack">Remote Development Extension Pack</a></li>
+</ul>
+<blockquote>
+<p>推荐 C\C++ 插件的插件呀。</p>
+</blockquote>
+<h4 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h4><h3 id="美化"><a href="#美化" class="headerlink" title="美化"></a>美化</h3><h4 id="1-Beauty"><a href="#1-Beauty" class="headerlink" title="1. Beauty"></a>1. Beauty</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712191137.png" srcset="/img/loading.gif" lazyload></p>
+<p>Beauty 是 Web 开发中 VSCODE 的代码美化器扩展。<br>它支持多种语言，如 javascript, css, less, python, jsx, markups(html, swig, nunjucks)…等。</p>
+<blockquote>
+<p>不格式化其他的编程语言吗。</p>
+</blockquote>
+<h4 id="2-One-Dark-Pro"><a href="#2-One-Dark-Pro" class="headerlink" title="2. One Dark Pro"></a>2. One Dark Pro</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712191628.png" srcset="/img/loading.gif" lazyload></p>
+<p><code>Atom</code> 用于 <code>Visual Studio Code</code> 的标志性 <code>One Dark</code> 主题。</p>
+<blockquote>
+<p>很好看的主题呀。</p>
+</blockquote>
+<h4 id="2-Material-Icon-Theme"><a href="#2-Material-Icon-Theme" class="headerlink" title="2. Material Icon Theme"></a>2. Material Icon Theme</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716174638.png" srcset="/img/loading.gif" lazyload></p>
+<p>Get the Material Design icons into your VS Code.</p>
+<blockquote>
+<p>这个图标还挺好看的呢。<br>想看清楚的图标的话，需要去官方的 <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme">MarketPlace</a> 看一看吧。</p>
+</blockquote>
+<h4 id="3-vscode-icons"><a href="#3-vscode-icons" class="headerlink" title="3. vscode-icons"></a>3. vscode-icons</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716181801.png" srcset="/img/loading.gif" lazyload></p>
+<p>vscode 团队设计的图标库，还可以，但是在我看来，没上一个好看哦。</p>
+<h3 id="汉化"><a href="#汉化" class="headerlink" title="汉化"></a>汉化</h3><h4 id="Chinese-Simplified-简体中文-Language-Pack-for-Visual-Studio"><a href="#Chinese-Simplified-简体中文-Language-Pack-for-Visual-Studio" class="headerlink" title="Chinese (Simplified) (简体中文) Language Pack for Visual Studio"></a>Chinese (Simplified) (简体中文) Language Pack for Visual Studio</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712192229.png" srcset="/img/loading.gif" lazyload></p>
+<p>此中文（简体）语言包为 VS Code 提供本地化界面。</p>
+<blockquote>
+<p>英文不友好者狂喜插件。</p>
+</blockquote>
+<h3 id="Markdown"><a href="#Markdown" class="headerlink" title="Markdown"></a>Markdown</h3><h4 id="1-Markdown-All-in-One"><a href="#1-Markdown-All-in-One" class="headerlink" title="1. Markdown All in One"></a>1. Markdown All in One</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712192533.png" srcset="/img/loading.gif" lazyload></p>
+<p><code>Visual Studio Code</code> 的 <code>Markdown</code> 支持。</p>
+<blockquote>
+<p>将 <code>vscode</code> 作为 <code>markdown</code> 编辑器的话就需要这个了。</p>
+</blockquote>
+<h4 id="2-Markdown-PDF"><a href="#2-Markdown-PDF" class="headerlink" title="2. Markdown PDF"></a>2. Markdown PDF</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712192745.png" srcset="/img/loading.gif" lazyload></p>
+<p>此扩展将 <code>Markdown</code> 文件转换为 <code>pdf</code>、<code>html</code>、<code>png</code> 或 <code>jpeg</code> 文件。</p>
+<blockquote>
+<p>导出 <code>markdown</code> 文件需要的插件。</p>
+</blockquote>
+<div class="note note-info">
+            <p>如果导出文件时数学公式不正确，可见：<a class="btn" href="https://muxiner.github.io/2022/04/18/vscode-markdown-pdf-math-latex-error/"  target="_blank">VS code Markdown 导出 PDF 时，数学公式未能正确导出</a></p>
+          </div>
+
+<h3 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h3><h4 id="1-Python"><a href="#1-Python" class="headerlink" title="1. Python"></a>1. Python</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712193331.png" srcset="/img/loading.gif" lazyload></p>
+<p><code>IntelliSense</code> (Pylance)、<code>Linting</code>、调试（多线程、远程）、<code>Jupyter Notebooks</code>、代码格式化、重构、单元测试。</p>
+<blockquote>
+<p>编辑 python 的必备插件呀。</p>
+</blockquote>
+<h4 id="2-Pylance"><a href="#2-Pylance" class="headerlink" title="2. Pylance"></a>2. Pylance</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220712193550.png" srcset="/img/loading.gif" lazyload></p>
+<p><code>VS Code</code> 中用于 <code>Python</code> 的高性能、功能丰富的语言服务器。</p>
+<p><code>Pylance</code> 可与 <code>VScode</code> 中的 <code>Python</code> 插件一起使用的一个插件，以提供高性能的语言支持。<br>在后台，<code>Pylance</code> 由 <code>Microsoft</code> 的静态类型检查工具 <code>Pyright</code> 提供支持。 使用 <code>Pyright</code>，<code>Pylance</code> 可以为 <code>Python IntelliSense</code> 体验提供丰富的类型信息，从而帮助您更快地编写更好的代码。</p>
+<p><code>Pylance</code> 名称是 <code>Monty Python</code> 的 <code>Lancelot</code> 的一个小颂歌，<code>Lancelot</code> 是第一个在圣杯中回答守门员问题的骑士。</p>
+<p><strong>快速开始</strong></p>
+<ol>
+<li>安装 <code>Pylance</code> 扩展。<ol>
+<li>打开一个 <code>Python（.py）</code>文件，<code>Pylance</code> 扩展名将被激活。</li>
+</ol>
+</li>
+<li>当提示您将 <code>Pylance</code> 设置为默认语言服务器时，选择“是”。 这将更新您的首选项，也可以通过使用文本编辑器将“python.languageServer”：“ Pylance” 添加到 <code>settings.json</code> 文件中来手动进行。</li>
+</ol>
+<p><code>Pylance</code> 为 <code>Python 3</code> 提供了一些很棒的功能，包括：</p>
+<ul>
+<li>字串</li>
+<li>签名帮助，带有类型信息</li>
+<li>参数建议</li>
+<li>代码补全</li>
+<li>自动导入（以及添加和删除导入代码操作）</li>
+<li>输入代码的时候报告代码错误和警告（诊断）</li>
+<li>代码大纲</li>
+<li>代码导航</li>
+<li>类型检查模式</li>
+<li>本地多个工作区支持</li>
+<li><code>IntelliCode</code> 兼容性</li>
+<li><code>Jupyter Notebooks</code> 兼容性</li>
+<li>语法高亮</li>
+</ul>
+<h3 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h3><h4 id="1-Live-Server"><a href="#1-Live-Server" class="headerlink" title="1. Live Server"></a>1. Live Server</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716182133.png" srcset="/img/loading.gif" lazyload></p>
+<p>模拟本地服务器，编写完网页代码后保存，浏览器的页面情况将自动刷新，就无需在浏览器中刷新。</p>
+<h4 id="2-Auto-Complete-Tag"><a href="#2-Auto-Complete-Tag" class="headerlink" title="2. Auto Complete Tag"></a>2. Auto Complete Tag</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716184131.png" srcset="/img/loading.gif" lazyload></p>
+<p>同时拥有<strong>自动关闭标签</strong>和<strong>自动重命名标签</strong>的功能。</p>
+<blockquote>
+<p>就是下面两个插件的功能，要么安装该插件，要么安装下面两个插件。</p>
+</blockquote>
+<h4 id="3-Auto-Rename-Tag"><a href="#3-Auto-Rename-Tag" class="headerlink" title="3. Auto Rename Tag"></a>3. Auto Rename Tag</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716183614.png" srcset="/img/loading.gif" lazyload></p>
+<p>自动重命名成对的 HTML&#x2F;XML 标记。</p>
+<h4 id="4-Auto-Close-Tag"><a href="#4-Auto-Close-Tag" class="headerlink" title="4. Auto Close Tag"></a>4. Auto Close Tag</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716183810.png" srcset="/img/loading.gif" lazyload></p>
+<p>自动添加 HTML&#x2F;XMl 关闭标记。</p>
+<p>特征：</p>
+<ul>
+<li>键入开始标签的右括号时自动添加结束标签</li>
+<li>插入结束标签后，光标在开始和结束标签之间</li>
+<li>设置不自动关闭的标签列表</li>
+<li>自动关闭自关闭标签</li>
+<li>支持 <code>Sublime Text 3</code> 的自动关闭标签</li>
+<li>使用键盘快捷键或命令面板手动添加关闭标签</li>
+</ul>
+<h4 id="5-CSS-Peek"><a href="#5-CSS-Peek" class="headerlink" title="5. CSS Peek"></a>5. CSS Peek</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716184534.png" srcset="/img/loading.gif" lazyload></p>
+<p>快速跳到CSS的定义处预览。</p>
+<p>特征：该扩展支持符号定义跟踪的所有正常功能，但它适用于 <code>css</code> 选择器（<code>类</code>、<code>ID</code> 和 <code>HTML</code> 标记）。这包括：</p>
+<ul>
+<li><code>Peek</code>：内联加载 <code>css</code> 文件并在此处进行快速编辑。( <code>Ctrl + Shift + F12</code> )</li>
+<li><code>转到</code>：直接跳转到 <code>css</code> 文件或在新编辑器中打开它 (<code>F12</code>)</li>
+<li><code>悬停</code>：悬停在符号 (<code>Ctrl + hover</code>)上显示定义</li>
+</ul>
+<h4 id="6-HTML-CSS-Support"><a href="#6-HTML-CSS-Support" class="headerlink" title="6. HTML CSS Support"></a>6. HTML CSS Support</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716184901.png" srcset="/img/loading.gif" lazyload></p>
+<p>适用于 <code>HTML</code> 的 <code>Visual Studio Code CSS Intellisense</code>.</p>
+<p>特征: </p>
+<ul>
+<li>完善 HTML <code>id</code> 和 <code>类</code>属性。</li>
+<li>支持链接和嵌入的样式表。</li>
+<li>支持模板继承。</li>
+<li>支持其他样式表。</li>
+<li>支持其他类似 <code>HTML</code> 的语言。</li>
+<li>按需验证 <code>CSS</code> 选择器。</li>
+</ul>
+<p>用法: 可以通过 <code>ctrl + 空格</code> 查看 <code>id</code> 和 <code>类</code> 属性建议列表。</p>
+<h3 id="高效率工具"><a href="#高效率工具" class="headerlink" title="高效率工具"></a>高效率工具</h3><h4 id="1-Path-Intellisense"><a href="#1-Path-Intellisense" class="headerlink" title="1. Path Intellisense"></a>1. Path Intellisense</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716173750.png" srcset="/img/loading.gif" lazyload></p>
+<p>该插件支持自动提示文件路径，支持各种文件无脑快速引入。</p>
+<h4 id="2-Bracket-Pair-Colorization-Toggler"><a href="#2-Bracket-Pair-Colorization-Toggler" class="headerlink" title="2. Bracket Pair Colorization Toggler"></a>2. Bracket Pair Colorization Toggler</h4><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/md_img20220716182853.png" srcset="/img/loading.gif" lazyload></p>
+<p>给不同区域的括号加上不同的颜色，加以区分。</p>
+<p>仓库：<a target="_blank" rel="noopener" href="https://github.com/dzhavat/bracket-pair-toggler">Bracket Pair Colorization Toggler</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/VS-code/" class="category-chain-item">VS code</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%AE%B0%E5%BD%95/">#记录</a>
+      
+        <a href="/tags/Plugins/">#Plugins</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Visual Studio Code 插件使用记录</div>
+      <div>https://muxiner.github.io/2022/07/12/vscode-plugins/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Muxiner</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年7月12日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/07/12/good-skills-record/" title="好东西就记录下来">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">好东西就记录下来</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/05/30/using-scoop/" title="Windows 下包管理器 Scoop 的安装与使用">
+                        <span class="hidden-mobile">Windows 下包管理器 Scoop 的安装与使用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
