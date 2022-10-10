@@ -76,7 +76,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"muxiner.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"🚩"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"muxiner.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":90,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"🚩"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -437,17 +437,15 @@ df_boston_house_data.to_csv(<span class="hljs-string">&quot;boston_housing_data.
 <li>Python 3.9</li>
 <li>编辑器：<code>Pycharm</code></li>
 <li>可使用 <code>numpy</code>、<code>pandas</code>、<code>matplotlib</code> 等基础扩展包，建议使用 <code>anaconda</code> 安装</li>
-<li>不可使用 <code>sklearn</code>、<code>pytorch</code> 等机器学习包<h3 id="实验要求"><a href="#实验要求" class="headerlink" title="实验要求"></a>实验要求</h3></li>
+<li>不可使用 <code>sklearn</code>、<code>pytorch</code> 等机器学习包</li>
 </ul>
-<ol>
-<li><p>将数据集拆分成训练集（前 450 个样本）和测试集（后 56 个样本）</p>
-</li>
-<li><p>利用多元线性回归模型（<strong>最小二乘法</strong>或者<strong>梯度下降法</strong>均可）对训练数据进行拟合</p>
-</li>
-<li><p>对拟合得到的模型在测试集上进行测试，使用均方误差作为实验的准确结果并输出。</p>
-<h3 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h3></li>
-<li><p>数据集获得<br>使用 <code>sklearn</code> 包导入数据集，但是仅仅是导入，写入 csv 文件，后续使用的数据集均是从 csv 文件读取的。</p>
-<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> datasets
+<h3 id="实验要求"><a href="#实验要求" class="headerlink" title="实验要求"></a>实验要求</h3><ol>
+<li>将数据集拆分成训练集（前 450 个样本）和测试集（后 56 个样本）</li>
+<li>利用多元线性回归模型（<strong>最小二乘法</strong>或者<strong>梯度下降法</strong>均可）对训练数据进行拟合</li>
+<li>对拟合得到的模型在测试集上进行测试，使用均方误差作为实验的准确结果并输出。</li>
+</ol>
+<h3 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h3><ol>
+<li>数据集获得<br>使用 <code>sklearn</code> 包导入数据集，但是仅仅是导入，写入 csv 文件，后续使用的数据集均是从 csv 文件读取的。<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> datasets
 boston = datasets.load_boston()
 <span class="hljs-comment"># 将房价信息转成dataFrame格式</span>
 df_boston_house_data = pd.DataFrame(boston.data, columns=boston.feature_names)
@@ -460,16 +458,14 @@ df_boston_house_data[<span class="hljs-string">&#x27;PRICE&#x27;</span>] = bosto
 <span class="hljs-comment"># print(df_boston_house_data.head())</span>
 <span class="hljs-comment"># 将数据集写入csv文件</span>
 df_boston_house_data.to_csv(<span class="hljs-string">&quot;boston_housing_data.csv&quot;</span>, index=<span class="hljs-literal">False</span>, sep=<span class="hljs-string">&#x27;,&#x27;</span>)</code></pre></div></li>
-<li><p>读取数据集</p>
-<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">read_data</span>(<span class="hljs-params">file_path</span>):
+<li>读取数据集<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">read_data</span>(<span class="hljs-params">file_path</span>):
  <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string"> 从文件路径中读取数据集</span>
 <span class="hljs-string"> :param file_path: 文件路径</span>
 <span class="hljs-string"> :return: 返回一个 dataFrame</span>
 <span class="hljs-string"> &quot;&quot;&quot;</span>
  <span class="hljs-keyword">return</span> pd.read_csv(file_path, sep=<span class="hljs-string">&#x27;,&#x27;</span>)</code></pre></div></li>
-<li><p>数据集拆分为训练集和测试集</p>
-<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_training_data</span>(<span class="hljs-params">df, num</span>):
+<li>数据集拆分为训练集和测试集<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_training_data</span>(<span class="hljs-params">df, num</span>):
  <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string"> 从 df 中获得训练集</span>
 <span class="hljs-string"> :param num:</span>
@@ -490,8 +486,7 @@ df_boston_house_data.to_csv(<span class="hljs-string">&quot;boston_housing_data.
  <span class="hljs-comment"># 取数据集的后50项</span>
  df_test = df.tail(num)
  <span class="hljs-keyword">return</span> df_test</code></pre></div></li>
-<li><p>计算学习的模型<br>通过公式进行计算。<br>$$w^* &#x3D; (X^TX)^{-1}X^Ty$$</p>
-<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">model_calculation</span>(<span class="hljs-params">df_x, df_y</span>):
+<li>计算学习的模型<br>通过公式进行计算。<br>$$w^* &#x3D; (X^TX)^{-1}X^Ty$$<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">model_calculation</span>(<span class="hljs-params">df_x, df_y</span>):
  <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string"> 计算模型</span>
 <span class="hljs-string"> :param df_x:</span>
@@ -508,8 +503,7 @@ df_boston_house_data.to_csv(<span class="hljs-string">&quot;boston_housing_data.
  beta = np.dot(np.linalg.inv(np.dot(x_matrix.T, x_matrix)), np.dot(x_matrix.T, y_matrix))
  
  <span class="hljs-keyword">return</span> beta</code></pre></div></li>
-<li><p>通过模型获得房价预测值</p>
-<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_estimate</span>(<span class="hljs-params">beta, df_test</span>):
+<li>通过模型获得房价预测值<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_estimate</span>(<span class="hljs-params">beta, df_test</span>):
  <span class="hljs-string">&quot;&quot;&quot;</span>
 <span class="hljs-string"></span>
 <span class="hljs-string"> :param beta: β的矩阵</span>
@@ -531,8 +525,7 @@ df_boston_house_data.to_csv(<span class="hljs-string">&quot;boston_housing_data.
 
  <span class="hljs-comment"># print(estimate)</span>
  <span class="hljs-keyword">return</span> estimate</code></pre></div></li>
-<li><p>绘制房价实际值和预测值的比较图</p>
-<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 绘制预测值与真实值图</span>
+<li>绘制房价实际值和预测值的比较图<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 绘制预测值与真实值图</span>
  <span class="hljs-comment"># 规定字体，避免乱码</span>
  plt.rcParams[<span class="hljs-string">&#x27;font.sans-serif&#x27;</span>] = [<span class="hljs-string">u&#x27;SimHei&#x27;</span>]
  plt.rcParams[<span class="hljs-string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="hljs-literal">False</span>
@@ -542,10 +535,9 @@ df_boston_house_data.to_csv(<span class="hljs-string">&quot;boston_housing_data.
  plt.ylabel(<span class="hljs-string">&quot;价格&quot;</span>)  <span class="hljs-comment"># y轴命名表示</span>
  plt.title(<span class="hljs-string">&quot;实际值与预测值折线图&quot;</span>)
  plt.legend()  <span class="hljs-comment"># 增加图例</span>
- plt.show()  <span class="hljs-comment"># 显示图片</span></code></pre></div>
-<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3></li>
+ plt.show()  <span class="hljs-comment"># 显示图片</span></code></pre></div></li>
 </ol>
-<p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628230727.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20220628230727.png" srcset="/img/loading.gif" lazyload></p>
 <p>分析：</p>
 <p>上述结果仅是一次学习的结果，可见 50 组实际值与预测值之间出入较大，大部分的实际值与预测值之间存在较大的差别。</p>
 <p>不过好在获得了想要的结果。</p>
@@ -811,23 +803,21 @@ df_boston_house_data.to_csv(<span class="hljs-string">&quot;boston_housing_data.
         </div>
       
       
-      
-        <div class="license-meta-item">
-          <div>许可协议</div>
-          <div>
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
             
-              
-              
-                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-by"></i>
-                  </span>
-                </a>
-              
             
-          </div>
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
         </div>
-      
+      </div>
     </div>
     <div class="license-icon iconfont"></div>
   </div>
@@ -1019,34 +1009,22 @@ df_boston_house_data.to_csv(<span class="hljs-string">&quot;boston_housing_data.
     var boardCtn = jQuery('#board-ctn');
     var boardTop = boardCtn.offset().top;
 
-    window.tocbot.init(Object.assign({
+    window.tocbot.init({
       tocSelector     : '#toc-body',
       contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
       linkClass       : 'tocbot-link',
       activeLinkClass : 'tocbot-active-link',
       listClass       : 'tocbot-list',
       isCollapsedClass: 'tocbot-is-collapsed',
       collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
       scrollSmooth    : true,
-      includeTitleTags: true,
-      headingsOffset  : -boardTop,
-    }, CONFIG.toc));
+      headingsOffset  : -boardTop
+    });
     if (toc.find('.toc-list-item').length > 0) {
       toc.css('visibility', 'visible');
     }
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('tocbot' in window) {
-        tocbot.refresh();
-        var toc = jQuery('#toc');
-        if (toc.length === 0 || !tocbot) {
-          return;
-        }
-        if (toc.find('.toc-list-item').length > 0) {
-          toc.css('visibility', 'visible');
-        }
-      }
-    });
   });
 </script>
 
@@ -1075,21 +1053,6 @@ df_boston_house_data.to_csv(<span class="hljs-string">&quot;boston_housing_data.
       window.anchors.options.class = 'anchorjs-link-left';
     }
     window.anchors.add(res.join(', '));
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('anchors' in window) {
-        anchors.removeAll();
-        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-        var res = [];
-        for (var item of el) {
-          res.push('.markdown-body > ' + item.trim());
-        }
-        if (CONFIG.anchorjs.placement === 'left') {
-          anchors.options.class = 'anchorjs-link-left';
-        }
-        anchors.add(res.join(', '));
-      }
-    });
   });
 </script>
 
@@ -1133,15 +1096,6 @@ df_boston_house_data.to_csv(<span class="hljs-string">&quot;boston_housing_data.
           MathJax.typeset();
           MathJax.typesetPromise();
         }
-
-        Fluid.events.registerRefreshCallback(function() {
-          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
-            MathJax.startup.document.state(0);
-            MathJax.texReset();
-            MathJax.typeset();
-            MathJax.typesetPromise();
-          }
-        });
       </script>
     
 
