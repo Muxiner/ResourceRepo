@@ -16,29 +16,25 @@
   <meta name="author" content="Muxiner">
   <meta name="keywords" content="">
   
-    <meta name="description" content="本文所写记录 Ubuntu 使用过程中的问题 —— Ubuntu Update 失败：Release file is not valid yet。">
+    <meta name="description" content="在 ubuntu 更新软件，下载软件时，出现问题 Unable to mkstemp &#x2F;tmp&#x2F;clearsigned.message.r1RilL - GetTempFile，等解决办法（疑似误删了&#x2F;tmp 文件夹）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【水博客】Ubuntu Update 失败：Release file is not valid yet">
-<meta property="og:url" content="https://muxiner.github.io/2022/05/09/ubuntu-update-failed/index.html">
+<meta property="og:title" content="Ubuntu 出现 Unable to mkstemp 等问题解决">
+<meta property="og:url" content="https://muxiner.github.io/2022/10/19/ubuntu-error-unable-to-mkstemp/index.html">
 <meta property="og:site_name" content="Muxiner&#39;s Blog">
-<meta property="og:description" content="本文所写记录 Ubuntu 使用过程中的问题 —— Ubuntu Update 失败：Release file is not valid yet。">
+<meta property="og:description" content="在 ubuntu 更新软件，下载软件时，出现问题 Unable to mkstemp &#x2F;tmp&#x2F;clearsigned.message.r1RilL - GetTempFile，等解决办法（疑似误删了&#x2F;tmp 文件夹）">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s1.ax1x.com/2022/05/09/OGlyCD.png">
-<meta property="og:image" content="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628221558.png">
-<meta property="og:image" content="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628221120.png">
-<meta property="og:image" content="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628222226.png">
-<meta property="article:published_time" content="2022-05-09T05:59:13.000Z">
-<meta property="article:modified_time" content="2022-10-19T02:08:59.556Z">
+<meta property="article:published_time" content="2022-10-19T01:32:41.000Z">
+<meta property="article:modified_time" content="2022-10-19T01:32:41.000Z">
 <meta property="article:author" content="Muxiner">
+<meta property="article:tag" content="BLog">
 <meta property="article:tag" content="Ubuntu">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s1.ax1x.com/2022/05/09/OGlyCD.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>【水博客】Ubuntu Update 失败：Release file is not valid yet - Muxiner&#39;s Blog</title>
+  <title>Ubuntu 出现 Unable to mkstemp 等问题解决 - Muxiner&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -209,13 +205,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://w.wallhaven.cc/full/md/wallhaven-mdkjl1.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="【水博客】Ubuntu Update 失败：Release file is not valid yet"></span>
+            <span id="subtitle" data-typed-text="Ubuntu 出现 Unable to mkstemp 等问题解决"></span>
           
         </div>
 
@@ -231,8 +227,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-05-09 13:59" pubdate>
-          2022年5月9日 下午
+        <time datetime="2022-10-19 09:32" pubdate>
+          2022年10月19日 上午
         </time>
       </span>
     
@@ -244,7 +240,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          1.3k 字
+          748 字
         
       </span>
     
@@ -256,7 +252,7 @@
         
         
           <!-- compatible with older versions-->
-          11 分钟
+          7 分钟
         
       </span>
     
@@ -302,54 +298,40 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">【水博客】Ubuntu Update 失败：Release file is not valid yet</h1>
-            
-              <p class="note note-info">
-                
-                  
-                    <!-- compatible with older versions-->
-                    本文最后更新于：几秒前
-                  
-                
-              </p>
+            <h1 style="display: none">Ubuntu 出现 Unable to mkstemp 等问题解决</h1>
             
             
               <div class="markdown-body">
                 
-                <p>ᕕ( ᐛ )ᕗ</p>
-<p>(ノﾟ∀ﾟ)ノ举高高</p>
-<p>( へ ﾟ∀ﾟ)べ摔低低</p>
-<p>(&#96;ヮ´ ) 开摆！</p>
-<p>↙(&#96;ヮ´ )↗ 开摆！</p>
-<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>该问题是在 <code>Windows</code> 下使用 <code>Linux</code> 子系统 <code>Ubuntu</code> 时，执行了 <code>sudo apt update</code> 命令后，就出现问题：</p>
-<p><img src="https://s1.ax1x.com/2022/05/09/OGlyCD.png" srcset="/img/loading.gif" lazyload></p>
-<div class="code-wrapper"><pre><code class="hljs awk">E: Release file <span class="hljs-keyword">for</span> https:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/ubuntu/</span>dists<span class="hljs-regexp">/focal-updates/</span>InRelease is not valid yet (invalid <span class="hljs-keyword">for</span> another <span class="hljs-number">5</span>h <span class="hljs-number">35</span>min <span class="hljs-number">12</span>s). Updates <span class="hljs-keyword">for</span> this repository will not be applied.
-E: Release file <span class="hljs-keyword">for</span> https:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/ubuntu/</span>dists<span class="hljs-regexp">/focal-backports/</span>InRelease is not valid yet (invalid <span class="hljs-keyword">for</span> another <span class="hljs-number">5</span>h <span class="hljs-number">36</span>min <span class="hljs-number">30</span>s). Updates <span class="hljs-keyword">for</span> this repository will not be applied.
-E: Release file <span class="hljs-keyword">for</span> https:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/ubuntu/</span>dists<span class="hljs-regexp">/focal-security/</span>InRelease is not valid yet (invalid <span class="hljs-keyword">for</span> another <span class="hljs-number">5</span>h <span class="hljs-number">34</span>min <span class="hljs-number">27</span>s). Updates <span class="hljs-keyword">for</span> this repository will not be applied.</code></pre></div>
+                <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>在使用 WSL Ubuntu 进行软件更新或软件下载时，出现如下问题：</p>
+<div class="code-wrapper"><pre><code class="hljs bash">$ sudo apt install xxx
+[sudo] password <span class="hljs-keyword">for</span> xxxxxx:
+Reading package lists... Error!
+E: Unable to mkstemp /tmp/clearsigned.message.r1RilL - GetTempFile (20: Not a directory)
+E: The package lists or status file could not be parsed or opened.</code></pre></div>
+<div class="code-wrapper"><pre><code class="hljs bash">$ sudo apt update
+E: Unable to mkstemp /tmp/clearsigned.message.u1lbd8 - GetTempFile (20: Not a directory)
+E: The package lists or status file could not be parsed or opened.</code></pre></div>
 
-<p>意思就是：<strong>发布文件尚未生效（在另一个 5 小时 35 分钟 12 秒内无效）。不会应用此存储库的更新。</strong></p>
-<h3 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h3><p>经过一番搜索后发现了问题 —— 咱 <code>Ubuntu</code> 上的时间与清华大学 <code>TUNA</code> 的软件源镜像的时间不一致，咱的系统时间比它慢了几个小时。</p>
+<p>造成软件更新或下载失败。</p>
+<h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><p>想起之前在这 ubuntu 做使用，看到 &#x2F;tmp 非空，且了解到：</p>
 <blockquote>
-<p>错误的原因是系统上的时间和现实世界的时间不同。</p>
+<p>&#x2F;tmp&#x2F;    存储系统和用户的临时信息。<br>就想着删除 tmp 目录下的内容，于是直接动手。</p>
 </blockquote>
-<p>为啥会出现这种问题呢？</p>
-<p>咱电脑安装了双系统的，<code>windows 11</code> + <code>manjaro</code>，上午的时候玩了一会 <code>manjaro</code>，整了一会后，回到 <code>windows 11</code>，发现咱的时间晚了 8 小时，但是咱没有注意到时间的变化，就安装了咱们的 <code>ubuntu</code>，因而该系统的时间也是跟着咱 <code>windows 11</code> 的时间一样，慢了 8 小时。但是这会，咱执行 <code>sudo apt update</code> 是没问题的哦。后来咱就发现电脑时间不对，就赶紧更新了电脑时间，后重新启动了 <code>ubuntu</code>，仍旧执行了 <code>sudo apt update</code> 命令，这会就出现问题了。</p>
-<p>提示：<strong>发布文件尚未生效（在另一个 5 小时 35 分钟 12 秒内无效）。不会应用此存储库的更新。</strong></p>
-<p>执行 <code>date</code> 命令查看时间：</p>
-<div class="code-wrapper"><pre><code class="hljs applescript"><span class="hljs-built_in">date</span></code></pre></div>
-<p><img src="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628221558.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><p>想要解决问题呀，简单的改一下 <code>ubuntu</code> 的时间就好，改成和 <code>windows 11</code> 时间一样就行。</p>
-<p>执行 <code>sudo date -s xxxxxx</code> 设置系统时间</p>
-<div class="code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> date -s <span class="hljs-number">12</span>:<span class="hljs-number">40</span>:<span class="hljs-number">50</span></code></pre></div>
-<p><img src="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628221120.png" srcset="/img/loading.gif" lazyload></p>
-<blockquote>
-<p>我这知识时间不对，因而仅修改了时间。<br>若是日期也不对就需要执行：</p>
-<div class="code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> date -s <span class="hljs-number">2022</span>-<span class="hljs-number">5</span>-<span class="hljs-number">9</span> <span class="hljs-number">12</span>:<span class="hljs-number">40</span>:<span class="hljs-number">50</span></code></pre></div>
-</blockquote>
-<p><img src="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628222226.png" srcset="/img/loading.gif" lazyload></p>
-<p>OK! 问题成功解决。</p>
-<p>(&#96;ヮ´ ) 开摆！</p>
-<p>↙(&#96;ヮ´ )↗ 开摆！</p>
+<p>然而，删除完后， tmp 目录就在是出问题：</p>
+<div class="code-wrapper"><pre><code class="hljs bash">$ <span class="hljs-built_in">cd</span> /tmp
+-bash: <span class="hljs-built_in">cd</span>: /tmp: Not a directory
+
+$ <span class="hljs-built_in">mkdir</span> -p /tmp
+<span class="hljs-built_in">mkdir</span>: cannot create directory ‘/tmp’: File exists</code></pre></div>
+<p>刚开始没当回事，以为重启就没事，也就没在乎。</p>
+<p>哪知过几天再来使用 ubuntu 时，更新或下载软件时出现上述问题。</p>
+<p>然后开始询问度娘，搜索到“误删 &#x2F;tmp 目录”等等的解决方法。</p>
+<p><strong>思路很简单，就是删除 &#x2F;tmp 再重新创建 &#x2F;tmp。</strong></p>
+<p><strong>命令如下：</strong></p>
+<div class="code-wrapper"><pre><code class="hljs bash">sudo <span class="hljs-built_in">rm</span> -r /tmp
+sudo <span class="hljs-built_in">mkdir</span> /tmp</code></pre></div>
+
 
                 
               </div>
@@ -368,15 +350,8 @@ E: Release file <span class="hljs-keyword">for</span> https:<span class="hljs-re
     
       <span class="category-chain">
         
-  <a href="/categories/linux/" class="category-chain-item">linux</a>
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/linux/%E6%B0%B4%E5%8D%9A%E5%AE%A2/" class="category-chain-item">水博客</a>
-  
-  
-
   
 
       </span>
@@ -390,6 +365,8 @@ E: Release file <span class="hljs-keyword">for</span> https:<span class="hljs-re
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
+        <a href="/tags/BLog/">#BLog</a>
+      
         <a href="/tags/Ubuntu/">#Ubuntu</a>
       
     </div>
@@ -402,8 +379,8 @@ E: Release file <span class="hljs-keyword">for</span> https:<span class="hljs-re
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>【水博客】Ubuntu Update 失败：Release file is not valid yet</div>
-      <div>https://muxiner.github.io/2022/05/09/ubuntu-update-failed/</div>
+      <div>Ubuntu 出现 Unable to mkstemp 等问题解决</div>
+      <div>https://muxiner.github.io/2022/10/19/ubuntu-error-unable-to-mkstemp/</div>
     </div>
     <div class="license-meta">
       
@@ -415,7 +392,7 @@ E: Release file <span class="hljs-keyword">for</span> https:<span class="hljs-re
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年5月9日</div>
+          <div>2022年10月19日</div>
         </div>
       
       
@@ -447,18 +424,12 @@ E: Release file <span class="hljs-keyword">for</span> https:<span class="hljs-re
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/05/14/ml-decision-tree/" title="决策树 —— 隐形眼镜数据集预测">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">决策树 —— 隐形眼镜数据集预测</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/05/06/powershell-beauty/" title="Windows PowerShell 美化">
-                        <span class="hidden-mobile">Windows PowerShell 美化</span>
+                      <a href="/2022/09/06/git-proxy-error/" title="使用 Git 时网络问题（代理）解决">
+                        <span class="hidden-mobile">使用 Git 时网络问题（代理）解决</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

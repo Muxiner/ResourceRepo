@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>Ubuntu 出现 Unable to mkstemp 等问题解决</title>
+    <link href="/2022/10/19/ubuntu-error-unable-to-mkstemp/"/>
+    <url>/2022/10/19/ubuntu-error-unable-to-mkstemp/</url>
+    
+    <content type="html"><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>在使用 WSL Ubuntu 进行软件更新或软件下载时，出现如下问题：</p><div class="code-wrapper"><pre><code class="hljs bash">$ sudo apt install xxx[sudo] password <span class="hljs-keyword">for</span> xxxxxx:Reading package lists... Error!E: Unable to mkstemp /tmp/clearsigned.message.r1RilL - GetTempFile (20: Not a directory)E: The package lists or status file could not be parsed or opened.</code></pre></div><div class="code-wrapper"><pre><code class="hljs bash">$ sudo apt updateE: Unable to mkstemp /tmp/clearsigned.message.u1lbd8 - GetTempFile (20: Not a directory)E: The package lists or status file could not be parsed or opened.</code></pre></div><p>造成软件更新或下载失败。</p><h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><p>想起之前在这 ubuntu 做使用，看到 &#x2F;tmp 非空，且了解到：</p><blockquote><p>&#x2F;tmp&#x2F;    存储系统和用户的临时信息。<br>就想着删除 tmp 目录下的内容，于是直接动手。</p></blockquote><p>然而，删除完后， tmp 目录就在是出问题：</p><div class="code-wrapper"><pre><code class="hljs bash">$ <span class="hljs-built_in">cd</span> /tmp-bash: <span class="hljs-built_in">cd</span>: /tmp: Not a directory$ <span class="hljs-built_in">mkdir</span> -p /tmp<span class="hljs-built_in">mkdir</span>: cannot create directory ‘/tmp’: File exists</code></pre></div><p>刚开始没当回事，以为重启就没事，也就没在乎。</p><p>哪知过几天再来使用 ubuntu 时，更新或下载软件时出现上述问题。</p><p>然后开始询问度娘，搜索到“误删 &#x2F;tmp 目录”等等的解决方法。</p><p><strong>思路很简单，就是删除 &#x2F;tmp 再重新创建 &#x2F;tmp。</strong></p><p><strong>命令如下：</strong></p><div class="code-wrapper"><pre><code class="hljs bash">sudo <span class="hljs-built_in">rm</span> -r /tmpsudo <span class="hljs-built_in">mkdir</span> /tmp</code></pre></div>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>BLog</tag>
+      
+      <tag>Ubuntu</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>使用 Git 时网络问题（代理）解决</title>
     <link href="/2022/09/06/git-proxy-error/"/>
     <url>/2022/09/06/git-proxy-error/</url>
