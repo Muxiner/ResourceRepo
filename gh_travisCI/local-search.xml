@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>关于 Credential Helper Selector 的问题</title>
+    <link href="/2022/10/19/credential-helper-selector/"/>
+    <url>/2022/10/19/credential-helper-selector/</url>
+    
+    <content type="html"><![CDATA[<p>介于自己遇事不决就重装系统的毛病，最近又重装了系统，到手后又是一个宛如一张白纸的 windows 系统，一切又得重新开始。</p><p>安装 <code>git for windows</code>，配置信息，水博客，<code>add</code>，<code>commit</code>，<code>push</code>，突然跳出一个弹窗 —— Credential Helper Selector，很熟悉但是又不知道怎么选择：</p><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/postscredential-helper-selector.png" alt="postscredential-helper-selector"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Git</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Git</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Ubuntu 出现 Unable to mkstemp 等问题解决</title>
     <link href="/2022/10/19/ubuntu-error-unable-to-mkstemp/"/>
     <url>/2022/10/19/ubuntu-error-unable-to-mkstemp/</url>
