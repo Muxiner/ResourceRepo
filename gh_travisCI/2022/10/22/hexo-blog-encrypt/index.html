@@ -16,29 +16,24 @@
   <meta name="author" content="Muxiner">
   <meta name="keywords" content="">
   
-    <meta name="description" content="本文所写记录 Ubuntu 使用过程中的问题 —— Ubuntu Update 失败：Release file is not valid yet。">
+    <meta name="description" content="使用 hexo-blog-encrypt 使用 hexo 的文章加密。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【水博客】Ubuntu Update 失败：Release file is not valid yet">
-<meta property="og:url" content="https://muxiner.github.io/2022/05/09/ubuntu-update-failed/index.html">
+<meta property="og:title" content="hexo 文章加密">
+<meta property="og:url" content="https://muxiner.github.io/2022/10/22/hexo-blog-encrypt/index.html">
 <meta property="og:site_name" content="Muxiner&#39;s Blog">
-<meta property="og:description" content="本文所写记录 Ubuntu 使用过程中的问题 —— Ubuntu Update 失败：Release file is not valid yet。">
+<meta property="og:description" content="使用 hexo-blog-encrypt 使用 hexo 的文章加密。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s1.ax1x.com/2022/05/09/OGlyCD.png">
-<meta property="og:image" content="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628221558.png">
-<meta property="og:image" content="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628221120.png">
-<meta property="og:image" content="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628222226.png">
-<meta property="article:published_time" content="2022-05-09T05:59:13.000Z">
-<meta property="article:modified_time" content="2022-10-22T06:57:13.832Z">
+<meta property="article:published_time" content="2022-10-22T06:32:45.000Z">
+<meta property="article:modified_time" content="2022-10-22T06:32:45.000Z">
 <meta property="article:author" content="Muxiner">
-<meta property="article:tag" content="Ubuntu">
+<meta property="article:tag" content="Hexo">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s1.ax1x.com/2022/05/09/OGlyCD.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>【水博客】Ubuntu Update 失败：Release file is not valid yet - Muxiner&#39;s Blog</title>
+  <title>hexo 文章加密 - Muxiner&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -209,13 +204,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://w.wallhaven.cc/full/md/wallhaven-mdkjl1.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="【水博客】Ubuntu Update 失败：Release file is not valid yet"></span>
+            <span id="subtitle" data-typed-text="hexo 文章加密"></span>
           
         </div>
 
@@ -231,8 +226,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-05-09 13:59" pubdate>
-          2022年5月9日 下午
+        <time datetime="2022-10-22 14:32" pubdate>
+          2022年10月22日 下午
         </time>
       </span>
     
@@ -244,7 +239,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          1.3k 字
+          2.4k 字
         
       </span>
     
@@ -256,7 +251,7 @@
         
         
           <!-- compatible with older versions-->
-          11 分钟
+          21 分钟
         
       </span>
     
@@ -302,54 +297,72 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">【水博客】Ubuntu Update 失败：Release file is not valid yet</h1>
-            
-              <p class="note note-info">
-                
-                  
-                    <!-- compatible with older versions-->
-                    本文最后更新于：几秒前
-                  
-                
-              </p>
+            <h1 style="display: none">hexo 文章加密</h1>
             
             
               <div class="markdown-body">
                 
-                <p>ᕕ( ᐛ )ᕗ</p>
-<p>(ノﾟ∀ﾟ)ノ举高高</p>
-<p>( へ ﾟ∀ﾟ)べ摔低低</p>
-<p>(&#96;ヮ´ ) 开摆！</p>
-<p>↙(&#96;ヮ´ )↗ 开摆！</p>
-<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>该问题是在 <code>Windows</code> 下使用 <code>Linux</code> 子系统 <code>Ubuntu</code> 时，执行了 <code>sudo apt update</code> 命令后，就出现问题：</p>
-<p><img src="https://s1.ax1x.com/2022/05/09/OGlyCD.png" srcset="/img/loading.gif" lazyload></p>
-<div class="code-wrapper"><pre><code class="hljs awk">E: Release file <span class="hljs-keyword">for</span> https:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/ubuntu/</span>dists<span class="hljs-regexp">/focal-updates/</span>InRelease is not valid yet (invalid <span class="hljs-keyword">for</span> another <span class="hljs-number">5</span>h <span class="hljs-number">35</span>min <span class="hljs-number">12</span>s). Updates <span class="hljs-keyword">for</span> this repository will not be applied.
-E: Release file <span class="hljs-keyword">for</span> https:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/ubuntu/</span>dists<span class="hljs-regexp">/focal-backports/</span>InRelease is not valid yet (invalid <span class="hljs-keyword">for</span> another <span class="hljs-number">5</span>h <span class="hljs-number">36</span>min <span class="hljs-number">30</span>s). Updates <span class="hljs-keyword">for</span> this repository will not be applied.
-E: Release file <span class="hljs-keyword">for</span> https:<span class="hljs-regexp">//mi</span>rrors.tuna.tsinghua.edu.cn<span class="hljs-regexp">/ubuntu/</span>dists<span class="hljs-regexp">/focal-security/</span>InRelease is not valid yet (invalid <span class="hljs-keyword">for</span> another <span class="hljs-number">5</span>h <span class="hljs-number">34</span>min <span class="hljs-number">27</span>s). Updates <span class="hljs-keyword">for</span> this repository will not be applied.</code></pre></div>
+                <h3 id="丑话在先"><a href="#丑话在先" class="headerlink" title="丑话在先"></a>丑话在先</h3><p>本来是没有什么文章内容需要加密的，不过现在突然发现我可以使用博客文章记录一下咱喜欢的 <a href="pixiv.net">Pixiv</a> 画师，如果是正常的插画，就不需要加密，不过嘛，我喜欢的多少需要一点科学观看，所以还是使用加密，就自己看看吧。</p>
+<p>本是记得 hexo 的文章信息头可以加入 <code>password</code> 的字段，不过搜索后发现还需要安装一个 hexo 扩展：<code>hexo-blog-encrypt</code>。</p>
+<p>于是记录一下。</p>
+<h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><ul>
+<li>一旦你输入了正确的密码，它就会被存储在本地浏览器的 <code>localStorage</code> 中。按个按钮，密码将会被清空。若博客中有脚本，它将被正确地执行。</li>
+<li>支持按标签加密。</li>
+<li>所有的核心功能都是由原生的 <code>API</code> 所提供的。在 <code>Node.js</code> 中，我们使用 <code>Crypto</code>。在浏览器中，我们使用 <code>Web Crypto API</code>。</li>
+<li><code>PBKDF2</code>，<code>SHA256</code> 被用作复制密钥，<code>AES256-CBC</code> 被用作加解密，我们还使用 <code>HMAC</code> 来验证密文的来源，并确保其纠正。</li>
+<li>广泛地使用 <code>Promise</code> 来进行异步操作，从而确保线程不被杜塞。</li>
+<li>过时的浏览器将无法正常显示，因此，请升级您的浏览器。</li>
+</ul>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><div class="code-wrapper"><pre><code class="hljs powershell">npm install <span class="hljs-literal">--save</span> hexo<span class="hljs-literal">-blog-encrypt</span></code></pre></div>
 
-<p>意思就是：<strong>发布文件尚未生效（在另一个 5 小时 35 分钟 12 秒内无效）。不会应用此存储库的更新。</strong></p>
-<h3 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h3><p>经过一番搜索后发现了问题 —— 咱 <code>Ubuntu</code> 上的时间与清华大学 <code>TUNA</code> 的软件源镜像的时间不一致，咱的系统时间比它慢了几个小时。</p>
-<blockquote>
-<p>错误的原因是系统上的时间和现实世界的时间不同。</p>
-</blockquote>
-<p>为啥会出现这种问题呢？</p>
-<p>咱电脑安装了双系统的，<code>windows 11</code> + <code>manjaro</code>，上午的时候玩了一会 <code>manjaro</code>，整了一会后，回到 <code>windows 11</code>，发现咱的时间晚了 8 小时，但是咱没有注意到时间的变化，就安装了咱们的 <code>ubuntu</code>，因而该系统的时间也是跟着咱 <code>windows 11</code> 的时间一样，慢了 8 小时。但是这会，咱执行 <code>sudo apt update</code> 是没问题的哦。后来咱就发现电脑时间不对，就赶紧更新了电脑时间，后重新启动了 <code>ubuntu</code>，仍旧执行了 <code>sudo apt update</code> 命令，这会就出现问题了。</p>
-<p>提示：<strong>发布文件尚未生效（在另一个 5 小时 35 分钟 12 秒内无效）。不会应用此存储库的更新。</strong></p>
-<p>执行 <code>date</code> 命令查看时间：</p>
-<div class="code-wrapper"><pre><code class="hljs applescript"><span class="hljs-built_in">date</span></code></pre></div>
-<p><img src="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628221558.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><p>想要解决问题呀，简单的改一下 <code>ubuntu</code> 的时间就好，改成和 <code>windows 11</code> 时间一样就行。</p>
-<p>执行 <code>sudo date -s xxxxxx</code> 设置系统时间</p>
-<div class="code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> date -s <span class="hljs-number">12</span>:<span class="hljs-number">40</span>:<span class="hljs-number">50</span></code></pre></div>
-<p><img src="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628221120.png" srcset="/img/loading.gif" lazyload></p>
-<blockquote>
-<p>我这知识时间不对，因而仅修改了时间。<br>若是日期也不对就需要执行：</p>
-<div class="code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> date -s <span class="hljs-number">2022</span>-<span class="hljs-number">5</span>-<span class="hljs-number">9</span> <span class="hljs-number">12</span>:<span class="hljs-number">40</span>:<span class="hljs-number">50</span></code></pre></div>
-</blockquote>
-<p><img src="https://munner.coding.net/p/blogpicgo/d/blogimages/git/raw/main/posts/20220628222226.png" srcset="/img/loading.gif" lazyload></p>
-<p>OK! 问题成功解决。</p>
-<p>(&#96;ヮ´ ) 开摆！</p>
-<p>↙(&#96;ヮ´ )↗ 开摆！</p>
+<h3 id="快速使用"><a href="#快速使用" class="headerlink" title="快速使用"></a>快速使用</h3><p>将 <code>password</code> 添加到文章信息头：</p>
+<div class="code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">title:</span> <span class="hljs-string">Hello</span> <span class="hljs-string">World</span>
+<span class="hljs-attr">date:</span> <span class="hljs-number">2020-03-13 21:12:21</span>
+<span class="hljs-attr">password:</span> <span class="hljs-string">muyiio</span>
+<span class="hljs-meta">---</span></code></pre></div>
+<h3 id="按照标签加密"><a href="#按照标签加密" class="headerlink" title="按照标签加密"></a>按照标签加密</h3><h4 id="1-修改文章信息头"><a href="#1-修改文章信息头" class="headerlink" title="1. 修改文章信息头"></a>1. 修改文章信息头</h4><div class="code-wrapper"><pre><code class="hljs"><pre><code class="hljs yaml"><span class="hljs-attr">title:</span> <span class="hljs-string">Hello</span> <span class="hljs-string">World</span>
+<span class="hljs-attr">tags:</span>
+<span class="hljs-bullet">-</span> <span class="hljs-string">加密文章tag</span>
+<span class="hljs-attr">date:</span> <span class="hljs-number">2020-03-13 21:12:21</span>
+<span class="hljs-attr">password:</span> <span class="hljs-string">muyiio</span>
+<span class="hljs-attr">abstract:</span> <span class="hljs-string">这里有东西被加密了，需要输入密码查看哦。</span>
+<span class="hljs-attr">message:</span> <span class="hljs-string">您好，这里需要密码。</span>
+<span class="hljs-attr">wrong_pass_message:</span> <span class="hljs-string">抱歉，这个密码看着不太对，请再试试。</span>
+<span class="hljs-attr">wrong_hash_message:</span> <span class="hljs-string">抱歉，这个文章不能被纠正，不过您还是能看看解密后的内容。</span>
+<span class="hljs-meta">---</span></code></pre></div>
+</code></pre>
+<h4 id="2-修改博客本目录-config-yml。添加如下字段"><a href="#2-修改博客本目录-config-yml。添加如下字段" class="headerlink" title="2. 修改博客本目录 _config.yml。添加如下字段"></a>2. 修改博客本目录 <code>_config.yml</code>。添加如下字段</h4><div class="code-wrapper"><pre><code class="hljs"><pre><code class="hljs handlebars"><span class="language-xml"># 安全</span>
+<span class="language-xml">encrypt: # hexo-blog-encrypt</span>
+<span class="language-xml">    abstract: 这里有东西被加密了，需要输入密码查看哦。</span>
+<span class="language-xml">    message: 您好, 这里需要密码.</span>
+<span class="language-xml">    tags:</span>
+<span class="language-xml">    - &#123;name: tagName, password: 密码A&#125;</span>
+<span class="language-xml">    - &#123;name: tagName, password: 密码B&#125;</span>
+<span class="language-xml">    template: <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;hexo-blog-encrypt&quot;</span> <span class="hljs-attr">data-wpm</span>=<span class="hljs-string">&quot;</span></span></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">hbeWrongPassMessage</span>&#125;&#125;</span><span class="language-xml"><span class="hljs-tag"><span class="hljs-string">&quot;</span> <span class="hljs-attr">data-whm</span>=<span class="hljs-string">&quot;</span></span></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">hbeWrongHashMessage</span>&#125;&#125;</span><span class="language-xml"><span class="hljs-tag"><span class="hljs-string">&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;hbe-input-container&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;password&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;hbePass&quot;</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;</span></span></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">hbeMessage</span>&#125;&#125;</span><span class="language-xml"><span class="hljs-tag"><span class="hljs-string">&quot;</span> /&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">hbeMessage</span>&#125;&#125;</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;bottom-line&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;hbeData&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;hbeData&quot;</span> <span class="hljs-attr">data-hmacdigest</span>=<span class="hljs-string">&quot;</span></span></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">hbeHmacDigest</span>&#125;&#125;</span><span class="language-xml"><span class="hljs-tag"><span class="hljs-string">&quot;</span>&gt;</span></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">hbeEncryptedData</span>&#125;&#125;</span><span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+<span class="language-xml">    wrong_pass_message: 抱歉, 这个密码看着不太对, 请再试试.</span>
+<span class="language-xml">    wrong_hash_message: 抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.</span></code></pre></div>
+</code></pre>
+<h3 id="DLC"><a href="#DLC" class="headerlink" title="DLC"></a>DLC</h3><p>记录下咱没有用到的内容。</p>
+<p><strong>对 TOC 文章进行加密</strong></p>
+<p>如果有一篇文章使用了 <code>TOC</code>，需要修改模板的部分代码。这里以 <code>matery</code> 主题作为示例：</p>
+<p>在 <code>hexo/themes/matery/layout/_partial/article.ejs</code> 找到 <code>article.ejs</code>。<br>然后找到 <code>&lt;％post.content％&gt;</code> 这段代码，通常在 30 行左右。<br>使用如下的代码来替代它：</p>
+<div class="code-wrapper"><pre><code class="hljs xquery">&lt;% <span class="hljs-keyword">if</span>(post.toc ==<span class="hljs-built_in"> true</span>)&#123; %&gt;
+  &lt;div<span class="hljs-built_in"> id</span>=<span class="hljs-string">&quot;toc-div&quot;</span> class=<span class="hljs-string">&quot;toc-article&quot;</span> &lt;% <span class="hljs-keyword">if</span> (post.encrypt ==<span class="hljs-built_in"> true</span>) &#123; %&gt;style=<span class="hljs-string">&quot;display:none&quot;</span> &lt;% &#125; %&gt;&gt;
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">strong</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;toc-title&quot;</span>&gt;</span>Index<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span></span>
+      &lt;% <span class="hljs-keyword">if</span> (post.encrypt ==<span class="hljs-built_in"> true</span>) &#123; %&gt;
+        &lt;<span class="hljs-meta">%-</span> toc(post.origin, &#123;list_number:<span class="hljs-built_in"> true</span>&#125;) %&gt;
+      &lt;% &#125; <span class="hljs-keyword">else</span> &#123; %&gt;
+        &lt;<span class="hljs-meta">%-</span> toc(post.content, &#123;list_number:<span class="hljs-built_in"> true</span>&#125;) %&gt;
+      &lt;% &#125; %&gt;
+  &lt;/div&gt;
+&lt;% &#125; %&gt;
+&lt;<span class="hljs-meta">%-</span> post.content %&gt;</code></pre></div>
+
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/D0n9X1n/hexo-blog-encrypt">hexo-blog-encrypt</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/D0n9X1n/hexo-blog-encrypt/blob/master/ReadMe.zh.md">hexo-blog-encrypt | 中文</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/113235573">对 Hexo 博客文章进行加密</a></li>
+</ul>
 
                 
               </div>
@@ -368,15 +381,8 @@ E: Release file <span class="hljs-keyword">for</span> https:<span class="hljs-re
     
       <span class="category-chain">
         
-  <a href="/categories/linux/" class="category-chain-item">linux</a>
+  <a href="/categories/%E6%95%99%E7%A8%8B/" class="category-chain-item">教程</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/linux/%E6%B0%B4%E5%8D%9A%E5%AE%A2/" class="category-chain-item">水博客</a>
-  
-  
-
   
 
       </span>
@@ -390,7 +396,7 @@ E: Release file <span class="hljs-keyword">for</span> https:<span class="hljs-re
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Ubuntu/">#Ubuntu</a>
+        <a href="/tags/Hexo/">#Hexo</a>
       
     </div>
   
@@ -402,8 +408,8 @@ E: Release file <span class="hljs-keyword">for</span> https:<span class="hljs-re
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>【水博客】Ubuntu Update 失败：Release file is not valid yet</div>
-      <div>https://muxiner.github.io/2022/05/09/ubuntu-update-failed/</div>
+      <div>hexo 文章加密</div>
+      <div>https://muxiner.github.io/2022/10/22/hexo-blog-encrypt/</div>
     </div>
     <div class="license-meta">
       
@@ -415,7 +421,7 @@ E: Release file <span class="hljs-keyword">for</span> https:<span class="hljs-re
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年5月9日</div>
+          <div>2022年10月22日</div>
         </div>
       
       
@@ -447,18 +453,12 @@ E: Release file <span class="hljs-keyword">for</span> https:<span class="hljs-re
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/05/14/ml-decision-tree/" title="决策树 —— 隐形眼镜数据集预测">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">决策树 —— 隐形眼镜数据集预测</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/05/06/powershell-beauty/" title="Windows PowerShell 美化">
-                        <span class="hidden-mobile">Windows PowerShell 美化</span>
+                      <a href="/2022/10/19/credential-helper-selector/" title="关于 Credential Helper Selector 的问题">
+                        <span class="hidden-mobile">关于 Credential Helper Selector 的问题</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
