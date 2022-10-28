@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>微软商店 Microsoft Store 的安装</title>
+    <link href="/2022/10/28/install-microsoft-store/"/>
+    <url>/2022/10/28/install-microsoft-store/</url>
+    
+    <content type="html"><![CDATA[<h3 id="问题由来"><a href="#问题由来" class="headerlink" title="问题由来"></a>问题由来</h3><p>简单说就是，当安装了比较干净的 windows 系统，如 <code>Windows 10 LTSC</code>，系统中没有类似于 Microsoft Store、图片查看器等等工具，但是又迫切的想要使用 Microsoft Store 用来下载或者安装某些软件时，就需要使用到 Microsoft Store。</p><h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><p>啥不会就 Goolge。</p><p>一番 Google 下来也看到了不少的方法：</p><ol><li>打开 powershell 执行一系列命令——失败<br>命令应该是可以的，不过并没有细究失败原因</li><li>打开某网站下载 Microsoft Store 软件包 —— 失败<br>这个应该也是可以的马，但是看他们说还需要安装一些依赖，有些复杂，咱暂时有些急迫去解决该问题，也就没有细究。</li><li>github 上有个项目傻瓜式安装<br>这个就是真简单了，下载包，根据指示可以一键安装。</li></ol><p>咱就简单说明一下方法三。</p><p>首先咱先附上该项目的地址：<a href="https://github.com/kkkgo/LTSC-Add-MicrosoftStore">LTSC-Add-MicrosoftStore</a></p><p>项目名字也是非常直白，针对 LTSC 的 Windows 版本增加 Microsoft Store。</p><p><img src="https://raw.githubusercontent.com/Muxiner/BlogImages/main/posts/20221028210543-ltsc-add-ms.png" alt="项目情况"></p><p>项目实现原理也十分明了，就是将 Microsoft Store 安装所需要的包以及依赖给咱准备好，同时还有 App Installer &#x2F; Purchase App &#x2F; Xbox 等安装需要的包以及依赖，然后编写一个 CMD 命令脚本，傻瓜式安装。</p><p>项目还提醒了：</p><blockquote><p>如果您不想安装 App Installer &#x2F; Purchase App &#x2F; Xbox，请在运行安装之前删除对应的. appxbundle 后缀的文件。<br>但是，如果您<strong>计划安装游戏，或带有购买选项的应用</strong>，则不要删除。</p></blockquote><p>所以基本上还是不需要删除什么文件的。</p><h3 id="解决步骤"><a href="#解决步骤" class="headerlink" title="解决步骤"></a>解决步骤</h3><ol><li>访问项目地址，下载项目文件<ul><li><a href="https://github.com/kkkgo/LTSC-Add-MicrosoftStore">LTSC-Add-MicrosoftStore</a></li><li><a href="https://github.com/lixuy/LTSC-Add-MicrosoftStore/archive/2019.zip">下载地址</a>：点击直接下载文件。</li></ul></li><li>解压文件</li><li>根据自身情况删除部分文件，或是不做修改</li><li>以<strong>管理员身份</strong>运行 <code>Add-Store.cmd</code></li><li>打开 Microsoft Store 检查安装是否成功</li></ol><div class="note note-info">            <ul><li><p>如果装完之后商店仍然打不开，请先重启试试。</p></li><li><p>如果仍然不行，请以管理员身份打开命令提示符并运行以下命令之后，然后再重启试试。</p> <div class="code-wrapper"><pre><code class="hljs nginx"><span class="hljs-attribute">PowerShell</span> -ExecutionPolicy Unrestricted -Command <span class="hljs-string">&quot;&amp; &#123;<span class="hljs-variable">$manifest</span> = (Get-AppxPackage Microsoft.WindowsStore).InstallLocation + &#x27;\AppxManifest.xml&#x27; ; Add-AppxPackage -DisableDevelopmentMode -Register <span class="hljs-variable">$manifest</span>&#125;&quot;</span></code></pre></div></li></ul>          </div><div class="note note-default">            <p>商店修复：</p><ul><li><code>Win+R</code> 打开运行，输入 <code>WSReset.exe</code> 回车。<br>该命令会清空并重置 Windows Store 商店的所有缓存。</li></ul>          </div><h3 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h3><p>用此方法安装的 Microsoft Store 以及其他软件版本教旧，可使用 Microsoft Store 进行更新。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>教程</category>
+      
+      <category>记录</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>install</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>hexo 文章加密</title>
     <link href="/2022/10/22/hexo-blog-encrypt/"/>
     <url>/2022/10/22/hexo-blog-encrypt/</url>
