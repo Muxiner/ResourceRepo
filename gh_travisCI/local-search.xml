@@ -31,6 +31,33 @@
   
   
   <entry>
+    <title>Windows 安装 WSL Ubuntu 出现错误代码：0x8007019e</title>
+    <link href="/2022/10/28/wsl-error-0x8007019e/"/>
+    <url>/2022/10/28/wsl-error-0x8007019e/</url>
+    
+    <content type="html"><![CDATA[<p>近期为了方便自己重装系统，准备整一个适用自己的系统镜像，想着给它也整个 WSL Ubuntu 省的后面重装后还麻烦。</p><p>由于咱选取了 <code>windows 10 企业版 LTSC</code>，为了搞 linux 子系统也是要费不少功夫，其他的先不谈，直接到 Ubuntu 的使用。</p><p>下载完 Ubuntu 后点击使用，一开始就出现该错误：</p><div class="code-wrapper"><pre><code class="hljs subunit">Installing, this may take a few minutes...Installation Failed!<span class="hljs-keyword">Error: </span>0x8007019ePress any key to continue...</code></pre></div><p>一番搜索后发现 —— <strong>未安装 Windows 子系统支持</strong></p><p><strong>解决办法</strong>：</p><ul><li><p>必须启用“适用于 Linux 的 Windows 子系统”可选功能并<strong>重启</strong>，然后才能在 Windows 上运行 Linux 发行版。</p></li><li><p>以管理员身份运行 <code>PowerShell</code>，并执行下列命令：</p><div class="code-wrapper"><pre><code class="hljs pwershell">Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux</code></pre></div></li></ul><p>重启完后打开 Ubuntu 等一会就行了。</p><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul><li><a href="https://www.cnblogs.com/cai1432452416/p/11748610.html">在windows应用商店安装ubuntu系统，报错WslRegisterDistribution failed with error: 0x8007019e</a></li><li><a href="https://learn.microsoft.com/zh-cn/windows/wsl/install-on-server">Windows Server 安装指南</a></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>教程</category>
+      
+      <category>记录</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Ubuntu</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>hexo 文章加密</title>
     <link href="/2022/10/22/hexo-blog-encrypt/"/>
     <url>/2022/10/22/hexo-blog-encrypt/</url>
